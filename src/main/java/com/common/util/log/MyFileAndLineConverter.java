@@ -1,0 +1,73 @@
+package com.common.util.log;
+
+import ch.qos.logback.classic.pattern.ClassicConverter;
+import ch.qos.logback.classic.spi.CallerData;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+
+/**
+ * Created by madl on 2017/4/26.
+ */
+public class MyFileAndLineConverter extends ClassicConverter {
+
+    private String getFullyQualifiedName(ILoggingEvent le) {
+
+        StackTraceElement[] cda = le.getCallerData();
+
+        String[] array = le.getLoggerName().split("\\.");
+        String fileName = array[array.length - 1] + ".java";
+
+        if (cda != null && cda.length > 0) {
+
+            for (StackTraceElement e : cda) {
+
+                if (e.getFileName() != null) {
+
+                    if (fileName.equals(e.getFileName())) {
+                        return e.getFileName();
+                    }
+                }
+            }
+
+            return CallerData.NA;
+        } else {
+            return CallerData.NA;
+        }
+    }
+
+    private String getLineNumber(ILoggingEvent le) {
+
+        StackTraceElement[] cda = le.getCallerData();
+
+        String[] array = le.getLoggerName().split("\\.");
+        String fileName = array[array.length - 1] + ".java";
+
+        if (cda != null && cda.length > 0) {
+
+            for (StackTraceElement e : cda) {
+
+                if (e.getFileName() != null) {
+
+                    if (fileName.equals(e.getFileName())) {
+                        return Integer.toString(e.getLineNumber());
+                    }
+                }
+            }
+
+            return CallerData.NA;
+        } else {
+
+            return CallerData.NA;
+        }
+    }
+
+    @Override
+    public String convert(ILoggingEvent le) {
+
+        //log所在的类的类名
+        String fileName = getFullyQualifiedName(le);
+        //log所在的类的行数
+        String line = getLineNumber(le);
+
+        return fileName + ": " + line;
+    }
+}
