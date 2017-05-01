@@ -1,0 +1,37 @@
+package com.common.entity;
+
+import enumeration.ServerStateEnum;
+
+/**
+ * Created by madl on 2017/4/27.
+ */
+public class ZkConnectionNodeEntity {
+
+    private final String id;
+    private final String ip;
+    private final int port;
+    private final ServerStateEnum serverStateEnum;
+
+    public ZkConnectionNodeEntity(String id, String ip, int port, ServerStateEnum serverStateEnum) {
+        this.id = id;
+        this.ip = ip;
+        this.port = port;
+        this.serverStateEnum = serverStateEnum;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public ServerStateEnum getServerStateEnum() {
+        return serverStateEnum;
+    }
+
+    public String getId() {
+        return id;
+    }
+}

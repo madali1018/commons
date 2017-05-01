@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <!--通常一个session-factory节点代表一个数据库-->
+    <session-factory>
+
+        <!--mysql连接url，驱动类，用户名，密码-->
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/mysql</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">rootroot</property>
+        <!--针对mysql数据库的方言，特定的关系数据库生成优化的SQL-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!--是否在控制台打印sql语句-->
+        <property name="hibernate.show_sql">false</property>
+        <!--自动生成数据表-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!--是否使用二级缓存-->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+
+        <!--连接使用c3p0连接池-->
+        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider
+        </property>
+        <!--最小连接数-->
+        <property name="hibernate.c3p0.min_size">5</property>
+        <!--最大连接数-->
+        <property name="hibernate.c3p0.max_size">20</property>
+        <!--获得连接的超时时间，如果超过这个时间会抛出异常，单位毫秒-->
+        <property name="hibernate.c3p0.timeout">300</property>
+        <!--最大的preparedStatement的数量-->
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <!--每隔3000秒检查连接池里的空闲连接，单位是秒-->
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+
+        <!--将hibernate.c3p0.validate和hibernate.c3p0.testConnectionOnCheckout属性设置为true，保证hibernate mysql数据源自动重连不会失败。-->
+        <!--每次都验证连接是否可用-->
+        <property name="hibernate.c3p0.validate">true</property>
+        <!--每个connection提交时都验证连接的有效性-->
+        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+
+        <!--定义Model类和对应数据库表之间的关联关系-->
+        <mapping class="com.common.model.AddTime"/>
+        <mapping class="com.common.model.Snapshot"/>
+
+    </session-factory>
+</hibernate-configuration>

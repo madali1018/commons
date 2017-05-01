@@ -18,6 +18,12 @@ public class TimeUtil {
         return OffsetDateTime.ofInstant(Instant.now(), ZoneOffset.ofHours(timeZone)).format(DateTimeFormatter.ofPattern(format));
     }
 
+    //获取当前时刻（含时区）
+    public static OffsetDateTime gmtOffsetDateTime(int timeZone) {
+
+        return OffsetDateTime.ofInstant(Instant.now(), ZoneOffset.ofHours(timeZone));
+    }
+
     //String 转 OffsetDatetime(含时区)
     public static OffsetDateTime offsetDateTime(String gmtDatetime, int timeZone) {
 
@@ -93,6 +99,13 @@ public class TimeUtil {
         System.out.println("gmt0Datetime: " + gmt0Datetime);
         System.out.println("gmtDatetime: " + gmtDatetime);
         System.out.println("--------------------");
+
+        OffsetDateTime gmt0OffsetDateTime = gmtOffsetDateTime(0);
+        OffsetDateTime gmtOffsetDateTime = gmtOffsetDateTime(timeZone);
+        System.out.println("gmt0OffsetDateTime: " + gmt0OffsetDateTime);
+        System.out.println("gmtOffsetDateTime: " + gmtOffsetDateTime);
+        System.out.println("--------------------");
+
 
         //String 转 OffsetDateTime
         OffsetDateTime gmt0DatetimeODT = offsetDateTime(gmt0Datetime, 0);

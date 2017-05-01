@@ -1,0 +1,8 @@
+package com.common.util.mq;
+
+/**
+ * Created by madl on 2017/4/27.
+ */
+//异步回到消费或订阅
+public interface ICallback {
+}

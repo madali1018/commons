@@ -11,8 +11,8 @@ import ch.qos.logback.core.spi.FilterReply;
 import org.slf4j.LoggerFactory;
 
 /**
-* Created by madl on 2017/4/26.
-*/
+ * Created by madl on 2017/4/26.
+ */
 public class LogUtilBak {
 
     /**
@@ -65,6 +65,6 @@ public class LogUtilBak {
         LOGGER_INFO.info("LOGGER_INFO.info");
         LOGGER_WARN.warn("LOGGER_WARN.warn");
         LOGGER_ERROR.error("LOGGER_ERROR.error");
-        
+
     }
 }
