@@ -1,6 +1,6 @@
 package com.common.model;
 
-import com.common.util.json.JsonUtil;
+import com.alibaba.fastjson.JSON;
 
 import java.io.Serializable;
 
@@ -9,8 +9,16 @@ import java.io.Serializable;
  */
 public abstract class BaseModel implements Serializable {
 
-    public <T> T convertTo(Class<T> cls) {
+    /**
+     * 自定义实体和业务实体互转 （先序列化再反序列化）
+     *
+     * @param obj 源对象
+     * @param cls 要转换的目标对象
+     * @param <E>
+     * @return
+     */
+    public static <E> E convertTo(Object obj, Class<E> cls) {
 
-        return JsonUtil.convertTo(this, cls);
+        return JSON.parseObject(JSON.toJSONString(obj), cls);
     }
 }

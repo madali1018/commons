@@ -1,7 +1,7 @@
 package com.common.dao;
 
 import com.common.model.AddTime;
-import com.common.util.hibernate.HibernateUtil;
+import com.common.util.db.hibernate.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.slf4j.Logger;

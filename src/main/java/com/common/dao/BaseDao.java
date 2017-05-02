@@ -1,6 +1,6 @@
 package com.common.dao;
 
-import com.common.util.hibernate.HibernateUtil;
+import com.common.util.db.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
