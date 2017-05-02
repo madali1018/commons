@@ -2,7 +2,8 @@
 /log/
 /target/
 /.idea/
-/**/.iml
+/common.iml
+/.gitignore
 
 
 

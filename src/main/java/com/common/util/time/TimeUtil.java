@@ -15,6 +15,7 @@ public class TimeUtil {
     //获取当前时刻（含时区）
     public static String gmtDatetime(int timeZone, String format) {
 
+        //Instant.now()获取当前GMT0时间，OffsetDateTime.now()获取的是当前机器所在时区的时间
         return OffsetDateTime.ofInstant(Instant.now(), ZoneOffset.ofHours(timeZone)).format(DateTimeFormatter.ofPattern(format));
     }
 
