@@ -18,17 +18,7 @@ public class MyFileAndLineConverter extends ClassicConverter {
 
         if (cda != null && cda.length > 0) {
 
-            for (StackTraceElement e : cda) {
-
-                if (e.getFileName() != null) {
-
-                    if (fileName.equals(e.getFileName())) {
-                        return e.getFileName();
-                    }
-                }
-            }
-
-            return CallerData.NA;
+            return fileName;
         } else {
             return CallerData.NA;
         }
@@ -45,15 +35,12 @@ public class MyFileAndLineConverter extends ClassicConverter {
 
             for (StackTraceElement e : cda) {
 
-                if (e.getFileName() != null) {
-
-                    if (fileName.equals(e.getFileName())) {
-                        return Integer.toString(e.getLineNumber());
-                    }
+                if (fileName.equals(e.getFileName())) {
+                    return Integer.toString(e.getLineNumber());
                 }
             }
 
-            return CallerData.NA;
+            return Integer.toString(cda[0].getLineNumber());
         } else {
 
             return CallerData.NA;
