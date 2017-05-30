@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 /**
  * Created by madl on 2017/4/27.
  */
@@ -30,26 +32,7 @@ public abstract class BaseDao {
         }
     }
 
-    public <T> T get(Integer id, Class<T> cls) {
-
-        T t = null;
-        Session session = HibernateUtil.getSession();
-
-        try {
-            session.beginTransaction();
-            t = (T) session.get(cls, id);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            LOGGER.warn("Fail to get (T: {}), e: ", cls, e);
-        } finally {
-            session.close();
-        }
-
-        return t;
-    }
-
-    public <T> T get(String id, Class<T> cls) {
+    public <T> T get(Class<T> cls, Serializable id ) {
 
         T t = null;
         Session session = HibernateUtil.getSession();
