@@ -91,6 +91,65 @@ public class TimeUtil {
         return getFirstDayInCurrentMonth(offsetDateTime, timeZone).minusDays(1);
     }
 
+    //获取当前时间（精确到微秒）
+    public static String getCurrentGmt0Datetime(String currentGmt0Datetime) {
+
+        String nanoStr = String.valueOf(System.nanoTime());
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(currentGmt0Datetime);
+        sb.append(".");
+        sb.append(nanoStr.substring(5, 11));
+
+        return sb.toString();
+    }
+
+    //获取两个GMT0时间的差值
+    public static String getTimeDifference(String time1, String time2) {
+
+        OffsetDateTime offsetDateTime1 = offsetDateTime(time1, 0, DEFAULT_DATETIME_FORMAT);
+        OffsetDateTime offsetDateTime2 = offsetDateTime(time2, 0, DEFAULT_DATETIME_FORMAT);
+
+        long between = offsetDateTime1.toEpochSecond() - offsetDateTime2.toEpochSecond();//时间差，单位为秒
+        long days = between / (24 * 3600);
+        long hours = (between - days * 24 * 3600) / 3600;
+        long minutes = (between - days * 24 * 3600 - hours * 3600) / 60;
+        long seconds = between % 60;
+
+        StringBuilder timeDifference = new StringBuilder();
+
+        timeDifference.append("Time Difference: ");
+
+        if (days > 0)
+            timeDifference.append(days + "days, ");
+
+        if (hours > 0)
+            timeDifference.append(hours + "hours, ");
+
+        if (minutes > 0)
+            timeDifference.append(minutes + "minutes, ");
+
+        timeDifference.append(seconds + "seconds.");
+
+        return timeDifference.toString();
+    }
+
+    //判断两个GMT0时间差的分钟数，是否大于等于指定分钟
+    public static boolean judge(String time1, String time2, int difference) {
+
+        OffsetDateTime offsetDateTime1 = offsetDateTime(time1, 0, DEFAULT_DATETIME_FORMAT);
+        OffsetDateTime offsetDateTime2 = offsetDateTime(time2, 0, DEFAULT_DATETIME_FORMAT);
+
+        long between = offsetDateTime1.toEpochSecond() - offsetDateTime2.toEpochSecond();//时间差，单位为秒
+        long minutes = between / 60;
+
+        if (minutes >= difference)
+            return true;
+        else
+            return false;
+    }
+
+
     public static void main(String[] args) {
 
         int timeZone = 8;
@@ -143,5 +202,10 @@ public class TimeUtil {
         System.out.println("firstDayInCurrentMonthODT: " + firstDayInCurrentMonthODT);
         System.out.println("lastDayInCurrentMonthODT: " + lastDayInCurrentMonthODT);
         System.out.println("lastDayInPreviousMonthODT: " + lastDayInPreviousMonthODT);
+
+        System.out.println("--------------------");
+        System.out.println(getCurrentGmt0Datetime("2017-06-11 01:35:39"));
+        System.out.println(getTimeDifference("2017-06-11 01:35:39", "2017-06-11 00:35:39"));
+        System.out.println(judge("2017-06-11 01:35:39", "2017-06-11 00:35:39", 10));
     }
 }

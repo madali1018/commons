@@ -1,9 +1,6 @@
 package com.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by madl on 2017/4/27.
@@ -13,6 +10,8 @@ import javax.persistence.Table;
 public class AddTime extends BaseModel {
 
     @Id
+    //主键自动生成，无需赋值
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
