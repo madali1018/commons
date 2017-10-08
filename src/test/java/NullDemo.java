@@ -1,9 +1,7 @@
-package nulldemo;
-
 import java.util.Date;
 
 /**
- * Created by madl on 2017/4/26.
+ * Created by madl on 2017/10/8.
  */
 public class NullDemo {
 

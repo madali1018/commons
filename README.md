@@ -1,1 +1,1 @@
-Some common utils and demo summary.
+Some common utils, demo summary and designPattern java demo.
