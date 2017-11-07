@@ -20,6 +20,7 @@ public class RandomCodeUtil {
 
     /**
      * 获取唯一字符串（阿拉伯数字和英文字符串的组合）
+     *
      * @return
      */
     public static String getRandomCode() {
@@ -36,4 +37,11 @@ public class RandomCodeUtil {
         return sb.toString();
     }
 
+    public static void main(String[] args) {
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(getRandomCode());
+        }
+
+    }
 }
