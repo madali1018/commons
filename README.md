@@ -2,13 +2,12 @@
 
 ## jdk版本：jdk1.8.0_102
 
-## 常用工具类示例。
-## 设计模式demo示例。
+## 常用工具类和设计模式demo示例。
 
 ### 内容目录
 ####     com.common目录：
-            cglib动态代理
-            util目录：
+1.             cglib动态代理
+2.             util目录：
                          负载均衡算法
                          环境变量工具类
                          db工具类(hibernate和redis)
@@ -23,16 +22,16 @@
                          时间处理工具类
                          Zookeeper工具类
 
-    designpattern目录：
-             设计模式demo
+####     designpattern目录：
+1.              设计模式demo
 
 
-    enumeration目录：
-             枚举类
+####     enumeration目录：
+1.              枚举类
 
-    resource目录：
-             配置文件
+####     resource目录：
+1.              配置文件
 
-    test目录：
-             测试demo
+####     test目录：
+1.              测试demo
 
