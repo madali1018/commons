@@ -5,33 +5,33 @@
 ## 常用工具类和设计模式demo示例。
 
 ### 内容目录
-####     com.common目录：
-1.             cglib动态代理
-2.             util目录：
-                         负载均衡算法
-                         环境变量工具类
-                         db工具类(hibernate和redis)
-                         枚举工具类
-                         文件压缩解压缩工具类
-                         MD5和一致性hash算法
-                         日志处理工具类(cligb+logback和jdk proxy+logback)
-                         MQ工具类(kafka+redis)
-                         数字处理工具类
-                         对象转换工具类
-                         线程工具类
-                         时间处理工具类
-                         Zookeeper工具类
 
-####     designpattern目录：
-1.              设计模式demo
+* #### com.common目录 ####
+	* cglib动态代理
+	* util(java工具类包)
+		* 负载均衡算法
+		* 环境变量工具类
+		* db工具类(hibernate和redis)
+		* 枚举工具类
+		* 文件压缩解压缩工具类
+		* MD5和一致性hash算法
+		* 日志处理工具类(cligb+logback和jdk proxy+logback)
+		* MQ工具类(kafka+redis)
+		* 数字处理工具类
+		* 对象转换工具类
+		* 线程工具类
+		* 时间处理工具类
+		* Zookeeper工具类
 
+* #### designpattern目录 ####
+	* 设计模式demo
 
-####     enumeration目录：
-1.              枚举类
+* #### enumeration目录 ####
+	* 枚举类
 
-####     resource目录：
-1.              配置文件
+* #### resource目录 ####
+	* 配置文件
 
-####     test目录：
-1.              测试demo
+* #### test目录 ####
+	* 测试demo
 
