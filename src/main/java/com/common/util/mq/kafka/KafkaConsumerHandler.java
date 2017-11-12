@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 public class KafkaConsumerHandler implements IConsumerHandler {
 

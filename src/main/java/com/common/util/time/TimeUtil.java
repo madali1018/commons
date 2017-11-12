@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 时间工具类
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class TimeUtil {
 

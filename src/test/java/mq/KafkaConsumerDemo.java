@@ -8,7 +8,7 @@ import com.common.util.mq.kafka.IKafkaCallback;
 import com.common.util.zookeeper.ZkUtil;
 
 /**
- * Created by madl on 2017/5/1.
+ * Created by madali on 2017/5/1.
  */
 public class KafkaConsumerDemo {
 

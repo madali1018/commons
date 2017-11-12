@@ -3,7 +3,7 @@ package obj.annotationdemo;
 import java.lang.annotation.*;
 
 /**
- * Created by madl on 2017/5/11.
+ * Created by madali on 2017/5/11.
  */
 
 //自定义注解MethodAnnotation，要想使用反射读取注解，必须将Retention的值选为RUNTIME。

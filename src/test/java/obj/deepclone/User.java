@@ -3,7 +3,7 @@ package obj.deepclone;
 import java.io.Serializable;
 
 /**
- * Created by madl on 2017/5/15.
+ * Created by madali on 2017/5/15.
  */
 public class User implements Cloneable, Serializable {
 

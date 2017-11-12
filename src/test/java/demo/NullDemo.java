@@ -3,7 +3,7 @@ package demo;
 import java.util.Date;
 
 /**
- * Created by madl on 2017/10/8.
+ * Created by madali on 2017/10/8.
  */
 public class NullDemo {
 

@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * Created by madl on 2017/4/28.
+ * Created by madali on 2017/4/28.
  */
 @EnableScheduling
 @EnableAsync(proxyTargetClass = true)

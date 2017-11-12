@@ -1,7 +1,7 @@
 package finallydemo;
 
 /**
- * Created by madl on 2017/5/1.
+ * Created by madali on 2017/5/1.
  * <p>
  * 当发生异常后，catch中的return执行情况与未发生异常时try中return的执行情况完全一样。
  */

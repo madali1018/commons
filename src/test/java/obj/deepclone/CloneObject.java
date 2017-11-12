@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Created by madl on 2017/5/12.
+ * Created by madali on 2017/5/12.
  */
 public class CloneObject implements Cloneable, Serializable {
 

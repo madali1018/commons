@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class ConfigurationUtil {
 

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * Created by madl on 2017/1/12.
+ * Created by madali on 2017/1/12.
  */
 @Embeddable
 //@Embeddable表示此类可以被插入到某个entity中

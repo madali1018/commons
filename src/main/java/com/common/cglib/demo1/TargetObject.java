@@ -3,7 +3,7 @@ package com.common.cglib.demo1;
 /**
  * 没有实现接口，需要CGLIB动态代理的目标类
  * <p>
- * Created by madl on 2017/6/1.
+ * Created by madali on 2017/6/1.
  */
 public class TargetObject {
 

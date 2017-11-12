@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * Created by madl on 2017/5/1.
+ * Created by madali on 2017/5/1.
  */
 public class KafkaProducerDemo {
 

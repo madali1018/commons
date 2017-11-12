@@ -1,7 +1,7 @@
 package com.common.cglib.demo3;
 
 /**
- * Created by madl on 2017/6/1.
+ * Created by madali on 2017/6/1.
  */
 public class TestCglib3 {
 

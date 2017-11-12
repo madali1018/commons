@@ -1,5 +1,5 @@
 /**
- * Created by madl on 2017/4/29.
+ * Created by madali on 2017/4/29.
  */
 package com.common.util.mq;
 

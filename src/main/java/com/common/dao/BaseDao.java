@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 @Repository
 public abstract class BaseDao {

@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.Arrays;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 @Entity
 @Table(name = "snapshot")

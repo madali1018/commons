@@ -11,7 +11,7 @@ import ch.qos.logback.core.spi.FilterReply;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class LogUtilBak {
 

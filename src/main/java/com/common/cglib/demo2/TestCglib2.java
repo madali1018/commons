@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
 
 /**
- * Created by madl on 2017/6/1.
+ * Created by madali on 2017/6/1.
  */
 public class TestCglib2 {
 

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Proxy;
 
 /**
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class JdkLogUtil {
 

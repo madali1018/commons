@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 public class RedisPublisherHandler implements IPublisherHandler {
 

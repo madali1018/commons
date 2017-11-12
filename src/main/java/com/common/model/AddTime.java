@@ -3,7 +3,7 @@ package com.common.model;
 import javax.persistence.*;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 @Entity
 @Table(name = "add_time")

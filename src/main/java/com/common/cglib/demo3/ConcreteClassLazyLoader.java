@@ -3,7 +3,7 @@ package com.common.cglib.demo3;
 import net.sf.cglib.proxy.LazyLoader;
 
 /**
-* Created by madl on 2017/6/1.
+* Created by madali on 2017/6/1.
 */
 public class ConcreteClassLazyLoader implements LazyLoader {
 
@@ -13,7 +13,7 @@ public class ConcreteClassLazyLoader implements LazyLoader {
         System.out.println("Before lazyloader....");
 
         PropertyBean propertyBean = new PropertyBean();
-        propertyBean.setKey("madl");
+        propertyBean.setKey("madali");
         propertyBean.setValue(new User("username", "pwd"));
 
         System.out.println("After lazyloader....");

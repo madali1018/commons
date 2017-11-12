@@ -7,7 +7,7 @@ import com.common.util.mq.ISubscriberHandler;
 import java.util.Properties;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 public class KafkaSubscriberHandler extends KafkaConsumerHandler implements ISubscriberHandler {
 

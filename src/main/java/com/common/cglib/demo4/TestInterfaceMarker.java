@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 /**
  * 接口生成器InterfaceMaker
  * <p>
- * Created by madl on 2017/5/31.
+ * Created by madali on 2017/5/31.
  */
 public class TestInterfaceMarker {
 

@@ -3,7 +3,7 @@ package reflect;
 import java.lang.reflect.Method;
 
 /**
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class RefletDemo {
     public static void main(String[] args) {

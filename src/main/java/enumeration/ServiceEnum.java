@@ -1,7 +1,7 @@
 package enumeration;
 
 /**
- * Created by madl on 2017/4/30.
+ * Created by madali on 2017/4/30.
  */
 
 public enum ServiceEnum {

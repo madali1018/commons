@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * java对象深克隆工具类
  * <p>
- * Created by madl on 2017/5/17.
+ * Created by madali on 2017/5/17.
  */
 public class ObjectDeepCloneUtil {
 

@@ -5,7 +5,7 @@ import net.sf.cglib.proxy.Mixin;
 /**
  * Mixin可以对多个对象进行代理，需要同时指定多个接口和多个接口对应的代理对象。
  * <p>
- * Created by madl on 2017/6/1.
+ * Created by madali on 2017/6/1.
  */
 public class MixinTest {
 

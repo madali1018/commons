@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Created by madl on 2017/5/2.
+ * Created by madali on 2017/5/2.
  */
 public class DatetimeUtil {
 

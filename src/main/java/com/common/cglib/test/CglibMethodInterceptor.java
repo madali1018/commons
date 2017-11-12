@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * Created by madl on 2017/4/12.
+ * Created by madali on 2017/4/12.
  */
 public class CglibMethodInterceptor implements MethodInterceptor {
 

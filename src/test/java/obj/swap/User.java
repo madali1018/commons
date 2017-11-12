@@ -1,7 +1,7 @@
 package obj.swap;
 
 /**
- * Created by madl on 2017/5/17.
+ * Created by madali on 2017/5/17.
  */
 public class User {
 

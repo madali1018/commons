@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 含权重和leader的负载均衡算法（该算法中服务集合中所有的元素唯一不重复）
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class WeightRoundRobin {
     

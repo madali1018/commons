@@ -1,7 +1,7 @@
 package com.common.util.mq;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 //P2P模式
 public interface IProducerHandler {

@@ -3,7 +3,7 @@ package com.common.util.obj;
 import java.lang.annotation.*;
 
 /**
- * Created by madl on 2017/5/17.
+ * Created by madali on 2017/5/17.
  */
 @Documented
 @Inherited

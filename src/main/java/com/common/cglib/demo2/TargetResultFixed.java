@@ -5,7 +5,7 @@ import net.sf.cglib.proxy.FixedValue;
 /**
  * 表示锁定方法返回值，无论被代理的方法返回什么值，回调方法都返回固定值
  * <p>
- * Created by madl on 2017/6/1.
+ * Created by madali on 2017/6/1.
  */
 public class TargetResultFixed implements FixedValue {
 

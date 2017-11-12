@@ -1,5 +1,5 @@
 /**
- * Created by madl on 2017/11/8.
+ * Created by madali on 2017/11/8.
  */
 package designpattern.proxy;
 

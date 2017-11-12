@@ -3,7 +3,7 @@ package com.common.callback;
 import com.common.callback.service.IServiceEntity;
 
 /**
- * Created by madl on 2017/4/27.
+ * Created by madali on 2017/4/27.
  */
 public interface IServiceCallback<T extends IServiceEntity> {
 

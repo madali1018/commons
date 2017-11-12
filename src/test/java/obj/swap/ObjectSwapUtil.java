@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * java对象转换工具类（根据自定义注解）
- * Created by madl on 2017/5/17.
+ * Created by madali on 2017/5/17.
  */
 public class ObjectSwapUtil {
 

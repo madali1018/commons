@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * Created by madl on 2017/5/11.
+ * Created by madali on 2017/5/11.
  */
 @FieldAnnotation(name = "class", hobby = {"smoke"})
 public class AnnotationDemo {

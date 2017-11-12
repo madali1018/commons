@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Set;
 
 /**
- * Created by madl on 2017/5/2.
+ * Created by madali on 2017/5/2.
  */
 public class ThreadUtil {
 

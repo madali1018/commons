@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 /**
  * 代理类（使用的是jdk动态代理）
  * <p>
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class JdkInvocationHandler implements InvocationHandler {
 

@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * Created by madl on 2017/5/24.
+ * Created by madali on 2017/5/24.
  */
 public class ObjUtil {
 

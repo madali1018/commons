@@ -1,7 +1,7 @@
 package finallydemo;
 
 /**
- * Created by madl on 2017/5/1.
+ * Created by madali on 2017/5/1.
  * <p>
  * finally语句块中的代码在try或者catch中的return语句执行之后返回之前执行，
  * 且finally中的修改语句不能影响try或者catch中return已经确定的返回值。

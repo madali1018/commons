@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 负载均衡算法
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class RoundRobin {
 

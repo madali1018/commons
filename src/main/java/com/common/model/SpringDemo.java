@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Created by madl on 2017/5/3.
+ * Created by madali on 2017/5/3.
  */
 public class SpringDemo {
 

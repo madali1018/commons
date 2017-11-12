@@ -1,7 +1,7 @@
 package designpattern.singleton;
 
 /**
- * Created by madl on 2017/10/8.
+ * Created by madali on 2017/10/8.
  */
 
 /**
@@ -11,7 +11,7 @@ package designpattern.singleton;
  * <p>
  * 懒汉模式：第一次使用时才初始化，延迟  getInstance---getInstance4方法
  * <p>
- * Created by madl on 2017/4/26.
+ * Created by madali on 2017/4/26.
  */
 public class Singleton {
 
