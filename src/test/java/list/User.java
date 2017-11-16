@@ -1,4 +1,4 @@
-package demo.list;
+package list;
 
 /**
  * Created by madali on 2017/11/6.

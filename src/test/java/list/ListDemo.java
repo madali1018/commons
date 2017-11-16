@@ -1,4 +1,4 @@
-package demo.list;
+package list;
 
 import java.util.*;
 
@@ -7,10 +7,11 @@ import java.util.*;
  */
 public class ListDemo {
 
+    private static User user;
     private static List<User> userList = new ArrayList<>();
 
     static {
-        User user = new User("u1", "p1", "2017-11-09 15:05:48");
+        user = new User("u1", "p1", "2017-11-09 15:05:48");
         User user2 = new User("u2", "p2", "2017-11-09 15:05:48");
         User user3 = new User("u3", "p3", "2017-11-09 15:07:48");
         User user4 = new User("u4", "p4", "2017-11-09 15:06:48");
