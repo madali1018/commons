@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 
 public class LogDemo {
 
-    private static final Logger LOGGER = CglibLogUtil.getLogger(LogDemo.class);
+    private static final Logger LOGGER = CglibLogUtil.getLogger(LogDemo.class, true);
 
     public static void main(String[] args) {
 
