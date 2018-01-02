@@ -1,5 +1,6 @@
 package log;
 
+import com.alibaba.fastjson.JSONObject;
 import com.common.util.log.cglib.CglibLogUtil;
 import org.slf4j.Logger;
 
@@ -9,11 +10,18 @@ public class LogDemo {
 
     public static void main(String[] args) {
 
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("111","211");
+        LOGGER.warn("IoT解析kafka消息:{}并保存事件信息至iot_events表失败,事件为null.", jsonObject);
+
         String clientId = "111222";
         String userId = "343";
-
         LOGGER.info("根据设备ID:{}查询出的要通知的报警userId:{}", clientId, userId);
 
+        String startTime = "2017-10-10";
+        String endTime = "2017-10-12";
+        LOGGER.warn("传入的startTime:" + startTime + "或endTime:" + endTime + "的时间格式不正确,应为yyyy-MM-dd HH:mm:ss");
+        LOGGER.warn("传入的startTime:{}或endTime:{}的时间格式不正确,应为yyyy-MM-dd HH:mm:ss", startTime, endTime);
     }
 
 }

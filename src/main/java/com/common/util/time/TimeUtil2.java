@@ -18,18 +18,16 @@ public class TimeUtil2 {
 
         Boolean flag = false;
 
-        Long currentTime = new Date().getTime();
+        Long currentTime = System.currentTimeMillis();
         //前一天时间（毫秒）
         Long previousTime = currentTime - 24 * 60 * 60 * 1000L;
-        //后一天时间（毫秒）
-        Long nextTime = currentTime + 24 * 60 * 60 * 1000L;
 
         if (String.valueOf(time).length() == 10) {
-            if ((time * 1000L) >= previousTime && (time * 1000L) <= nextTime) {
+            if ((time * 1000L) >= previousTime && (time * 1000L) <= currentTime) {
                 flag = true;
             }
         } else if (String.valueOf(time).length() == 13) {
-            if (time >= previousTime && time <= nextTime) {
+            if (time >= previousTime && time <= currentTime) {
                 flag = true;
             }
         }

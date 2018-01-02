@@ -28,7 +28,16 @@ public class ListDemo {
 
     public static void main(String[] args) {
 //        group();
-        order();
+//        order();
+
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < 15; i++) {
+            list.add(i);
+        }
+//        System.out.println(getLimitList(list, 0, 5));
+//        System.out.println(getLimitList(list, 1, 5));
+//        System.out.println(getLimitList(list, 2, 5));
+        System.out.println(getLimitList(list, 3, 5));
     }
 
     //list根据字段分组，并统计每个字段的个数
@@ -60,8 +69,40 @@ public class ListDemo {
             }
         });
 
+
+        //按照时间倒序排列
+        Collections.sort(userList, (o1, o2) -> o2.getTime().compareTo(o1.getTime()));
+
+        Collections.sort(userList, (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+
+
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));
         }
     }
+
+    //list分页
+    private static List getLimitList(List list, int pageIndex, int pageSize) {
+
+        int pageStartRow;
+        int pageEndRow;
+        int totalPage = list.size() % pageSize == 0 ? list.size() / pageSize : list.size() / pageSize + 1;
+
+        // 判断是否为最后一页
+        if ((pageIndex + 1) * pageSize < list.size()) {
+            pageEndRow = (pageIndex + 1) * pageSize;
+            pageStartRow = pageEndRow - pageSize;
+        } else {
+            pageEndRow = list.size();
+            pageStartRow = pageSize * (totalPage - 1);
+        }
+
+        List resultList = null;
+        if (!list.isEmpty()) {
+            resultList = list.subList(pageStartRow, pageEndRow);
+        }
+
+        return resultList;
+    }
+
 }
