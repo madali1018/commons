@@ -15,7 +15,9 @@ public class HibernateUtil {
     private static final SessionFactory SESSION_FACTORY;
 
     static {
-        SESSION_FACTORY = buildSessionFactory();
+        Configuration configuration = new Configuration().configure();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        SESSION_FACTORY =  configuration.buildSessionFactory(serviceRegistry);
     }
 
     public static Session getSession() {
@@ -28,12 +30,4 @@ public class HibernateUtil {
         return session;
     }
 
-    private static SessionFactory buildSessionFactory() {
-
-        Configuration configuration = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-        return sessionFactory;
-    }
 }

@@ -1,4 +1,4 @@
-package list;
+package collection.list;
 
 /**
  * Created by madali on 2017/11/6.

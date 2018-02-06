@@ -10,6 +10,9 @@ public class LogDemo {
 
     public static void main(String[] args) {
 
+        LOGGER.info("dataType:" + 1111 + ",context:" + 22222 + ",获取到的parserRule:" + "ssss");
+
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("111","211");
         LOGGER.warn("IoT解析kafka消息:{}并保存事件信息至iot_events表失败,事件为null.", jsonObject);

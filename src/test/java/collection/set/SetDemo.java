@@ -1,4 +1,4 @@
-package set;
+package collection.set;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +14,6 @@ public class SetDemo {
         System.out.println(Integer.MAX_VALUE);
 
         Set<Integer> set = new HashSet<>();
-
         set.add(111);
         set.add(112);
         set.add(113);
@@ -24,7 +23,6 @@ public class SetDemo {
         while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
-
 
     }
 

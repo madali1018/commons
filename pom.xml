@@ -50,6 +50,19 @@
             </exclusions>
         </dependency>
 
+        <!--spring-core-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.7.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
