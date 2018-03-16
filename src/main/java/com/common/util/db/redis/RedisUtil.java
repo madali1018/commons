@@ -50,7 +50,7 @@ public class RedisUtil {
         String[] arr = redisHost.split(":");
 
         String ip = arr[0];
-        int port = Integer.valueOf(arr[1]).intValue();
+        int port = Integer.valueOf(arr[1]);
 
         JEDIS_POOL = new JedisPool(
                 jedisPoolConfig,
@@ -90,9 +90,7 @@ public class RedisUtil {
 
         try {
             jedis = connect();
-
             jedis.hset(CONSUMER_PROGRESS_KEY, groupId + "_" + topic + "_" + partition, String.valueOf(offset));
-
         } finally {
             disconnect(jedis);
         }

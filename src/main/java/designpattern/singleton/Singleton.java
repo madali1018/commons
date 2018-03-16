@@ -80,8 +80,7 @@ public class Singleton {
 
     public static void main(String[] args) {
 
-        Singleton singleton = Singleton.instance();
-        singleton.print();
+        Singleton.print();
 
         Singleton singleton1 = Singleton.getInstance();
         Singleton singleton2 = Singleton.getInstance2();

@@ -8,5 +8,5 @@ import com.common.util.mq.ICallback;
 //异步回到消费或订阅
 public interface IRedisCallback extends ICallback {
 
-    public void execute(String message);
+    void execute(String message);
 }
