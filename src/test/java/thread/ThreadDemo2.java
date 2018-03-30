@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by madali on 2017/12/27.
  */
-public class ThreadDemo {
+public class ThreadDemo2 {
 
     public static void main(String[] args) {
 
