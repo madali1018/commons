@@ -48,7 +48,7 @@ public class A {
 
     @Override
     public String toString() {
-        return "A{" +
+        return "Person{" +
                 "age=" + age +
                 ", id=" + id +
                 ", flag=" + flag +
