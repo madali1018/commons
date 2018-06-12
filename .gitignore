@@ -1,10 +1,9 @@
-# Maven
+/.classpath
+/.project
+/common.iml
+/.settings
 /log/
 /target/
 /.idea/
-/common.iml
-/.gitignore
-
-
 
 
