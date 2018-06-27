@@ -1,4 +1,4 @@
-package thread;
+package concurrentAndthread.thread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ public class ScheduledExecutorServiceDemo {
 
     public static void main(String[] args) {
 
-        test1();
+//        test1();
 //        test2();
-//        test3();
+        test3();
 
     }
 
@@ -87,7 +87,7 @@ public class ScheduledExecutorServiceDemo {
             //线程休眠3秒再执行
             TimeUnit.SECONDS.sleep(3);
             System.out.println("callA end:  " + Thread.currentThread().getName() + ", " + System.currentTimeMillis());
-            return "returnA";
+            return "A";
         }
     }
 
@@ -95,8 +95,10 @@ public class ScheduledExecutorServiceDemo {
         @Override
         public String call() throws Exception {
             System.out.println("callB begin:" + Thread.currentThread().getName() + ", " + System.currentTimeMillis());
+            //线程休眠1秒再执行
+            TimeUnit.SECONDS.sleep(1);
             System.out.println("callB end:  " + Thread.currentThread().getName() + ", " + System.currentTimeMillis());
-            return "returnB";
+            return "B";
         }
     }
 

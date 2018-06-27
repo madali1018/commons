@@ -264,7 +264,7 @@ public class ObjUtil {
             //属性名
             String fieldName = field.getName();
 
-            if ("serialVersionUID" == fieldName)
+            if (Objects.equals("serialVersionUID", fieldName))
                 continue;
 
             //获取属性的getName和setName

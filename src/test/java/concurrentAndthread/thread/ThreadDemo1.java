@@ -1,4 +1,4 @@
-package thread;
+package concurrentAndthread.thread;
 
 /**
  * 创建线程的两种方法
@@ -11,7 +11,6 @@ public class ThreadDemo1 {
 
 //        create1();
         create2();
-
     }
 
     private static void create1() {
