@@ -10,25 +10,26 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Auther: madali
  * @Date: 2018/6/27 14:31
  */
-public class BoundedBuffer {
-
-    final Lock lock = new ReentrantLock();
+public class ConditionDemo {
 
     /*
-     * 对于同一个锁可以创建多个Condition。
+     * 对于同一个锁对象可以创建多个Condition(对象监听器)。
      *
      * 例如，假如多线程读/写同一个缓冲区：当向缓冲区中写入数据之后，唤醒"读线程"；当从缓冲区读出数据之后，唤醒"写线程"；并且当缓冲区满的时候，"写线程"需要等待；当缓冲区为空时，"读线程"需要等待。
      * 如果采用Object类中的wait(), notify(), notifyAll()实现该缓冲区，当向缓冲区写入数据之后需要唤醒"读线程"时，不可能通过notify()或notifyAll()明确的指定唤醒"读线程"，
      * 而只能通过notifyAll唤醒所有线程(但是notifyAll无法区分唤醒的线程是读线程，还是写线程)。
-     *
      * 但是，通过Condition，就能明确的指定唤醒读线程。
      *
+     * synchronized相当于在整个lock对象上只有一个单一的Condition对象，所有的线程都注册在它一个对象的身上。
+     *
      */
-    final Condition notFull = lock.newCondition();
-    final Condition notEmpty = lock.newCondition();
+
+    Lock lock = new ReentrantLock();
+    Condition notFull = lock.newCondition();
+    Condition notEmpty = lock.newCondition();
 
     int bufferSize = 5;
-    final Object[] items = new Object[bufferSize];
+    Object[] items = new Object[bufferSize];
 
     int putPtr;
     int takePtr;
@@ -36,14 +37,14 @@ public class BoundedBuffer {
 
     public static void main(String[] args) {
 
-//        testPutTake();
+        testPutTake();
 
-        testTakePut();
+//        testTakePut();
     }
 
     // 先put再take
     private static void testPutTake() {
-        final BoundedBuffer buffer = new BoundedBuffer();
+        final ConditionDemo buffer = new ConditionDemo();
 
         int count = 10;
         final CountDownLatch latch = new CountDownLatch(2 * count);
@@ -100,7 +101,7 @@ public class BoundedBuffer {
     // 先take再put
     private static void testTakePut() {
 
-        final BoundedBuffer buffer = new BoundedBuffer();
+        final ConditionDemo buffer = new ConditionDemo();
 
         int count = 10;
         final CountDownLatch latch = new CountDownLatch(2 * count);
