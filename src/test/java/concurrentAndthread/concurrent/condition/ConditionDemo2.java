@@ -1,4 +1,4 @@
-package concurrentAndthread.concurrent;
+package concurrentAndthread.concurrent.condition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -19,7 +19,7 @@ public class ConditionDemo2 {
     public void set() {
         try {
             lock.lock();
-            while (hasValue == true) {
+            while (hasValue) {
                 condition.await();
             }
             System.out.println("打印set");
@@ -35,7 +35,7 @@ public class ConditionDemo2 {
     public void get() {
         try {
             lock.lock();
-            while (hasValue == false) {
+            while (!hasValue) {
                 condition.await();
             }
             System.out.println("打印get");
@@ -63,6 +63,6 @@ public class ConditionDemo2 {
                 demo.get();
             }
         }).start();
-
+        
     }
 }

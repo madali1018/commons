@@ -1,4 +1,4 @@
-package concurrentAndthread.concurrent;
+package concurrentAndthread.concurrent.readwritelock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -15,8 +15,8 @@ public class ReadWriteLockDemo2 {
 
     public static void main(String[] args) {
 
-//        test1();
-        test2();
+        test1();
+//        test2();
     }
 
     // 降级（写锁 --> 读锁）：正常运行

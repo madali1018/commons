@@ -1,6 +1,4 @@
-package concurrentAndthread.concurrent;
-
-import com.common.util.time.TimeUtil;
+package concurrentAndthread.concurrent.readwritelock;
 
 import java.time.OffsetDateTime;
 import java.util.concurrent.CountDownLatch;
@@ -64,7 +62,7 @@ public class ReadWriteLockDemo {
             e.printStackTrace();
         }
 
-        System.out.println(TimeUtil.gmtOffsetDateTime(8) + " finished.");
+        System.out.println(OffsetDateTime.now() + " finished.");
 
     }
 

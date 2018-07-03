@@ -1,4 +1,4 @@
-package concurrentAndthread.concurrent;
+package concurrentAndthread.concurrent.reentrantlock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -10,10 +10,15 @@ public class ReentrantLockDemo2 {
 
     private ReentrantLock lock;
 
-    public ReentrantLockDemo2(boolean isFari) {
+    public ReentrantLockDemo2() {
         super();
         // ReentrantLock默认使用的是公平锁
-        lock = new ReentrantLock(isFari);
+        lock = new ReentrantLock(true);
+    }
+
+    public ReentrantLockDemo2(boolean fair) {
+        super();
+        lock = new ReentrantLock(fair);
     }
 
     public void serviceMethod() {
@@ -28,10 +33,10 @@ public class ReentrantLockDemo2 {
     public static void main(String[] args) {
 
         //公平锁
-//        ReentrantLockDemo2 demo = new ReentrantLockDemo2(true);
+        ReentrantLockDemo2 demo = new ReentrantLockDemo2();
 
         //非公平锁
-        ReentrantLockDemo2 demo = new ReentrantLockDemo2(false);
+//        ReentrantLockDemo2 demo = new ReentrantLockDemo2(false);
 
         //多线程乱序执行，但公平锁情况下 线程获取锁和线程运行了的顺序是不变的。非公平锁情况下，线程获取锁和线程运行了的顺序是乱序的。
         Thread[] arr = new Thread[10];

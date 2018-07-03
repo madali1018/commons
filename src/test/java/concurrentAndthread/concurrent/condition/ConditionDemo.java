@@ -1,4 +1,4 @@
-package concurrentAndthread.concurrent;
+package concurrentAndthread.concurrent.condition;
 
 import java.time.OffsetDateTime;
 import java.util.concurrent.CountDownLatch;
