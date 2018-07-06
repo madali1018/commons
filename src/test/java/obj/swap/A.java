@@ -48,16 +48,17 @@ public class A {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "age=" + age +
-                ", id=" + id +
-                ", flag=" + flag +
-                ", name='" + name + '\'' +
-                ", array=" + Arrays.toString(array) +
-                ", list=" + list +
-                ", map=" + map +
-                ", user=" + user +
-                '}';
+        final StringBuilder sb = new StringBuilder("A{");
+        sb.append("age=").append(age);
+        sb.append(", id=").append(id);
+        sb.append(", flag=").append(flag);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", array=").append(Arrays.toString(array));
+        sb.append(", list=").append(list);
+        sb.append(", map=").append(map);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString();
     }
 
     public int getAge() {

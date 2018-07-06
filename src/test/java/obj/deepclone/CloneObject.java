@@ -68,15 +68,16 @@ public class CloneObject implements Cloneable, Serializable {
 
     @Override
     public String toString() {
-        return "CloneObject{" +
-                "age=" + age +
-                ", flag=" + flag +
-                ", description='" + description + '\'' +
-                ", array=" + Arrays.toString(array) +
-                ", list=" + list +
-                ", map=" + map +
-                ", user=" + user +
-                '}';
+        final StringBuilder sb = new StringBuilder("CloneObject{");
+        sb.append("age=").append(age);
+        sb.append(", flag=").append(flag);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", array=").append(Arrays.toString(array));
+        sb.append(", list=").append(list);
+        sb.append(", map=").append(map);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString();
     }
 
     public int getAge() {

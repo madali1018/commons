@@ -51,16 +51,17 @@ public class B {
 
     @Override
     public String toString() {
-        return "B{" +
-                "bge=" + bge +
-                ", price=" + price +
-                ", f=" + f +
-                ", name='" + name + '\'' +
-                ", array=" + Arrays.toString(array) +
-                ", list=" + list +
-                ", map=" + map +
-                ", user=" + user +
-                '}';
+        final StringBuilder sb = new StringBuilder("B{");
+        sb.append("bge=").append(bge);
+        sb.append(", price=").append(price);
+        sb.append(", f=").append(f);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", array=").append(Arrays.toString(array));
+        sb.append(", list=").append(list);
+        sb.append(", map=").append(map);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString();
     }
 
     public int getBge() {

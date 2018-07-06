@@ -27,7 +27,7 @@ public class ObjectDeepCloneUtil {
     //方法三：使用序列化(读写流)进行深拷贝，fromObject及其引用类必须实现Serializable接口。
     public static Object deepCloneIOStream(Object fromObject) {
 
-        Object toObject = null;
+        Object toObject;
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream out = null;
@@ -49,7 +49,6 @@ public class ObjectDeepCloneUtil {
             if (out != null) {
                 try {
                     out.close();
-                    out = null;
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -58,7 +57,6 @@ public class ObjectDeepCloneUtil {
             if (in != null) {
                 try {
                     in.close();
-                    in = null;
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

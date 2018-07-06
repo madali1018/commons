@@ -53,9 +53,7 @@ public class NumberUtil {
                 sb.append(zr ? "0" : "#");
         }
 
-        String s = new DecimalFormat(sb.toString()).format(d);
-
-        return s;
+        return new DecimalFormat(sb.toString()).format(d);
     }
 
     /**
@@ -107,4 +105,41 @@ public class NumberUtil {
         else
             return decimalFormat.format(Double.parseDouble(text));
     }
+
+    /**
+     * 使用java正则表达式去掉多余的.与0
+     *
+     * @param str
+     * @return
+     */
+    public static String trimZero(String str) {
+
+        if (str.indexOf(".") > 0) {
+            //去掉多余的0
+            str = str.replaceAll("0+?$", "");
+            //如最后一位是.则去掉
+            str = str.replaceAll("[.]$", "");
+        }
+
+        return str;
+    }
+
+    /**
+     * 使用java正则表达式去掉小数点后的所有数字，小数点也去掉
+     *
+     * @param str
+     * @return
+     */
+    public static String trimNumber(String str) {
+
+        if (str.indexOf(".") > 0) {
+            //去掉多余的0
+            str = str.replaceAll("[0-9]+?$", "");
+            //如最后一位是.则去掉
+            str = str.replaceAll("[.]$", "");
+        }
+
+        return str;
+    }
+
 }

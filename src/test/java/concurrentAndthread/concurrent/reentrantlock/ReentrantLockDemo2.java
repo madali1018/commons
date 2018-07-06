@@ -12,8 +12,8 @@ public class ReentrantLockDemo2 {
 
     public ReentrantLockDemo2() {
         super();
-        // ReentrantLock默认使用的是公平锁
-        lock = new ReentrantLock(true);
+        // ReentrantLock默认使用的是非公平锁
+        lock = new ReentrantLock();
     }
 
     public ReentrantLockDemo2(boolean fair) {
