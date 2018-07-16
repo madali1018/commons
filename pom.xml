@@ -18,6 +18,13 @@
 
     <dependencies>
 
+        <!-- junit测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+
         <!--c3p0-->
         <dependency>
             <groupId>c3p0</groupId>

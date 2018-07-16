@@ -1,5 +1,7 @@
 package concurrentAndthread.thread;
 
+import org.junit.Test;
+
 /**
  * 创建线程的两种方法
  * <p>
@@ -27,5 +29,32 @@ public class ThreadDemo1 {
         Runner runner = new Runner();
         new Thread(runner).start();
     }
+
+    @Test
+    public void test1() {
+
+        Thread thread = new Thread(() -> {
+            String s = null;
+            System.out.println(s.length());
+        });
+        System.out.println(thread.getName());
+        //对指定的线程对象设置默认异常处理器
+        thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                System.out.println("线程" + t.getName() + "出现了异常.");
+            }
+        });
+
+        //对指定线程类的所有线程对象设置默认的异常处理器
+        thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            System.out.println("线程" + t.getName() + "出现了异常.");
+        });
+
+
+        thread.start();
+
+    }
+
 
 }
