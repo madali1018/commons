@@ -49,21 +49,6 @@ public class B {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("B{");
-        sb.append("bge=").append(bge);
-        sb.append(", price=").append(price);
-        sb.append(", f=").append(f);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", array=").append(Arrays.toString(array));
-        sb.append(", list=").append(list);
-        sb.append(", map=").append(map);
-        sb.append(", user=").append(user);
-        sb.append('}');
-        return sb.toString();
-    }
-
     public int getBge() {
         return bge;
     }
@@ -126,5 +111,20 @@ public class B {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("B{");
+        sb.append("bge=").append(bge);
+        sb.append(", price=").append(price);
+        sb.append(", f=").append(f);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", array=").append(Arrays.toString(array));
+        sb.append(", list=").append(list);
+        sb.append(", map=").append(map);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }

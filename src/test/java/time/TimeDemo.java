@@ -18,9 +18,6 @@ public class TimeDemo {
         Long time = 1514993005000L;
         String timeStr = simpleDateFormat.format(time);
         System.out.println(timeStr);
-
-
-
     }
 
 }

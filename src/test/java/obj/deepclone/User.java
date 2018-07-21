@@ -24,14 +24,6 @@ public class User implements Cloneable, Serializable {
         return super.clone();
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
     public String getUsername() {
         return username;
     }
@@ -46,5 +38,14 @@ public class User implements Cloneable, Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("username='").append(username).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }

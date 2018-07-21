@@ -48,11 +48,12 @@ public class Snapshot extends BaseModel {
 
     @Override
     public String toString() {
-
-        return "Snapshot{" +
-                "id: {buId=" + id.getBuId() + ", executeGmt0Datetime=" + id.getExecuteGmt0Datetime() + "}" +
-                ", data=" + Arrays.toString(data) +
-                ", executionStatus=" + executionStatus +
-                '}';
+        final StringBuilder sb = new StringBuilder("Snapshot{");
+        sb.append("id=").append(id);
+        sb.append(", data=").append(Arrays.toString(data));
+        sb.append(", executionStatus=").append(executionStatus);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
+
 }

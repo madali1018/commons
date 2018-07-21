@@ -38,11 +38,12 @@ public class AddTime extends BaseModel {
 
     @Override
     public String toString() {
-        return "AddTime{" +
-                "id=" + id +
-                ", addDay=" + addDay +
-                ", addHour=" + addHour +
-                ", addMinute=" + addMinute +
-                '}';
+        final StringBuilder sb = new StringBuilder("AddTime{");
+        sb.append("id=").append(id);
+        sb.append(", addDay=").append(addDay);
+        sb.append(", addHour=").append(addHour);
+        sb.append(", addMinute=").append(addMinute);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }

@@ -43,6 +43,6 @@ public class Person implements Serializable {
         sb.append("age=").append(age);
         sb.append(", name='").append(name).append('\'');
         sb.append('}');
-        return sb.toString();
+        return sb.toString().replace("'null'", "null");
     }
 }

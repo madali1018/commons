@@ -46,21 +46,6 @@ public class A {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("A{");
-        sb.append("age=").append(age);
-        sb.append(", id=").append(id);
-        sb.append(", flag=").append(flag);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", array=").append(Arrays.toString(array));
-        sb.append(", list=").append(list);
-        sb.append(", map=").append(map);
-        sb.append(", user=").append(user);
-        sb.append('}');
-        return sb.toString();
-    }
-
     public int getAge() {
         return age;
     }
@@ -123,5 +108,20 @@ public class A {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("A{");
+        sb.append("age=").append(age);
+        sb.append(", id=").append(id);
+        sb.append(", flag=").append(flag);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", array=").append(Arrays.toString(array));
+        sb.append(", list=").append(list);
+        sb.append(", map=").append(map);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }

@@ -50,6 +50,6 @@ public class User {
         sb.append(", password='").append(password).append('\'');
         sb.append(", time='").append(time).append('\'');
         sb.append('}');
-        return sb.toString();
+        return sb.toString().replace("'null'", "null");
     }
 }

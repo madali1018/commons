@@ -66,20 +66,6 @@ public class CloneObject implements Cloneable, Serializable {
         return cloneObject;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("CloneObject{");
-        sb.append("age=").append(age);
-        sb.append(", flag=").append(flag);
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", array=").append(Arrays.toString(array));
-        sb.append(", list=").append(list);
-        sb.append(", map=").append(map);
-        sb.append(", user=").append(user);
-        sb.append('}');
-        return sb.toString();
-    }
-
     public int getAge() {
         return age;
     }
@@ -134,5 +120,19 @@ public class CloneObject implements Cloneable, Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CloneObject{");
+        sb.append("age=").append(age);
+        sb.append(", flag=").append(flag);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", array=").append(Arrays.toString(array));
+        sb.append(", list=").append(list);
+        sb.append(", map=").append(map);
+        sb.append(", user=").append(user);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }
