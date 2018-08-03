@@ -1,5 +1,7 @@
 package concurrentAndthread.concurrent.readwritelock;
 
+import org.junit.Test;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -13,14 +15,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ReadWriteLockDemo2 {
 
-    public static void main(String[] args) {
-
-        test1();
-//        test2();
-    }
-
+    @Test
     // 降级（写锁 --> 读锁）：正常运行
-    private static void test1() {
+    public void test1() {
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
         Lock readLock = lock.readLock();
@@ -41,9 +38,9 @@ public class ReadWriteLockDemo2 {
         System.out.println("finished.");
     }
 
-
+    @Test
     // 升级（读锁 --> 写锁）：只能打印出前两句，后面就一直挂住了。
-    private static void test2() {
+    public void test2() {
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
         Lock readLock = lock.readLock();
