@@ -121,15 +121,15 @@ public class TimeUtil {
         timeDifference.append("Time Difference: ");
 
         if (days > 0)
-            timeDifference.append(days + "days, ");
+            timeDifference.append(days).append("days, ");
 
         if (hours > 0)
-            timeDifference.append(hours + "hours, ");
+            timeDifference.append(hours).append("hours, ");
 
         if (minutes > 0)
-            timeDifference.append(minutes + "minutes, ");
+            timeDifference.append(minutes).append("minutes, ");
 
-        timeDifference.append(seconds + "seconds.");
+        timeDifference.append(seconds).append("seconds.");
 
         return timeDifference.toString();
     }

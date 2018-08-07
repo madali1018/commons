@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import org.junit.Test;
 
 import java.util.*;
 
@@ -98,12 +99,12 @@ public class FastJsonDemo {
         }
     }
 
+    @Test
     // Java对象转String类型的JSON串  -------  String类型的JSON串转Java对象
-    private static void test5() {
+    public void test5() {
         Person p = new Person(1, "11");
         String json = JSON.toJSONString(p);
         System.out.println(json);
-
         System.out.println("-------------------------");
 
         //String类型的JSON串转Java对象
