@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 分页工具类
  * Created by madali on 2017/12/5.
  */
 public class ListPageUtil<T> {
@@ -93,13 +94,12 @@ public class ListPageUtil<T> {
     }
 
     public static void main(String[] args) {
-
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             list.add(i);
         }
 
-        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 1, 5);
+        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 4, 5);
         List<Integer> pagedList = listPageUtil.getPagedList();
         System.out.println(pagedList);
     }
