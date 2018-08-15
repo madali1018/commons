@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @Auther: madali
  * @Date: 2018/8/7 16:44
  */
-public class TestPredicate {
+public class PredicateDemo1 {
 
     static List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
@@ -54,6 +54,11 @@ public class TestPredicate {
     public void test3() {
         String s1 = "AX";
         String s2 = "AS";
+        //isEqual方法返回类型也是Predicate，也就是说通过isEqual方法得到的也是一个用来进行条件判断的函数式接口实例。
+        // 而返回的这个函数式接口实例是通过传入的targetRef的equals方法进行判断的。
+
+        //这里会用s1的equals方法判断与s2是否相等，结果false。
+        System.out.println("中");
         System.out.println(Predicate.isEqual(s1).test(s2));
     }
 
@@ -75,6 +80,10 @@ public class TestPredicate {
     //将当前条件取反
     private List<Integer> conditionFilterNegate(List<Integer> list, Predicate<Integer> predicate) {
         return list.stream().filter(predicate.negate()).collect(Collectors.toList());
+    }
+
+    private List<Integer> conditionMySelf(List<Integer> list, Predicate<Integer> predicate) {
+        return list.stream().filter(predicate).collect(Collectors.toList());
     }
 
 }
