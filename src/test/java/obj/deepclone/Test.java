@@ -1,8 +1,5 @@
 package obj.deepclone;
 
-import org.apache.commons.beanutils.BeanUtils;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,26 +80,6 @@ public class Test {
 
         System.out.println("重新赋值后obj1: " + obj1);
         System.out.println("重新赋值cligb拷贝出的b后: " + obj2);
-    }
-
-    //使用commons-beanutils库测试浅拷贝（深拷贝待扩展实现）
-    private static void testDeepCloneCommonsBeanutils() throws InvocationTargetException, IllegalAccessException {
-
-        //基本类型：修改1不影响2，修改2不影响1
-        CloneObject obj2 = new CloneObject();
-
-        //引用类型：修改2不影响1，修改1影响2
-        BeanUtils.copyProperties(obj2, obj1);
-
-        obj1.setAge(11111);
-        obj1.getUser().setUsername("name1");
-
-        obj2.setDescription("Obj222222222222");
-        obj2.setFlag(true);
-        obj2.getMap().put(5, "value5");
-
-        System.out.println(obj1);
-        System.out.println(obj2);
     }
 
 }
