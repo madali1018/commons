@@ -61,11 +61,12 @@ public class FastJsonDemo {
     public void test3() {
         // String类型的JSON串转list对象
         String json = "[{\"age\":1,\"name\":\"11\"},{\"age\":2,\"name\":\"12\"}]";
-        List<Person> list2 = JSON.parseObject(json, new TypeReference<List<Person>>() {
+        List<Person> list = JSON.parseObject(json, new TypeReference<List<Person>>() {
         });
-        for (int i = 0; i < list2.size(); i++) {
-            System.out.println(list2.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
         }
+        System.out.println("----------------------");
 
         // String类型的JSON串转map对象
         String json2 = "{1:{\"age\":1,\"name\":\"11\"},2:{\"age\":2,\"name\":\"12\"}}";
