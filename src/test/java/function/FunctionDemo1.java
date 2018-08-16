@@ -36,11 +36,6 @@ public class FunctionDemo1 {
         System.out.println(Function.identity().apply("identity方法是一个静态方法，作用是返回一个Function对象，返回的对象总是返回它被传入的值。"));
     }
 
-    private void modifyTheValue(int valueToBeOperated, Function<Integer, Integer> function) {
-        int newValue = function.apply(valueToBeOperated);
-        System.out.println("newValue:" + newValue);
-    }
-
     @Test
     public void test2() {
 
@@ -51,6 +46,11 @@ public class FunctionDemo1 {
         modifyTheValue(a, val -> val * b);
         modifyTheValue(a, val -> val - b);
         modifyTheValue(a, val -> "sth".length() + val - b);
+    }
+
+    private void modifyTheValue(int valueToBeOperated, Function<Integer, Integer> function) {
+        int newValue = function.apply(valueToBeOperated);
+        System.out.println("newValue:" + newValue);
     }
 
 }

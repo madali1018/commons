@@ -2,6 +2,8 @@ package function;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -30,17 +32,17 @@ public class ConsumerDemo1 {
         Consumer consumer1 = o -> System.out.println("consumer1");
         Consumer consumer2 = o -> System.out.println("consumer2");
         consumer1.andThen(consumer2).accept(new Object());
+        System.out.println("-------------------------------------");
+        consumer2.andThen(consumer1).accept(null);
     }
 
 }
 
 class Foo {
-    private int[] data = new int[10];
+
+    private static List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     public Foo() {
-        for (int i = 0; i < 10; i++) {
-            data[i] = i;
-        }
     }
 
     /**
@@ -51,8 +53,9 @@ class Foo {
      * @param consumer
      */
     public void foo(Consumer<Integer> consumer) {
-        for (int i : data) {
-            consumer.accept(i);
+        for (int i : list) {
+            consumer.accept(i * 2);
         }
     }
+
 }

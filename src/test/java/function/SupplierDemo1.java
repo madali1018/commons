@@ -15,7 +15,6 @@ public class SupplierDemo1 {
     /**
      * supplier的中文意思是提供者，跟Consumer类相反，Supplier类用于提供对象，它只有一个get方法，是一个抽象方法，需要编程者自定义想要返回的对象。
      */
-
     @Test
     public void test1() {
         Supplier<Integer> supplier = new Supplier<Integer>() {
