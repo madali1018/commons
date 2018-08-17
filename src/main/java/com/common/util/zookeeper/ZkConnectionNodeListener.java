@@ -6,8 +6,8 @@ import com.common.entity.ZkConnectionNodeEntity;
 import com.common.util.balance.RoundRobin;
 import com.common.util.enumeration.EnumerationUtil;
 import com.common.util.ketama.ConsistentHashing;
-import enumeration.ServerStateEnum;
-import enumeration.ServiceEnum;
+import com.common.enumeration.ServerStateEnum;
+import com.common.enumeration.ServiceEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

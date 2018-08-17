@@ -5,7 +5,7 @@ import com.common.util.db.redis.RedisUtil;
 import com.common.util.mq.ICallback;
 import com.common.util.mq.IConsumerHandler;
 import com.common.util.zookeeper.ZkUtil;
-import enumeration.InfrastructureEnum;
+import com.common.enumeration.InfrastructureEnum;
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;

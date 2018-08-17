@@ -1,7 +1,7 @@
 package com.common.callback;
 
 import com.common.entity.ZkConfigurationNodeEntity;
-import enumeration.InfrastructureEnum;
+import com.common.enumeration.InfrastructureEnum;
 
 /**
  * Created by madali on 2017/4/27.

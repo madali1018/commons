@@ -1,6 +1,6 @@
 package mq;
 
-import enumeration.ServiceEnum;
+import com.common.enumeration.ServiceEnum;
 import com.common.util.mq.IProducerHandler;
 import com.common.util.mq.IPublisherHandler;
 import com.common.util.mq.MqUtil;

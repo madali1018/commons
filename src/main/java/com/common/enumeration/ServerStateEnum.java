@@ -1,4 +1,4 @@
-package enumeration;
+package com.common.enumeration;
 
 /**
  * Created by madali on 2017/5/1.

@@ -1,6 +1,6 @@
 package mq;
 
-import enumeration.ServiceEnum;
+import com.common.enumeration.ServiceEnum;
 import com.common.util.mq.IConsumerHandler;
 import com.common.util.mq.ISubscriberHandler;
 import com.common.util.mq.MqUtil;

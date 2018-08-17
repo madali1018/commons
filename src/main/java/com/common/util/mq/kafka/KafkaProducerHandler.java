@@ -1,6 +1,6 @@
 package com.common.util.mq.kafka;
 
-import enumeration.InfrastructureEnum;
+import com.common.enumeration.InfrastructureEnum;
 import com.common.util.mq.IProducerHandler;
 import com.common.util.zookeeper.ZkUtil;
 import kafka.javaapi.producer.Producer;
