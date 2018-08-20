@@ -1,5 +1,7 @@
 package java8.concurrent.condition;
 
+import org.junit.Test;
+
 import java.time.OffsetDateTime;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Condition;
@@ -23,7 +25,6 @@ public class ConditionDemo {
      * synchronized相当于在整个lock对象上只有一个单一的Condition对象，所有的线程都注册在它一个对象的身上。
      *
      */
-
     Lock lock = new ReentrantLock();
     Condition notFull = lock.newCondition();
     Condition notEmpty = lock.newCondition();
@@ -35,15 +36,9 @@ public class ConditionDemo {
     int takePtr;
     int count;
 
-    public static void main(String[] args) {
-
-        testPutTake();
-
-//        testTakePut();
-    }
-
     // 先put再take
-    private static void testPutTake() {
+    @Test
+    public void testPutTake() {
         final ConditionDemo buffer = new ConditionDemo();
 
         int count = 10;
@@ -99,7 +94,8 @@ public class ConditionDemo {
     }
 
     // 先take再put
-    private static void testTakePut() {
+    @Test
+    public void testTakePut() {
 
         final ConditionDemo buffer = new ConditionDemo();
 
