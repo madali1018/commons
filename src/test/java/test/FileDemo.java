@@ -10,9 +10,8 @@ import java.io.File;
 public class FileDemo {
 
     public static void main(String[] args) {
-
 //        testLoopOutAllFileName("D:\\");
-        testLoopOutAllFileName("D:\\111111111111记录");
+        testLoopOutAllFileName("D:\\works");
     }
 
     private static void testLoopOutAllFileName(String testFileDir) {
