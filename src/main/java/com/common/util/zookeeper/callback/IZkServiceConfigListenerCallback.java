@@ -1,6 +1,6 @@
-package com.common.callback;
+package com.common.util.zookeeper.callback;
 
-import com.common.entity.ZkConfigurationNodeEntity;
+import com.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.common.enumeration.ServiceEnum;
 
 /**

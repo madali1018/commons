@@ -1,6 +1,6 @@
 package com.common.util.configuration;
 
-import com.common.entity.ZkConfigurationNodeEntity;
+import com.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.common.util.log.jdk.JdkLogUtil;
 import com.common.util.zookeeper.ZkUtil;
 import org.slf4j.Logger;

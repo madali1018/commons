@@ -1,4 +1,4 @@
-package com.common.model;
+package com.common.entity.hibernate;
 
 import com.alibaba.fastjson.JSON;
 

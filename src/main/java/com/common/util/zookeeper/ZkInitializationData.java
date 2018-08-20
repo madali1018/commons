@@ -1,8 +1,8 @@
 package com.common.util.zookeeper;
 
-import com.common.callback.IZkConnectionListenerCallback;
-import com.common.callback.IZkInfrastructureListenerCallback;
-import com.common.callback.IZkServiceConfigListenerCallback;
+import com.common.util.zookeeper.callback.IZkConnectionListenerCallback;
+import com.common.util.zookeeper.callback.IZkInfrastructureListenerCallback;
+import com.common.util.zookeeper.callback.IZkServiceConfigListenerCallback;
 
 /**
  * Created by madali on 2017/4/27.

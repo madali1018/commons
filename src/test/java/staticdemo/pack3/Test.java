@@ -4,7 +4,7 @@ package staticdemo.pack3;
  * Created by madali on 2018/4/6.
  */
 public class Test {
-    Person person = new Person("Test");
+    Person person = new Person("Test1");
 
     static {
         System.out.println("test static");

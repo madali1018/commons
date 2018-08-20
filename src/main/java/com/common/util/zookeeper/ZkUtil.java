@@ -1,11 +1,11 @@
 package com.common.util.zookeeper;
 
 import com.alibaba.fastjson.JSONObject;
-import com.common.callback.IZkConnectionListenerCallback;
-import com.common.callback.IZkInfrastructureListenerCallback;
-import com.common.callback.IZkServiceConfigListenerCallback;
-import com.common.entity.ZkConfigurationNodeEntity;
-import com.common.entity.ZkConnectionNodeEntity;
+import com.common.util.zookeeper.callback.IZkConnectionListenerCallback;
+import com.common.util.zookeeper.callback.IZkInfrastructureListenerCallback;
+import com.common.util.zookeeper.callback.IZkServiceConfigListenerCallback;
+import com.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
+import com.common.util.zookeeper.entity.ZkConnectionNodeEntity;
 import com.common.util.configuration.ConfigurationUtil;
 import com.common.enumeration.InfrastructureEnum;
 import com.common.enumeration.ServerStateEnum;

@@ -1,5 +1,5 @@
 //package com.common.dao;
-//import com.common.model.AddTime;
+//import com.common.entity.hibernate.AddTime;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //

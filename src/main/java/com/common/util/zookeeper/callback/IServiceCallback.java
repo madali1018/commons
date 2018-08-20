@@ -1,6 +1,6 @@
-package com.common.callback;
+package com.common.util.zookeeper.callback;
 
-import com.common.callback.service.IServiceEntity;
+import com.common.util.zookeeper.callback.service.IServiceEntity;
 
 /**
  * Created by madali on 2017/4/27.

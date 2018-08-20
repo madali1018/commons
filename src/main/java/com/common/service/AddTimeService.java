@@ -1,7 +1,7 @@
 package com.common.service;
 
 import com.common.dao.AddTimeDao;
-import com.common.model.AddTime;
+import com.common.entity.hibernate.AddTime;
 import com.common.util.time.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,19 +38,15 @@ public class AddTimeService {
         int addMinutes = 0;
 
         for (AddTime addTime : addTimeList) {
-
             if (addTime.getAddDay() != null) {
-
                 addDays = addDays + addTime.getAddDay();
             }
 
             if (addTime.getAddHour() != null) {
-
                 addHours = addHours + addTime.getAddHour();
             }
 
             if (addTime.getAddMinute() != null) {
-
                 addMinutes = addMinutes + addTime.getAddMinute();
             }
         }

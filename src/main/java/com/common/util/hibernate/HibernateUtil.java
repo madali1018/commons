@@ -1,4 +1,4 @@
-package com.common.util.db.hibernate;
+package com.common.util.hibernate;
 
 import org.hibernate.FlushMode;
 import org.hibernate.Session;

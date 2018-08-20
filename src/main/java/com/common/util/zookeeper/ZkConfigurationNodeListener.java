@@ -1,8 +1,8 @@
 package com.common.util.zookeeper;
 
-import com.common.callback.IZkInfrastructureListenerCallback;
-import com.common.callback.IZkServiceConfigListenerCallback;
-import com.common.entity.ZkConfigurationNodeEntity;
+import com.common.util.zookeeper.callback.IZkInfrastructureListenerCallback;
+import com.common.util.zookeeper.callback.IZkServiceConfigListenerCallback;
+import com.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.common.enumeration.InfrastructureEnum;
 import com.common.enumeration.ServiceEnum;
 import org.apache.zookeeper.KeeperException;

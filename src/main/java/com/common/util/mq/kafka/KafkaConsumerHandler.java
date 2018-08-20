@@ -1,7 +1,7 @@
 package com.common.util.mq.kafka;
 
 import com.common.util.configuration.ConfigurationUtil;
-import com.common.util.db.redis.RedisUtil;
+import com.common.util.redis.RedisUtil;
 import com.common.util.mq.ICallback;
 import com.common.util.mq.IConsumerHandler;
 import com.common.util.zookeeper.ZkUtil;

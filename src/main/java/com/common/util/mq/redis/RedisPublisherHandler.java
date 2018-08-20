@@ -1,6 +1,6 @@
 package com.common.util.mq.redis;
 
-import com.common.util.db.redis.RedisUtil;
+import com.common.util.redis.RedisUtil;
 import com.common.util.mq.IPublisherHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

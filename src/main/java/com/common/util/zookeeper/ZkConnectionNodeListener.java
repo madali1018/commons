@@ -1,8 +1,8 @@
 package com.common.util.zookeeper;
 
 import com.alibaba.fastjson.JSONObject;
-import com.common.callback.IZkConnectionListenerCallback;
-import com.common.entity.ZkConnectionNodeEntity;
+import com.common.util.zookeeper.callback.IZkConnectionListenerCallback;
+import com.common.util.zookeeper.entity.ZkConnectionNodeEntity;
 import com.common.util.balance.RoundRobin;
 import com.common.util.enumeration.EnumerationUtil;
 import com.common.util.ketama.ConsistentHashing;

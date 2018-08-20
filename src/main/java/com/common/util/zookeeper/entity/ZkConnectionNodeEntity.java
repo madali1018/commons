@@ -1,4 +1,4 @@
-package com.common.entity;
+package com.common.util.zookeeper.entity;
 
 import com.common.enumeration.ServerStateEnum;
 

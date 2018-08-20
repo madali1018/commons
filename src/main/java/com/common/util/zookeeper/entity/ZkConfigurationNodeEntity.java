@@ -1,4 +1,4 @@
-package com.common.entity;
+package com.common.util.zookeeper.entity;
 
 /**
  * Created by madali on 2017/4/27.
