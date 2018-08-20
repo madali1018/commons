@@ -10,7 +10,6 @@ import org.dom4j.DocumentHelper;
 public class XmlDemo {
 
     public static void main(String[] args) throws DocumentException {
-
         String definition = "";
         System.out.println(isLegal(definition));
     }
