@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableScheduling
 @EnableAsync(proxyTargetClass = true)
-//@ComponentScan配置扫描多个包
-@ComponentScan(basePackages = "com.common.*,test.*")
+//@ComponentScan可以配置扫描多个包
+@ComponentScan(basePackages = "com.common.*")
 @Configuration
 public class AppConfig {
 
