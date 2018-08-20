@@ -1,7 +1,9 @@
 package com.common.util.obj;
 
+import com.alibaba.fastjson.JSON;
 import net.sf.cglib.beans.BeanCopier;
 
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,15 +14,65 @@ import java.util.*;
  */
 public class ObjUtil {
 
+    //对象深拷贝方法一：Object类实现Cloneable接口，在clone方法中对list，collection.map，类引用进行处理，即可深克隆。
+
+    //对象深拷贝方法二：使用FastJson(序列化反序列化)进行深拷贝，fromObject是一个普通的java对象，无需实现Serializable或Cloneable接口。
+    public static Object deepCloneFastJson(Object fromObject) {
+
+        return JSON.parseObject(JSON.toJSONString(fromObject), fromObject.getClass());
+    }
+
+    //对象深拷贝方法三：使用序列化(读写流)进行深拷贝，fromObject及其引用类必须实现Serializable接口。
+    public static Object deepCloneIOStream(Object fromObject) {
+
+        Object toObject;
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream out = null;
+        ObjectInputStream in = null;
+
+        try {
+            //将对象写到流里
+            out = new ObjectOutputStream(byteArrayOutputStream);
+            out.writeObject(fromObject);
+            out.flush();
+
+            //从流里读出对象
+            in = new ObjectInputStream(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+            toObject = in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return toObject;
+    }
+
     /**
-     * 使用cglib实现深拷贝。
+     * 对象深拷贝方法四：使用cglib实现深拷贝。
      * fromObj是一个普通的java对象，无需实现Serializable或Cloneable接口，但fromObj中的属性必须实现get和set方法。
      *
      * @param fromObj
      * @param <T>
      * @return
      */
-    public static <T> T clone(T fromObj) {
+    public static <T> T deepCloneCglib(T fromObj) {
 
         T toObj;
         try {
@@ -89,7 +141,7 @@ public class ObjUtil {
     }
 
     //get获取bean的属性在注解中的值 与 [属性名，属性类型，属性值] 的对应关系的map
-    private static Map<String, Object[]> getFieldAnnotationMap(Object object) {
+    public static Map<String, Object[]> getFieldAnnotationMap(Object object) {
 
         Map<String, Object[]> fieldAnnotationMap = new HashMap<>();
 
