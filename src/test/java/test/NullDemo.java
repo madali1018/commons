@@ -45,5 +45,6 @@ public class NullDemo {
 
         //null可以用于释放内存：让一个非null的引用类型变量指向null，这样这个对象就不再被任何对象应用了，等待JVM垃圾回收机制取回收。
         date = null;
+        System.out.println(date);
     }
 }
