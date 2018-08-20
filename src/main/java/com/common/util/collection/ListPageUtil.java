@@ -1,4 +1,4 @@
-package collection.list;
+package com.common.util.collection;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,7 +99,7 @@ public class ListPageUtil<T> {
             list.add(i);
         }
 
-        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 4, 5);
+        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 2, 5);
         List<Integer> pagedList = listPageUtil.getPagedList();
         System.out.println(pagedList);
     }

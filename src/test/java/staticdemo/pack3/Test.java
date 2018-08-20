@@ -5,7 +5,6 @@ package staticdemo.pack3;
  */
 public class Test {
     Person person = new Person("Test1");
-
     static {
         System.out.println("test static");
     }

@@ -5,7 +5,7 @@ import com.common.enumeration.WeekDayEnum;
 /**
  * Created by madali on 2017/4/26.
  */
-public class EnumerationUtilDemo {
+public class Demo {
 
     public static void main(String[] args) {
 

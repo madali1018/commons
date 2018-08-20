@@ -4,7 +4,7 @@ package com.common.util.number;
  * @Auther: madali
  * @Date: 2018/7/6 16:08
  */
-public class TestNumberUtil {
+public class Demo1 {
 
     public static void main(String[] args) {
 

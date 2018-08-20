@@ -121,7 +121,7 @@ public class A {
         sb.append(", name='").append(name).append('\'');
         sb.append(", array=").append(Arrays.toString(array));
         sb.append(", list=").append(list);
-        sb.append(", collection.map=").append(map);
+        sb.append(", com.common.util.collection.map=").append(map);
         sb.append(", user=").append(user);
         sb.append('}');
         return sb.toString().replace("'null'", "null");
