@@ -1,4 +1,4 @@
-package file;
+package java8.interfaceDemo;
 
 /**
  * @Auther: madali

@@ -32,11 +32,11 @@ public class JdkLogUtilTest {
         long start = System.currentTimeMillis();
 
         for (int i = 0; i < 10000; i++) {
-            LOGGER2.error("error, i: {}.", i);
+            LOG.error("error, i: {}.", i);
         }
 
         long end = System.currentTimeMillis();
         System.out.println(end - start);
-//        System.out.println((end - start) / 1000000.00);
+//        System.out.println((end - start) / 10000.00);
     }
 }

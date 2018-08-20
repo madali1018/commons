@@ -21,7 +21,7 @@ public class ThreadDemo2 {
 
         //固定线程池
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(100);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 500; i++) {
             int index = i;
             fixedThreadPool.execute(() -> {
                 System.out.println("Current thread index number is:" + (index + 1));

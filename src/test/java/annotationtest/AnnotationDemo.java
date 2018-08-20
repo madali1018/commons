@@ -1,4 +1,4 @@
-package obj.annotationdemo;
+package annotationtest;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

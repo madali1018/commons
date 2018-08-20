@@ -1,4 +1,4 @@
-package file;
+package test;
 
 import java.io.File;
 
@@ -11,9 +11,8 @@ public class FileDemo {
 
     public static void main(String[] args) {
 
-//        testLoopOutAllFileName("E:\\");
-        testLoopOutAllFileName("E:\\IOT物联网平台");
-
+//        testLoopOutAllFileName("D:\\");
+        testLoopOutAllFileName("D:\\111111111111记录");
     }
 
     private static void testLoopOutAllFileName(String testFileDir) {
