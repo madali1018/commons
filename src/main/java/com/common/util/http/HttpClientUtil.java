@@ -1,5 +1,6 @@
 package com.common.util.http;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -14,6 +15,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -26,13 +28,18 @@ import java.util.Map.Entry;
 public class HttpClientUtil {
 
     public static String sendGet(String url) {
+        return sendGet(url, null);
+    }
+
+    public static String sendGet(String url, String param) {
         CloseableHttpClient httpClient = HttpClients.createDefault();// 通过址默认配置创建一个httpClient实例
         CloseableHttpResponse response = null;
         String result = "";
 
         try {
+            String urlNameString = StringUtils.isEmpty(param) ? url : url + "?" + param;
             // 创建httpGet远程连接实例
-            HttpGet httpGet = new HttpGet(url);
+            HttpGet httpGet = new HttpGet(urlNameString);
             // 设置请求头信息，鉴权
             httpGet.setHeader("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
             // 设置配置请求参数
