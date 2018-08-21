@@ -11,7 +11,7 @@ import java.util.Set;
  * @Auther: madali
  * @Date: 2018/8/20 13:58
  */
-public class Demo2 {
+public class HashtableDemo {
 
     private static Hashtable hashtable = new Hashtable();
 

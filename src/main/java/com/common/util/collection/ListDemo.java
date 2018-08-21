@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by madali on 2018/1/11.
  */
-public class Demo1 {
+public class ListDemo {
 
     @Test
     public void test1() {
