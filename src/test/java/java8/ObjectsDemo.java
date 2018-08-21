@@ -1,14 +1,13 @@
-package test;
+package java8;
 
 import org.junit.Test;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 /**
  * Created by madali on 2018/3/20.
  */
-public class StringDemo {
+public class ObjectsDemo {
 
     @Test
     public void test1() {
@@ -83,12 +82,7 @@ public class StringDemo {
         int a = 100;
         int b = 1000;
         // 使用指定的比较器c 比较参数a和参数b的大小（相等返回0，a大于b返回正数1，a小于b返回负数-1）
-        int compare = Objects.compare(a, b, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1.compareTo(o2);
-            }
-        });
+        int compare = Objects.compare(a, b, Integer::compareTo);
         System.out.println(" compare = " + compare);
     }
 
@@ -96,20 +90,19 @@ public class StringDemo {
     public void requireNonNullTest() {
         String test = null;
         //java.lang.NullPointerException
-//         String s1 = Objects.requireNonNull(test);
+        String s1 = Objects.requireNonNull(test);
 
         //java.lang.NullPointerException: 这是空指针异常提示的信息
 //        String s2 = Objects.requireNonNull(test, "这是空指针异常提示的信息");
 
         //java.lang.NullPointerException: 我是返回的异常信息
-        String s3 = Objects.requireNonNull(test, "我是返回的异常信息");
+//        String s3 = Objects.requireNonNull(test, "我是返回的异常信息");
     }
 
     @Test
     public void nullTest() {
         Object obj = null;
-        boolean flag = Objects.isNull(obj);
-        System.out.println(flag);
+        System.out.println(Objects.isNull(obj) + "," + Objects.nonNull(obj));
     }
 
 }
