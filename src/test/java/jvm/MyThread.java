@@ -1,4 +1,4 @@
-package jvmtest;
+package jvm;
 
 /**
  * @Auther: madali

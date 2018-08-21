@@ -1,4 +1,4 @@
-package jvmtest;
+package jvm;
 
 /**
  * CPU 性能分析的主要目的是统计函数的调用情况及执行时间，或者更简单的情况就是统计应用程序的 CPU 使用情况。

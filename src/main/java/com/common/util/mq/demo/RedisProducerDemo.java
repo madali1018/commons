@@ -1,4 +1,4 @@
-package mq;
+package com.common.util.mq.demo;
 
 import com.common.enumeration.ServiceEnum;
 import com.common.util.mq.IProducerHandler;
@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 /**
  * Created by madali on 2017/5/1.
  */
-public class KafkaProducerDemo {
+public class RedisProducerDemo {
 
     static {
         ServiceEnum serviceEnum = null;
@@ -20,7 +20,7 @@ public class KafkaProducerDemo {
         ZkUtil.connect(serviceEnum);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
 
         //应用关闭时，执行
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -28,27 +28,22 @@ public class KafkaProducerDemo {
             MqUtil.disconnect();
         }));
 
-        testProducer();
+//        testProducer();
 
-//        testPublisher();
+        testPublisher();
     }
 
     private static void testProducer() throws Exception {
 
         String topic = "DemoTest";
 
-        IProducerHandler producerHandler = MqUtil.Kafka.createProducerHandler(topic);
+        IProducerHandler producerHandler = MqUtil.Redis.createProducerHandler(topic);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
             System.out.println("Input message:");
             producerHandler.produce(br.readLine());
-
-//            String message = Math.random()+"";
-//            producerHandler.produce(message);
-//            System.out.println(message);
-            Thread.sleep(1);
         }
     }
 
@@ -56,7 +51,7 @@ public class KafkaProducerDemo {
 
         String topic = "DemoTest";
 
-        IPublisherHandler publisherHandler = MqUtil.Kafka.createPublisherHandler(topic);
+        IPublisherHandler publisherHandler = MqUtil.Redis.createPublisherHandler(topic);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

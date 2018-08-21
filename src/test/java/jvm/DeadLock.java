@@ -1,4 +1,4 @@
-package jvmtest;
+package jvm;
 
 /**
  * 死锁demo

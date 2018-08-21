@@ -1,4 +1,4 @@
-package jvmtest;
+package jvm;
 
 /**
  * 内存堆Heap：VisualVM 通过检测 JVM 中加载的类和对象信息等帮助我们分析内存使用情况，我们可以通过 VisualVM 的监视标签对应用程序进行内存分析。

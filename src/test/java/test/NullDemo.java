@@ -27,16 +27,23 @@ public class NullDemo {
         String c = null;
 
         //a分配了内存空间，值存在，但是为空
-        if (a.isEmpty())
+        if (a.isEmpty()) {
             System.out.println(1);
+            System.out.println("----------------" + a);
+        }
 
         //b分配了内存空间，值存在，但是为空字符串
-        if (b.isEmpty())
+        if (b.isEmpty()) {
             System.out.println(2);
+            System.out.println("----------------" + b);
+        }
+        System.out.println(a.equals(b));
 
         //c未分配内存空间，值存在，但是为null（null是一种特殊的值）
-        if (c == null)
+        if (c == null) {
             System.out.println(3);
+            System.out.println("----------------" + c);
+        }
 
         Date date = new Date();
         //null可以用于判断一个引用类型是否为null，用==来判断

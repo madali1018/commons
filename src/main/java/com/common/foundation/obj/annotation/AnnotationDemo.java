@@ -1,4 +1,4 @@
-package annotationtest;
+package com.common.foundation.obj.annotation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -7,16 +7,16 @@ import java.util.Arrays;
 /**
  * Created by madali on 2017/5/11.
  */
-@FieldAnnotation(name = "class", hobby = {"smoke"})
+@FieldAndMethodAnnotation(name = "class", hobby = {"smoke"})
 public class AnnotationDemo {
 
-    @FieldAnnotation(hobby = {"sleep", "play"})
+    @FieldAndMethodAnnotation(hobby = {"sleep", "play"})
     private String s1;
 
-    @FieldAnnotation(hobby = {"sleep", "play", "buy"}, age = 30, name = "s2")
+    @FieldAndMethodAnnotation(hobby = {"sleep", "play", "buy"}, age = 30, name = "s2")
     private String s2;
 
-    @FieldAnnotation(hobby = {"a1", "a2", "a3"})
+    @FieldAndMethodAnnotation(hobby = {"a1", "a2", "a3"})
     private String s3;
 
     @MethodAnnotation
@@ -32,10 +32,10 @@ public class AnnotationDemo {
         Class<AnnotationDemo> cls = AnnotationDemo.class;
 
         //类上是否有注解
-        boolean clsHasAnnotation = cls.isAnnotationPresent(FieldAnnotation.class);
+        boolean clsHasAnnotation = cls.isAnnotationPresent(FieldAndMethodAnnotation.class);
         if (clsHasAnnotation) {
             //获取类上的注解
-            FieldAnnotation clsAnnotation = cls.getAnnotation(FieldAnnotation.class);
+            FieldAndMethodAnnotation clsAnnotation = cls.getAnnotation(FieldAndMethodAnnotation.class);
             //输出注解上的属性
             int age = clsAnnotation.age();
             String[] hobby = clsAnnotation.hobby();
@@ -50,10 +50,10 @@ public class AnnotationDemo {
 
             field.setAccessible(true);
 
-            boolean filedHasAnnotation = field.isAnnotationPresent(FieldAnnotation.class);
+            boolean filedHasAnnotation = field.isAnnotationPresent(FieldAndMethodAnnotation.class);
             if (filedHasAnnotation) {
                 //获取字段上的注解
-                FieldAnnotation fieldAnnotation = field.getAnnotation(FieldAnnotation.class);
+                FieldAndMethodAnnotation fieldAnnotation = field.getAnnotation(FieldAndMethodAnnotation.class);
                 //输出注解上的属性
                 int age = fieldAnnotation.age();
                 String[] hobby = fieldAnnotation.hobby();

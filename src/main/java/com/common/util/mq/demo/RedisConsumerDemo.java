@@ -1,4 +1,4 @@
-package mq;
+package com.common.util.mq.demo;
 
 import com.common.enumeration.ServiceEnum;
 import com.common.util.mq.IConsumerHandler;

@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
  * Created by madali on 2017/4/26.
  */
 public class ReflectionDemo {
+
     public static void main(String[] args) {
 
         String s1 = "str";
@@ -20,9 +21,11 @@ public class ReflectionDemo {
 
         Class<?> c3 = String.class;
         try {
-            Method m = s1.getClass().getDeclaredMethod("");
+            Method m = s1.getClass().getDeclaredMethod("intern");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+
     }
+
 }

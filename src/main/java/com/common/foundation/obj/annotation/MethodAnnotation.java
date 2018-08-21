@@ -1,4 +1,4 @@
-package annotationtest;
+package com.common.foundation.obj.annotation;
 
 import java.lang.annotation.*;
 
