@@ -13,7 +13,7 @@ public class ConcreteClassLazyLoader implements LazyLoader {
         System.out.println("Before lazyloader....");
 
         PropertyBean propertyBean = new PropertyBean();
-        propertyBean.setKey("madali");
+        propertyBean.setKey("sdsfg");
         propertyBean.setValue(new User("username", "pwd"));
 
         System.out.println("After lazyloader....");

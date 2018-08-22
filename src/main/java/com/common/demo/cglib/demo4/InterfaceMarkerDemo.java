@@ -4,7 +4,6 @@ import com.common.demo.cglib.demo1.TargetObject;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.InterfaceMaker;
 import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,7 +13,7 @@ import java.lang.reflect.Method;
  * <p>
  * Created by madali on 2017/5/31.
  */
-public class TestInterfaceMarker {
+public class InterfaceMarkerDemo {
 
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
@@ -31,24 +30,20 @@ public class TestInterfaceMarker {
         }
 
         //接口代理并设置代理接口方法拦截
-        Object object = Enhancer.create(TargetObject.class, new Class[]{targetInterface}, new MethodInterceptor() {
-            @Override
-            public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-
-                if ("method1".equals(method.getName())) {
-                    System.out.println("method1------");
-                    return "m111111111111111";
-                } else if ("method2".equals(method.getName())) {
-                    System.out.println("method2------");
-                    return 20000;
-                } else if ("method3".equals(method.getName())) {
-                    System.out.println("method3------");
-                    return 300;
-                }
-
-                return "default";
-            }
-        });
+        Object object = Enhancer.create(TargetObject.class,
+                new Class[]{targetInterface}, (MethodInterceptor) (obj, method, args1, proxy) -> {
+                    if ("method1".equals(method.getName())) {
+                        System.out.println("method1------");
+                        return "m111111111111111";
+                    } else if ("method2".equals(method.getName())) {
+                        System.out.println("method2------");
+                        return 20000;
+                    } else if ("method3".equals(method.getName())) {
+                        System.out.println("method3------");
+                        return 300;
+                    }
+                    return "default";
+                });
 
         Method targetMethod = object.getClass().getMethod("method1", new Class[]{String.class});
         Object obj = targetMethod.invoke(object, "jkl");

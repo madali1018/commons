@@ -15,7 +15,7 @@ public class LazyBean {
 
     private PropertyBean propertyBeanDispatcher;
 
-    public LazyBean(String name, int age, PropertyBean propertyBean, PropertyBean propertyBeanDispatcher) {
+    public LazyBean(String name, int age) {
         System.out.println("lazy bean init");
         this.name = name;
         this.age = age;
@@ -33,23 +33,15 @@ public class LazyBean {
          */
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(PropertyBean.class);
-
-        PropertyBean pb = (PropertyBean) enhancer.create(PropertyBean.class, new ConcreteClassLazyLoader());
-
-        return pb;
+        return (PropertyBean) enhancer.create(PropertyBean.class, new ConcreteClassLazyLoader());
     }
 
     //每次都懒加载
     private PropertyBean createPropertyBeanDispatcher() {
-
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(PropertyBean.class);
-
-        PropertyBean pb = (PropertyBean) enhancer.create(PropertyBean.class, new ConcreteClassDispatcher());
-
-        return pb;
+        return (PropertyBean) enhancer.create(PropertyBean.class, new ConcreteClassDispatcher());
     }
-
 
     public String getName() {
         return name;
@@ -85,11 +77,12 @@ public class LazyBean {
 
     @Override
     public String toString() {
-        return "LazyBean{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", propertyBean=" + propertyBean +
-                ", propertyBeanDispatcher=" + propertyBeanDispatcher +
-                '}';
+        final StringBuilder sb = new StringBuilder("LazyBean{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", propertyBean=").append(propertyBean);
+        sb.append(", propertyBeanDispatcher=").append(propertyBeanDispatcher);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }

@@ -10,13 +10,12 @@ import net.sf.cglib.proxy.NoOp;
 /**
  * Created by madali on 2017/6/1.
  */
-public class TestCglib2 {
+public class CglibDemo {
 
     public static void main(String[] args) {
 
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(TargetObject.class);
-
 
         //NoOp.INSTANCE：一个空Callback，表示什么操作也不做，代理类直接调用被代理的方法不进行拦截。
         Callback noopCallback = NoOp.INSTANCE;
@@ -30,7 +29,6 @@ public class TestCglib2 {
         // method2返回值1表示：使用Callback数组中的1位callback，即callback1，对method2使用callback1进行拦截，
         // method3返回值2表示：使用Callback数组中的2位callback，即fixedValue，对method3使用fixedValue进行拦截。
         Callback[] callbackArray = new Callback[]{noopCallback, callback1, fixedValue};
-
 
 //        enhancer.setCallback(new TargetInterceptor());
         enhancer.setCallbacks(callbackArray);

@@ -35,9 +35,10 @@ public class PropertyBean {
 
     @Override
     public String toString() {
-        return "PropertyBean{" +
-                "key='" + key + '\'' +
-                ", value=" + value +
-                '}';
+        final StringBuilder sb = new StringBuilder("PropertyBean{");
+        sb.append("key='").append(key).append('\'');
+        sb.append(", value=").append(value);
+        sb.append('}');
+        return sb.toString().replace("'null'", "null");
     }
 }

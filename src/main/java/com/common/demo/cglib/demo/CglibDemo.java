@@ -1,9 +1,9 @@
-package com.common.demo.cglib.test;
+package com.common.demo.cglib.demo;
 
 /**
  * Created by madali on 2017/4/12.
  */
-public class CglibTest {
+public class CglibDemo {
 
     public static void main(String[] args) {
 
