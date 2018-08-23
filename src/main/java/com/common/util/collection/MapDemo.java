@@ -19,6 +19,7 @@ public class MapDemo {
     public static void main(String[] args) {
         System.out.println(map.get(1));
         System.out.println(map.get(10));
+        System.out.println(map.getOrDefault(10,"defaultResult"));
     }
 
 }
