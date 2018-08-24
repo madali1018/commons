@@ -7,6 +7,7 @@ package com.common.util.http;
 public class Demo {
 
     private static String url = "http://site-api.anjuke.test/broker/getLevelInfo/c6fc09d70cb3174eaaf4e2ba1e5b740b/?broker_id=1170239";
+//    private static String url = "https://www.baidu.com/";
 
     @org.junit.Test
     public void test1() {

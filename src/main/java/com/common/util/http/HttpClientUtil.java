@@ -1,5 +1,6 @@
 package com.common.util.http;
 
+import com.common.config.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -15,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -43,9 +43,9 @@ public class HttpClientUtil {
             // 设置请求头信息，鉴权
             httpGet.setHeader("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
             // 设置配置请求参数
-            RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(35000)// 连接主机服务超时时间
-                    .setConnectionRequestTimeout(35000)// 请求超时时间
-                    .setSocketTimeout(60000)// 数据读取超时时间
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectionRequestTimeout(Constants.CONNECT_TIME_OUT)
+                    .setSocketTimeout(Constants.READ_TIME_OUT)
                     .build();
             // 为httpGet实例设置配置
             httpGet.setConfig(requestConfig);
@@ -76,9 +76,9 @@ public class HttpClientUtil {
         // 创建httpPost远程连接实例
         HttpPost httpPost = new HttpPost(url);
         // 配置请求参数实例
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(35000)// 设置连接主机服务超时时间
-                .setConnectionRequestTimeout(35000)// 设置连接请求超时时间
-                .setSocketTimeout(60000)// 设置读取数据连接超时时间
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectionRequestTimeout(Constants.CONNECT_TIME_OUT)
+                .setSocketTimeout(Constants.READ_TIME_OUT)
                 .build();
         // 为httpPost实例设置配置
         httpPost.setConfig(requestConfig);
