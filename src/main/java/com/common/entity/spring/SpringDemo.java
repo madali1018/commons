@@ -1,6 +1,6 @@
 package com.common.entity.spring;
 
-import com.common.config.AppConfig;
+import com.common.config.ProjectConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -11,7 +11,7 @@ public class SpringDemo {
 
     public static void main(String[] args) {
         //启动spring容器
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ProjectConfig.class);
         Student student = applicationContext.getBean(Student.class);
         System.out.println(student);
     }

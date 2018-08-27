@@ -13,6 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@ComponentScan可以配置扫描多个包
 @ComponentScan(basePackages = "com.common.*")
 @Configuration
-public class AppConfig {
+public class ProjectConfig {
 
 }
