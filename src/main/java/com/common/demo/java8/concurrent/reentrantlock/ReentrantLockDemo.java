@@ -1,6 +1,5 @@
 package com.common.demo.java8.concurrent.reentrantlock;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -12,62 +11,57 @@ import java.util.concurrent.locks.ReentrantLock;
  * 3. 还提供lockInterruptibly这样支持响应中断的加锁过程，意思是说你试图去加锁，但是当前锁被其他线程hold住，然后你这个线程可以被中断；
  *
  * @Auther: madali
- * @Date: 2018/6/27 10:22
+ * @Date: 2018/7/2 20:21
  */
 public class ReentrantLockDemo {
 
+    private ReentrantLock lock;
+
+    public ReentrantLockDemo() {
+        super();
+        // ReentrantLock默认使用的是非公平锁
+        lock = new ReentrantLock();
+    }
+
+    public ReentrantLockDemo(boolean fair) {
+        super();
+        lock = new ReentrantLock(fair);
+    }
+
+    public void serviceMethod() {
+        try {
+            lock.lock();
+            System.out.println("ThreadName:" + Thread.currentThread().getName() + "获得锁");
+        } finally {
+            lock.unlock();
+        }
+    }
+
     public static void main(String[] args) {
 
-        int loopCount = 10000;
-        int threadCount = 10;
+        //公平锁
+        ReentrantLockDemo demo = new ReentrantLockDemo(true);
 
-        final SafeSeqWithLock lock = new SafeSeqWithLock();
+        //非公平锁：ReentrantLock默认是非公平锁
+//        ReentrantLockDemo demo = new ReentrantLockDemo();
+//        ReentrantLockDemo demo = new ReentrantLockDemo(false);
 
-        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
-
-        for (int i = 0; i < threadCount; i++) {
-            final int index = i;
-
-            new Thread(() -> {
-                for (int j = 0; j < loopCount; j++) {
-                    lock.inc();
-                }
-
-                System.out.println("Finished:" + index);
-                countDownLatch.countDown();
-            }).start();
+        //多线程乱序执行，但公平锁情况下 线程获取锁和线程运行了的顺序是不变的。非公平锁情况下，线程获取锁和线程运行了的顺序是乱序的。
+        Thread[] arr = new Thread[10];
+        for (int i = 0; i < 10; i++) {
+            arr[i] = new Thread(() -> {
+                demo.serviceMethod();
+                System.out.println("ThreadName:" + Thread.currentThread().getName() + "运行了");
+            });
         }
 
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 10; i++) {
+            arr[i].start();
         }
 
-        System.out.println("both have finished....");
-        System.out.println("SafeSeqWithLock:" + lock.getCount());
+        System.out.println("当前使用的ReentrantLock锁模式是否是公平锁:" + demo.lock.isFair());
     }
 
 }
 
-class SafeSeqWithLock {
-    private long count = 0;
 
-    private ReentrantLock reentrantLock = new ReentrantLock();
-
-    public void inc() {
-        reentrantLock.lock();
-
-        try {
-            // 此处其实无需加try finally块。只是为了遵循习惯写法：将unlock()写在finally中
-            count++;
-        } finally {
-            reentrantLock.unlock();
-        }
-
-    }
-
-    public long getCount() {
-        return count;
-    }
-}
