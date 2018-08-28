@@ -1,4 +1,4 @@
-package com.mada.common.util.log.jdk;
+package com.mada.common.util.log;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
@@ -7,18 +7,17 @@ import ch.qos.logback.classic.filter.LevelFilter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.FileAppender;
 import ch.qos.logback.core.spi.FilterReply;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * 代理类（使用的是jdk动态代理）
- * <p>
  * Created by madali on 2017/4/26.
  */
-public class JdkInvocationHandler implements InvocationHandler {
+public class CglibMethodInterceptor {
 
     private Object target;
     private String logFileName;
@@ -28,41 +27,43 @@ public class JdkInvocationHandler implements InvocationHandler {
     private ch.qos.logback.classic.Logger warnLog;
     private ch.qos.logback.classic.Logger errorLog;
 
-    public JdkInvocationHandler(Object target) {
+    public CglibMethodInterceptor(Object target) {
         this.target = target;
     }
 
-    public JdkInvocationHandler(Object target, String logFileName) {
+    public CglibMethodInterceptor(Object target, String logFileName) {
         this.target = target;
         this.logFileName = logFileName;
     }
 
-    /**
-     * 拦截对目标类的各个方法的调用
-     *
-     * @param proxy  代理对象实例
-     * @param method 源对象的方法名
-     * @param args   传递的方法的实际入参
-     * @return
-     * @throws Throwable
-     */
-    @Override
-    //TODO 待优化 每次调用debug，info，warn，error方法前都配置appender并加至Logger上，调用完再移除appender，导致效率低下
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object createProxy() {
 
-        //每次调用debug，info，warn，error方法前先配置appender
-        FileAppender appender = getAppender((Logger) target, method);
+        Enhancer enhancer = new Enhancer();
 
-        //将appender加至Logger上
-        doBefore(appender, method);
+        enhancer.setSuperclass(Logger.class);
+        //设置回调函数，对Logger中每个方法进行拦截
+        enhancer.setCallback((MethodInterceptor) (obj, method, args, proxy) -> {
 
-        //目标方法调用
-        Object object = method.invoke(target, args);
+//            System.out.println("Before method: " + method.getName());
 
-        //将appender从Logger上移除
-        doAfter(appender, method);
+            //TODO  待优化：每次调用debug，info，warn，error方法前先配置appender，使用完后移除appender，性能低下
+            FileAppender appender = getAppender((Logger) target, method);
 
-        return object;
+            //将appender加至Logger上
+            doBefore(appender, method);
+
+            //参数1仍为外部声明的源对象，且Method为JDK的Method反射
+            Object object = method.invoke(target, args);
+
+//            System.out.println("After method: " + method.getName());
+
+            //将appender从Logger上移除
+            doAfter(appender, method);
+
+            return object;
+        });
+
+        return enhancer.create();
     }
 
     private FileAppender getAppender(Logger logger, Method method) {
@@ -70,30 +71,24 @@ public class JdkInvocationHandler implements InvocationHandler {
         FileAppender<ILoggingEvent> appender = new FileAppender<>();
 
         Level level = null;
-
         if ("debug".equals(method.getName())) {
-
             level = Level.DEBUG;
             debugLog = (ch.qos.logback.classic.Logger) logger;
         } else if ("info".equals(method.getName())) {
-
             level = Level.INFO;
             infoLog = (ch.qos.logback.classic.Logger) logger;
         } else if ("warn".equals(method.getName())) {
-
             level = Level.WARN;
             warnLog = (ch.qos.logback.classic.Logger) logger;
         } else if ("error".equals(method.getName())) {
-
             level = Level.ERROR;
             errorLog = (ch.qos.logback.classic.Logger) logger;
         }
 
-        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-
         String[] array = logger.getName().split("\\.");
         String catalog = array[array.length - 1];
 
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         PatternLayoutEncoder encoder = new PatternLayoutEncoder();
         encoder.setContext(loggerContext);
         encoder.setPattern("%date{dd-MM-yyyy HH:mm:ss.SSS, GMT} GMT [%thread] [%myFileAndLineConverter] - %msg%n");
@@ -122,42 +117,32 @@ public class JdkInvocationHandler implements InvocationHandler {
     }
 
     private void doBefore(FileAppender<ILoggingEvent> appender, Method method) {
-
         if ("debug".equals(method.getName())) {
-
             if (debugLog != null)
                 debugLog.addAppender(appender);
         } else if ("info".equals(method.getName())) {
-
             if (infoLog != null)
                 infoLog.addAppender(appender);
         } else if ("warn".equals(method.getName())) {
-
             if (warnLog != null)
                 warnLog.addAppender(appender);
         } else if ("error".equals(method.getName())) {
-
             if (errorLog != null)
                 errorLog.addAppender(appender);
         }
     }
 
     private void doAfter(FileAppender<ILoggingEvent> appender, Method method) {
-
         if ("debug".equals(method.getName())) {
-
             if (debugLog != null)
                 debugLog.detachAppender(appender);
         } else if ("info".equals(method.getName())) {
-
             if (infoLog != null)
                 infoLog.detachAppender(appender);
         } else if ("warn".equals(method.getName())) {
-
             if (warnLog != null)
                 warnLog.detachAppender(appender);
         } else if ("error".equals(method.getName())) {
-
             if (errorLog != null)
                 errorLog.detachAppender(appender);
         }

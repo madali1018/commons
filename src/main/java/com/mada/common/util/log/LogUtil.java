@@ -1,12 +1,13 @@
-package com.mada.common.util.log.cglib;
+package com.mada.common.util.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by madali on 2017/4/26.
+ * @Auther: madali
+ * @Date: 2018/8/28 17:35
  */
-public class CglibLogUtil {
+public class LogUtil {
 
     /**
      * 获取Logger的公共方法
@@ -57,4 +58,6 @@ public class CglibLogUtil {
 
         return (Logger) proxy;
     }
+
 }
+
