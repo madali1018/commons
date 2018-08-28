@@ -1,6 +1,6 @@
 /.classpath
 /.project
-/common.iml
+*.iml
 /.settings
 /log/
 /target/
