@@ -13,6 +13,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TwoThread {
 
     private int start = 1;
+
+    // 保证内存可见性：其实用锁了之后也可以保证可见性，这里用不用volatile都一样
     private boolean flag = false;
 
     private static ReentrantLock reentrantLock = new ReentrantLock();
