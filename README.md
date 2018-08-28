@@ -6,10 +6,9 @@
 
 ### 目录
 
-* #### com.common目录 ####
+* #### com.mada.common目录 ####
 	* annotation：注解
 	* config：配置
-	* demo：杂七杂八demo
 	* designpattern：设计模式demo
 	* entity：实体类
 	* enumeration：枚举
