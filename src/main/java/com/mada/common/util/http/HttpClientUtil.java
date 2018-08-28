@@ -1,6 +1,6 @@
 package com.mada.common.util.http;
 
-import com.mada.common.config.Constants;
+import com.mada.common.configuration.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
