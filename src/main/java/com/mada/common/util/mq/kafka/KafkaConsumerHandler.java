@@ -1,6 +1,6 @@
 package com.mada.common.util.mq.kafka;
 
-import com.mada.common.util.configuration.ConfigurationUtil;
+import com.mada.common.configuration.ConfigurationUtil;
 import com.mada.common.util.redis.RedisUtil;
 import com.mada.common.util.mq.ICallback;
 import com.mada.common.util.mq.IConsumerHandler;

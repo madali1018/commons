@@ -1,9 +1,9 @@
-package com.mada.common.util.configuration;
+package com.mada.common.configuration;
 
-import com.mada.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
-import com.mada.common.util.log.jdk.JdkLogUtil;
 import com.mada.common.util.zookeeper.ZkUtil;
+import com.mada.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.net.Inet4Address;
@@ -21,8 +21,7 @@ import java.util.regex.Pattern;
  */
 public class ConfigurationUtil {
 
-    //    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationUtil.class);
-    private static final Logger LOGGER = JdkLogUtil.getLogger(ConfigurationUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationUtil.class);
 
     public static final Integer SERVER_PORT;
     public static final String ZOOKEEPER_HOST;

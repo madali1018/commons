@@ -1,6 +1,6 @@
 package com.mada.common.entity.spring;
 
-import com.mada.common.config.ProjectConfig;
+import com.mada.common.configuration.ProjectConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

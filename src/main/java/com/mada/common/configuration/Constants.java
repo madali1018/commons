@@ -1,4 +1,4 @@
-package com.mada.common.config;
+package com.mada.common.configuration;
 
 /**
  * @Auther: madali

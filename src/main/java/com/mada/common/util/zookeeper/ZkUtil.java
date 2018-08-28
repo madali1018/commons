@@ -6,7 +6,7 @@ import com.mada.common.util.zookeeper.callback.IZkInfrastructureListenerCallback
 import com.mada.common.util.zookeeper.callback.IZkServiceConfigListenerCallback;
 import com.mada.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.mada.common.util.zookeeper.entity.ZkConnectionNodeEntity;
-import com.mada.common.util.configuration.ConfigurationUtil;
+import com.mada.common.configuration.ConfigurationUtil;
 import com.mada.common.enumeration.InfrastructureEnum;
 import com.mada.common.enumeration.ServerStateEnum;
 import com.mada.common.enumeration.ServiceEnum;
