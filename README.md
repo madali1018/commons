@@ -15,7 +15,6 @@
 	* util(java工具类包，其中包括部分demo)
 		* 负载均衡算法
 		* collection工具类
-		* 环境变量工具类
 		* 枚举工具类
 		* 文件压缩解压缩工具类
 		* hibernate工具类
@@ -24,14 +23,11 @@
 		* 日志处理工具类(cligb+logback和jdk proxy+logback)
 		* MQ工具类(kafka+redis)
 		* 数字处理工具类
-		* 对象转换工具类
-		* 线程工具类
+		* 对象转换和深拷贝工具类
 		* redis工具类
+		* 线程工具类
 		* 时间工具类
 		* Zookeeper工具类
-
-* #### enumeration目录 ####
-	* 枚举类
 
 * #### resource目录 ####
 	* 配置文件
