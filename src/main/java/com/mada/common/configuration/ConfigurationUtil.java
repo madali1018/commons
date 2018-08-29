@@ -30,10 +30,8 @@ public class ConfigurationUtil {
     private static String SERVER_IP = null;
 
     static {
-        String serverPortStr = System.getenv("SERVER_PORT");
-
-        SERVER_PORT = serverPortStr == null ? -1 : Integer.valueOf(serverPortStr);
-        ZOOKEEPER_HOST = System.getenv("ZOOKEEPER_HOST");
+        ZOOKEEPER_HOST = PropertiesUtil.getValue("ZOOKEEPER_HOST");
+        SERVER_PORT = Integer.valueOf(PropertiesUtil.getValue("SERVER_PORT"));
     }
 
     public static String getServerId() {
@@ -55,43 +53,34 @@ public class ConfigurationUtil {
 
     public static String getServerIp() {
 
-        if (SERVER_IP != null)
+        if (SERVER_IP != null) {
             return SERVER_IP;
-
-        List<String> ipList = new ArrayList<>();
+        }
 
         Enumeration all;
-
         try {
             all = NetworkInterface.getNetworkInterfaces();
         } catch (SocketException e) {
             LOGGER.error(e.getMessage(), e);
-
             return null;
         }
 
+        List<String> ipList = new ArrayList<>();
         while (all.hasMoreElements()) {
-
             NetworkInterface networkInterface = (NetworkInterface) all.nextElement();
-
             Enumeration addresses = networkInterface.getInetAddresses();
-
             while (addresses.hasMoreElements()) {
-
                 InetAddress inetAddress = (InetAddress) addresses.nextElement();
-
                 if (inetAddress != null && inetAddress instanceof Inet4Address) {
-
                     String ip = inetAddress.getHostAddress();
-
-                    if (!"127.0.0.1".equals(ip))
+                    if (!"127.0.0.1".equals(ip)) {
                         ipList.add(ip);
+                    }
                 }
             }
         }
 
         String serverIp = null;
-
         switch (ipList.size()) {
             case 0:
                 break;
@@ -100,19 +89,13 @@ public class ConfigurationUtil {
                 break;
             default:
                 ZkConfigurationNodeEntity configurationNodeEntity = null;
-
                 String[] segmentArr = configurationNodeEntity.getValue().split(",");
-
                 for (String segment : segmentArr) {
                     Pattern pattern = Pattern.compile(segment.replace("*", "(25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))"));
-
                     for (String ip : ipList) {
                         Matcher matcher = pattern.matcher(ip);
-
                         if (matcher.matches()) {
-
                             serverIp = ip;
-
                             break;
                         }
                     }
@@ -121,8 +104,9 @@ public class ConfigurationUtil {
                 break;
         }
 
-        if (serverIp != null)
+        if (serverIp != null) {
             SERVER_IP = serverIp;
+        }
 
         return serverIp;
     }
@@ -141,15 +125,12 @@ public class ConfigurationUtil {
         T value = defaultValue;
 
         if (str != null || "".equals(str)) {
-
-            if (cls == String.class)
+            if (cls == String.class) {
                 value = (T) str;
-            else {
+            } else {
                 try {
                     Method method = cls.getMethod("valueOf", String.class);
-
                     value = (T) method.invoke(null, str);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
