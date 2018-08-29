@@ -50,7 +50,7 @@ public class RedisUtil {
         String[] arr = redisHost.split(":");
 
         String ip = arr[0];
-        int port = Integer.valueOf(arr[1]);
+        int port = Integer.parseInt(arr[1]);
 
         JEDIS_POOL = new JedisPool(
                 jedisPoolConfig,
@@ -90,7 +90,7 @@ public class RedisUtil {
 
         try {
             jedis = connect();
-            jedis.hset(CONSUMER_PROGRESS_KEY, groupId + "_" + topic + "_" + partition, String.valueOf(offset));
+            jedis.hset(CONSUMER_PROGRESS_KEY, groupId + "_" + topic + "_" + partition, Long.toString(offset));
         } finally {
             disconnect(jedis);
         }
@@ -114,8 +114,9 @@ public class RedisUtil {
 
             String offsetStr = jedis.hget(CONSUMER_PROGRESS_KEY, groupId + "_" + topic + "_" + partition);
 
-            if (offsetStr != null)
-                offset = Long.valueOf(offsetStr);
+            if (offsetStr != null) {
+                offset = Long.parseLong(offsetStr);
+            }
 
         } finally {
             disconnect(jedis);
@@ -136,22 +137,18 @@ public class RedisUtil {
         List<Integer> partitions = new ArrayList<>();
 
         String keyPrefix = groupId + "_" + topic + "_";
-
         Jedis jedis = null;
 
         try {
             jedis = connect();
-
             Iterator<String> keyIt = jedis.hkeys(CONSUMER_PROGRESS_KEY).iterator();
 
             while (keyIt.hasNext()) {
-
                 String key = keyIt.next();
-
-                if (key.startsWith(keyPrefix))
-                    partitions.add(Integer.valueOf(key.substring(keyPrefix.length())));
+                if (key.startsWith(keyPrefix)) {
+                    partitions.add(Integer.parseInt(key.substring(keyPrefix.length())));
+                }
             }
-
         } finally {
             disconnect(jedis);
         }

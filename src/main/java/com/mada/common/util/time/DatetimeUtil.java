@@ -112,12 +112,12 @@ public class DatetimeUtil {
     public static LocalDate getDate(String date) {
 
         int spaceIndex = date.indexOf(" ");
-        if (spaceIndex != -1)
+        if (spaceIndex != -1) {
             date = date.substring(0, spaceIndex);
+        }
 
         String[] arr = date.split("-");
-
-        return LocalDate.of(Integer.valueOf(arr[0]), Integer.valueOf(arr[1]), Integer.valueOf(arr[2]));
+        return LocalDate.of(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
     }
 
     /**
@@ -127,7 +127,6 @@ public class DatetimeUtil {
      * @return
      */
     public static long getGMTTimeMillis(LocalDate date) {
-
         return date.toEpochDay() * MILLISECOND_OF_DAY;
     }
 
@@ -139,7 +138,6 @@ public class DatetimeUtil {
      * @return
      */
     public static LocalDate plusMonths(int deltaMonth, long gmtTimeMillis) {
-
         return getDate(gmtTimeMillis).plusMonths(deltaMonth);
     }
 
@@ -151,11 +149,11 @@ public class DatetimeUtil {
      */
     public static long getGMTTimeMillis(String datetime) {
 
-        if (!datetime.contains(" "))
+        if (!datetime.contains(" ")) {
             datetime += " 00:00:00";
+        }
 
         String[] arr = datetime.split(" ");
-
         return getGMTTimeMillis(arr[0], formatTime(arr[1]));
     }
 
@@ -167,7 +165,6 @@ public class DatetimeUtil {
      * @return
      */
     public static long getGMTTimeMillis(String date, String time) {
-
         return getGMTTimeMillis(getDate(date), time);
     }
 
@@ -183,16 +180,14 @@ public class DatetimeUtil {
         time = formatTime(time);
 
         String[] arr = time.split(":");
+        Double s = Double.parseDouble(arr[2]);
 
-        Double s = Double.valueOf(arr[2]);
-
-        int hour = Integer.valueOf(arr[0]);
-        int minute = Integer.valueOf(arr[1]);
+        int hour = Integer.parseInt(arr[0]);
+        int minute = Integer.parseInt(arr[1]);
         int second = s.intValue();
         int nanoOfSecond = (int) ((s - second) * Math.pow(10, 9));
 
         LocalTime localTime = LocalTime.of(hour, minute, second, nanoOfSecond);
-
         return date.toEpochDay() * MILLISECOND_OF_DAY + localTime.toNanoOfDay() / (long) Math.pow(10, 6);
     }
 
@@ -203,7 +198,6 @@ public class DatetimeUtil {
      * @return
      */
     public static String formatTimeZone(int timeZone) {
-
         return "GMT" + (timeZone >= 0 ? ("+" + timeZone) : timeZone);
     }
 
@@ -214,9 +208,7 @@ public class DatetimeUtil {
      * @return
      */
     public static int getLastDayOfMonth(long gmtTimeMillis) {
-
         LocalDate date = getDate(gmtTimeMillis);
-
         return LocalDate.of(date.getYear(), date.getMonth().plus(1), 1).minusDays(1).getDayOfMonth();
     }
 
@@ -227,7 +219,6 @@ public class DatetimeUtil {
      * @return
      */
     public static int getDayOfMonth(long gmtTimeMillis) {
-
         return getDate(gmtTimeMillis).getDayOfMonth();
     }
 
@@ -239,7 +230,6 @@ public class DatetimeUtil {
      * @return
      */
     public static long getDeltaDay(LocalDate date1, LocalDate date2) {
-
         return date2.toEpochDay() - date1.toEpochDay();
     }
 
@@ -262,17 +252,14 @@ public class DatetimeUtil {
     }
 
     public static String formatDate(LocalDate date, String format) {
-
         return formatDate(getGMTTimeMillis(date), format);
     }
 
     public static String formatDate(long gmt0TimeMillis, String dateFormat) {
-
         return getDate(gmt0TimeMillis).format(DateTimeFormatter.ofPattern(dateFormat, new Locale("en")));
     }
 
     public static String formatDate(String date, String format) {
-
         return formatDate(getGMTTimeMillis(date), format);
     }
 
@@ -281,11 +268,11 @@ public class DatetimeUtil {
         String datetime = getDatetime(gmt0TimeMillis, timeZone);
 
         int dotIndex = datetime.indexOf(".");
-        if (dotIndex != -1)
+        if (dotIndex != -1) {
             datetime = datetime.substring(0, dotIndex);
+        }
 
         String[] sArr = datetime.split(" ");
-
         return formatDate(sArr[0], dateFormat) + " " + sArr[1];
     }
 
@@ -294,11 +281,9 @@ public class DatetimeUtil {
         switch (time.split(":").length) {
             case 1:
                 time += ":00:00"; //补充分秒位
-
                 break;
             case 2:
                 time += ":00"; //补充秒位
-
                 break;
         }
 

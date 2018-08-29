@@ -94,7 +94,7 @@ public class TimeUtil {
     //获取当前时间（精确到微秒）
     public static String getCurrentGmt0Datetime(String currentGmt0Datetime) {
 
-        String nanoStr = String.valueOf(System.nanoTime());
+        String nanoStr = Long.toString(System.nanoTime());
 
         StringBuffer sb = new StringBuffer();
         sb.append(currentGmt0Datetime);

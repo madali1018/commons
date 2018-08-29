@@ -31,7 +31,7 @@ public class ConfigurationUtil {
 
     static {
         ZOOKEEPER_HOST = PropertiesUtil.getValue("ZOOKEEPER_HOST");
-        SERVER_PORT = Integer.valueOf(PropertiesUtil.getValue("SERVER_PORT"));
+        SERVER_PORT = Integer.parseInt(PropertiesUtil.getValue("SERVER_PORT"));
     }
 
     public static String getServerId() {

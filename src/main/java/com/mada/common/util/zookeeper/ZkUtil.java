@@ -1,15 +1,15 @@
 package com.mada.common.util.zookeeper;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mada.common.configuration.ConfigurationUtil;
+import com.mada.common.enumeration.InfrastructureEnum;
+import com.mada.common.enumeration.ServerStateEnum;
+import com.mada.common.enumeration.ServiceEnum;
 import com.mada.common.util.zookeeper.callback.IZkConnectionListenerCallback;
 import com.mada.common.util.zookeeper.callback.IZkInfrastructureListenerCallback;
 import com.mada.common.util.zookeeper.callback.IZkServiceConfigListenerCallback;
 import com.mada.common.util.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.mada.common.util.zookeeper.entity.ZkConnectionNodeEntity;
-import com.mada.common.configuration.ConfigurationUtil;
-import com.mada.common.enumeration.InfrastructureEnum;
-import com.mada.common.enumeration.ServerStateEnum;
-import com.mada.common.enumeration.ServiceEnum;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.listen.Listenable;
@@ -728,7 +728,7 @@ public class ZkUtil {
 
         String namespace = "consumers";
         String path = new StringBuilder().append("/").append(groupId).append("/offsets/").append(topic).append("/").append(partition).toString();
-        String value = String.valueOf(offset);
+        String value = Long.toString(offset);
 
         try {
             CuratorFramework consumerClient = client.usingNamespace(namespace);
@@ -767,6 +767,7 @@ public class ZkUtil {
 
     /**
      * 获取kafka的high level消费offset
+     *
      * @param groupId
      * @param topic
      * @param partition
@@ -785,8 +786,7 @@ public class ZkUtil {
 
             if (consumerClient.checkExists().forPath(path) != null) {
                 byte[] data = consumerClient.getData().forPath(path);
-
-                offset = Long.valueOf(new String(data, "UTF-8"));
+                offset = Long.parseLong(new String(data, "UTF-8"));
             }
         } catch (Throwable t) {
             LOGGER.error(t.getMessage(), t);

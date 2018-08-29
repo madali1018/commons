@@ -22,11 +22,11 @@ public class TimeUtil2 {
         //前一天时间（毫秒）
         Long previousTime = currentTime - 24 * 60 * 60 * 1000L;
 
-        if (String.valueOf(time).length() == 10) {
+        if (Long.toString(time).length() == 10) {
             if ((time * 1000L) >= previousTime && (time * 1000L) <= currentTime) {
                 flag = true;
             }
-        } else if (String.valueOf(time).length() == 13) {
+        } else if (Long.toString(time).length() == 13) {
             if (time >= previousTime && time <= currentTime) {
                 flag = true;
             }
@@ -46,7 +46,7 @@ public class TimeUtil2 {
         Calendar calendar = Calendar.getInstance();
 
         //将秒转换为毫秒
-        if (String.valueOf(time).length() == 10) {
+        if (Long.toString(time).length() == 10) {
             time = time * 1000L;
         }
 
