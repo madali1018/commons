@@ -8,8 +8,10 @@ import java.io.Serializable;
  */
 public class Person implements Serializable {
 
+    private int id;
     private int age;
     private String name;
+    private String address;
 
     private static final long serialVersionUID = 1L;
 
@@ -19,6 +21,21 @@ public class Person implements Serializable {
     public Person(int age, String name) {
         this.age = age;
         this.name = name;
+    }
+
+    public Person(int id, int age, String name, String address) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.address = address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAge() {
@@ -37,11 +54,21 @@ public class Person implements Serializable {
         this.name = name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Person{");
-        sb.append("age=").append(age);
+        sb.append("id=").append(id);
+        sb.append(", age=").append(age);
         sb.append(", name='").append(name).append('\'');
+        sb.append(", address='").append(address).append('\'');
         sb.append('}');
         return sb.toString().replace("'null'", "null");
     }

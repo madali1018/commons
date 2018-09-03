@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.PropertyFilter;
 import org.junit.Test;
 
 import java.util.*;
@@ -98,6 +99,28 @@ public class FastJsonDemo {
 
     @Test
     public void test5() {
+        Person p1 = new Person(1, 16, "11", "北京");
+        String json = JSON.toJSONString(p1);
+        System.out.println(json);
+        // 过滤不需要的字段：自定义fastjson的拦截器
+        String json2 = JSON.toJSONString(p1, PropertyFilterImpl.INSTANCE);
+        System.out.println(json2);
+    }
+
+    private static class PropertyFilterImpl implements PropertyFilter {
+
+        public static PropertyFilterImpl INSTANCE = new PropertyFilterImpl();
+
+        @Override
+        public boolean apply(Object object, String name, Object value) {
+            //表示id和address字段将被排除在外
+            return !name.equals("address") && !name.equals("id");
+        }
+
+    }
+
+    @Test
+    public void test6() {
 
         // 取float类型的参数
         String str = "{\"info_quality_last\": 100,\"qualification_industry\": 31,\"level\": 79.5}";
