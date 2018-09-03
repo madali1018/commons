@@ -140,4 +140,17 @@ public class FastJsonDemo {
         System.out.println("-------------------------");
     }
 
+    @Test
+    public void test7() {
+        Person p1 = new Person(1, 16, "11", "北京");
+        System.out.println(p1);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("param1572", "123");
+
+        p1.setName(jsonObject.toString());
+        System.out.println(p1);
+        System.out.println(p1.getName());
+    }
+
 }
