@@ -1,5 +1,8 @@
 package com.mada.common.util.http;
 
+import com.alibaba.fastjson.JSONObject;
+import org.junit.Test;
+
 /**
  * @Auther: madali
  * @Date: 2018/8/16 11:10
@@ -25,6 +28,26 @@ public class Demo {
         System.out.println("------------------------------------------");
         String postResult = HttpClientUtil2.sendPost(url);
         System.out.println(postResult);
+    }
+
+    @Test
+    public void test3() {
+        String url = "http://localhost:8080/index/person/p3";
+        String param = "username=name3&pwd=1";
+        String result = HttpClientUtil2.sendPost(url, param);
+        System.out.println(result);
+    }
+
+    @Test
+    public void test4() {
+        String url = "http://localhost:8080/index/person/p4";
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("username","name4");
+
+        String param = "username=name3&pwd=1";
+        String result = HttpClientUtil2.sendPost(url, jsonObject.toJSONString());
+        System.out.println(result);
     }
 
 }
