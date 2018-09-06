@@ -1,13 +1,36 @@
 package com.mada.common.util.log;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
 
 /**
  * @Auther: madali
  * @Date: 2018/8/28 17:35
  */
 public class LogUtil {
+
+    static {
+        // 指定logback.xml的路径。此处使用相对路径，即相对于当前类的路径。
+        File logbackFile = new File("src/main/resources/logback2.xml");
+        if (logbackFile.exists()) {
+            System.out.println("当前使用的logback.xml是:" + logbackFile.getPath());
+            LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+            JoranConfigurator configurator = new JoranConfigurator();
+            configurator.setContext(lc);
+            lc.reset();
+            try {
+                configurator.doConfigure(logbackFile);
+            } catch (JoranException e) {
+                e.printStackTrace(System.err);
+                System.exit(-1);
+            }
+        }
+    }
 
     /**
      * 获取Logger的公共方法

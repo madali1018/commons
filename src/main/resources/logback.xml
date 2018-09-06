@@ -4,17 +4,14 @@
     <property name="TIME_ZONE" value="GMT"/>
     <property name="MAX_FILE_SIZE" value="10MB"/>
     <property name="TIME_PATTERN" value="dd-MM-yyyy HH:mm:ss.SSS"/>
-
-    <!--使用自定义的[%myFileAndLineConverter]来代替原有的[%file:%line]，MyFileAndLineConverter类中自定义了file和line的转换器  -->
-    <conversionRule conversionWord="myFileAndLineConverter"
-                    converterClass="com.mada.common.util.log.MyFileAndLineConverter"/>
+    <property name="QUEUE_SIZE" value="10"/>
 
     <!--appender配置日志打印方式-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>-->
             <pattern>
-                [%level] %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%myFileAndLineConverter] - %msg%n
+                [%level] %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%file:%line] - %msg%n
             </pattern>
         </encoder>
         <!--控制台只打印debug级别以上的日志（info，warn，error）-->
@@ -42,7 +39,7 @@
 
         <encoder>
             <pattern>
-                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%myFileAndLineConverter] - %msg%n
+                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%file:%line] - %msg%n
             </pattern>
         </encoder>
 
@@ -70,7 +67,7 @@
 
         <encoder>
             <pattern>
-                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%myFileAndLineConverter] - %msg%n
+                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%file:%line] - %msg%n
             </pattern>
         </encoder>
 
@@ -98,7 +95,7 @@
 
         <encoder>
             <pattern>
-                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%myFileAndLineConverter] - %msg%n
+                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%file:%line] - %msg%n
             </pattern>
         </encoder>
 
@@ -126,7 +123,7 @@
 
         <encoder>
             <pattern>
-                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%myFileAndLineConverter] - %msg%n
+                %date{${TIME_PATTERN}, ${TIME_ZONE}} ${TIME_ZONE} [%thread] [%file:%line] - %msg%n
             </pattern>
         </encoder>
 
@@ -137,9 +134,20 @@
         </filter>
     </appender>
 
+    <!-- 配置debug级别的日志为异步输出，logback默认是同步输出日志 -->
+    <appender name="async_logback" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>${QUEUE_SIZE}</queueSize>
+        <!-- 添加附加的appender -->
+        <appender-ref ref="debug-out"/>
+    </appender>
+
     <!--配置根日志-->
     <root level="DEBUG">
         <appender-ref ref="console"/>
+        <appender-ref ref="async_logback"/>
         <appender-ref ref="debug-out"/>
         <appender-ref ref="info-out"/>
         <appender-ref ref="warn-out"/>
