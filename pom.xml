@@ -79,11 +79,11 @@
             <version>6.0.5</version>
         </dependency>
 
-        <!--spring-context-->
+        <!--spring-context：运行环境-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>5.1.0.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -92,11 +92,11 @@
             </exclusions>
         </dependency>
 
-        <!--spring-core-->
+        <!--spring-core：核心层-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>5.1.0.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>

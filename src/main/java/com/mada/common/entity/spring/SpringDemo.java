@@ -15,4 +15,5 @@ public class SpringDemo {
         Student student = applicationContext.getBean(Student.class);
         System.out.println(student);
     }
+
 }
