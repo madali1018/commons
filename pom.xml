@@ -204,7 +204,7 @@
                 </configuration>
             </plugin>
 
-            <!--生成Javadoc包-->
+            <!--生成Javadoc包插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -222,7 +222,7 @@
                 </executions>
             </plugin>
 
-            <!--生成源码包-->
+            <!--生成源码包插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
