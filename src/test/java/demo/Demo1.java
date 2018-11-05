@@ -26,4 +26,10 @@ public class Demo1 {
         System.out.println("StringUtils.EMPTY:" + StringUtils.EMPTY);
     }
 
+    @Test
+    public void test3() {
+        // 很长的数字可读性不好，在Java 7中可以使用下划线分隔长int以及long了。
+        int i = 1_000_000;
+    }
+
 }
