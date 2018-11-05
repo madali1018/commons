@@ -1,4 +1,4 @@
-package com.mada.common.util.log;
+package com.mada.common.util.log.logback;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;

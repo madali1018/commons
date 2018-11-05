@@ -1,4 +1,4 @@
-package com.mada.common.util.log;
+package com.mada.common.util.log.logback;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;

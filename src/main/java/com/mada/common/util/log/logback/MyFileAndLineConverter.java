@@ -1,4 +1,4 @@
-package com.mada.common.util.log;
+package com.mada.common.util.log.logback;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.CallerData;

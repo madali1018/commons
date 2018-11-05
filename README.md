@@ -22,7 +22,7 @@
 		* hibernate工具类
 		* http工具类
 		* MD5和一致性hash算法
-		* 日志处理工具类(cligb+logback和jdk proxy+logback)
+		* 日志处理工具类(log4j2,cligb+logback,jdk proxy+logback)
 		* MQ工具类(kafka+redis)
 		* 数字处理工具类
 		* 对象转换和深拷贝工具类

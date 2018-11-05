@@ -1,4 +1,4 @@
-package com.mada.common.util.log;
+package com.mada.common.util.log.logback;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;

@@ -3,7 +3,7 @@
 
     <property name="TIME_ZONE" value="GMT"/>
     <property name="MAX_FILE_SIZE" value="10MB"/>
-    <property name="TIME_PATTERN" value="dd-MM-yyyy HH:mm:ss.SSS"/>
+    <property name="TIME_PATTERN" value="yyyy-MM-dd HH:mm:ss.SSS"/>
     <property name="QUEUE_SIZE" value="10"/>
 
     <!--appender配置日志打印方式-->
