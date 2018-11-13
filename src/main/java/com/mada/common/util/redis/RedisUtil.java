@@ -6,7 +6,10 @@ import redis.clients.jedis.params.geo.GeoRadiusParam;
 import java.util.*;
 
 /**
- * Redis3.0之后支持地理位置geo功能。
+ * Redis3.0之后支持地理位置geo功能。geo底层是一个zset（删除可以使用 del location命令删除）
+ *参考：https://segmentfault.com/a/1190000009857124
+ *
+ *
  * <p>
  * Created by madali on 2017/4/26.
  */
