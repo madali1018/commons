@@ -45,7 +45,6 @@ public class Demo {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username","name4");
 
-        String param = "username=name3&pwd=1";
         String result = HttpClientUtil2.sendPost(url, jsonObject.toJSONString());
         System.out.println(result);
     }
