@@ -1,10 +1,7 @@
 package com.mada.common.util.collection;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by madali on 2018/1/3.
@@ -18,7 +15,7 @@ public class CollectionUtil {
      * @return
      */
     public static boolean isEmpty(Collection<?> collection) {
-        return collection == null || collection.size() == 0;
+        return Objects.isNull(collection) || collection.size() == 0;
     }
 
     public static boolean isNotEmpty(Collection<?> collection) {

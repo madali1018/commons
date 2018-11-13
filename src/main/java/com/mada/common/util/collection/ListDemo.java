@@ -31,6 +31,29 @@ public class ListDemo {
         System.out.println(CollectionUtil.countOccurrences(array, 2));
     }
 
+    // list去重
+    @Test
+    private void test3() {
+
+        List<String> list = new ArrayList<>();
+        list.add("111");
+        list.add("222");
+        list.add("333");
+        list.add("111");
+        list.add("555");
+
+        for (String s : list) {
+            System.out.println(s);
+        }
+
+        System.out.println("去重复后");
+        List<String> newList = new ArrayList<>(new HashSet<>(list));
+
+        for (String s : newList) {
+            System.out.println(s);
+        }
+    }
+
     @Test
     public void testTreeSet() {
         Set<Integer> set = new HashSet<>();
