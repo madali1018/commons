@@ -21,14 +21,12 @@ public class RedisProducerHandler implements IProducerHandler {
     }
 
     public RedisProducerHandler(String topic) {
-
         JEDIS = RedisUtil.connect();
         TOPIC = topic;
     }
 
     @Override
     public void produce(String message) {
-
         try {
             JEDIS.lpush(TOPIC, message);
             LOGGER.info("Produce redis message: " + message);
@@ -39,9 +37,7 @@ public class RedisProducerHandler implements IProducerHandler {
 
     @Override
     public void close() {
-
-        RedisUtil.disconnect(JEDIS);
-
+        RedisUtil.disConnect(JEDIS);
         LOGGER.info("Close the redis producer (Topic = {}).", TOPIC);
     }
 }

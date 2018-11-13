@@ -55,9 +55,7 @@ public class RedisConsumerHandler implements IConsumerHandler {
 
     @Override
     public void shutdown() {
-
-        RedisUtil.disconnect(JEDIS);
-
+        RedisUtil.disConnect(JEDIS);
         LOGGER.info("Shut down the redis consumer (Topic = {}).", TOPIC);
     }
 }

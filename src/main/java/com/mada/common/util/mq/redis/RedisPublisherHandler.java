@@ -21,14 +21,12 @@ public class RedisPublisherHandler implements IPublisherHandler {
     }
 
     public RedisPublisherHandler(String topic) {
-
         JEDIS = RedisUtil.connect();
         TOPIC = topic;
     }
 
     @Override
     public void publish(String message) {
-
         try {
             JEDIS.publish(TOPIC, message);
             LOGGER.info("Publish redis message: " + message);
@@ -39,9 +37,7 @@ public class RedisPublisherHandler implements IPublisherHandler {
 
     @Override
     public void close() {
-
-        RedisUtil.disconnect(JEDIS);
-
+        RedisUtil.disConnect(JEDIS);
         LOGGER.info("Close the redis publisher (Topic = {}).", TOPIC);
     }
 }

@@ -23,14 +23,12 @@ public class RedisSubscriberHandler implements ISubscriberHandler {
     }
 
     public RedisSubscriberHandler(String topic) {
-
         JEDIS = RedisUtil.connect();
         TOPIC = topic;
     }
 
     @Override
     public <T extends ICallback> void subscribe(final T callback) {
-
         try {
             JEDIS.subscribe(new JedisPubSub() {
                 @Override
@@ -46,9 +44,7 @@ public class RedisSubscriberHandler implements ISubscriberHandler {
 
     @Override
     public void shutdown() {
-
-        RedisUtil.disconnect(JEDIS);
-
+        RedisUtil.disConnect(JEDIS);
         LOGGER.info("Shut down the redis subscriber (Topic = {}).", TOPIC);
     }
 }

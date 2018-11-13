@@ -1,22 +1,21 @@
 package com.mada.common.util.redis;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.*;
+import redis.clients.jedis.params.geo.GeoRadiusParam;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
+ * Redis3.0之后支持地理位置geo功能。
+ * <p>
  * Created by madali on 2017/4/26.
  */
 public class RedisUtil {
 
-    private static final JedisPool JEDIS_POOL;
+    private static final JedisPool jedisPool;
 
-    private static final String CONSUMER_PROGRESS_KEY;
+    //kafka消费key：此处可以动态配置
+    private static final String CONSUMER_PROGRESS_KEY = "OffsetInfo";
 
     // Redis 服务器ip（如果是集群，此处需配置多个） port 密码
     private static final String IP = "127.0.0.1";
@@ -45,19 +44,148 @@ public class RedisUtil {
         // 设置的逐出策略类名, 默认DefaultEvictionPolicy(当连接超过最大空闲时间,或连接数超过最大空闲连接数)
         jedisPoolConfig.setEvictionPolicyClassName("org.apache.commons.pool2.impl.DefaultEvictionPolicy");
 
-        JEDIS_POOL = new JedisPool(jedisPoolConfig, IP, PORT, TIMEOUT, PASSWORD);
-
-        //此处可以动态配置
-        CONSUMER_PROGRESS_KEY = "OffsetInfo";
+        jedisPool = new JedisPool(jedisPoolConfig, IP, PORT, TIMEOUT, PASSWORD);
     }
 
     public static Jedis connect() {
-        return JEDIS_POOL.getResource();
+        return jedisPool.getResource();
     }
 
-    public static void disconnect(Jedis jedis) {
+    public static void disConnect(Jedis jedis) {
         if (Objects.nonNull(jedis)) {
             jedis.close();
+        }
+    }
+
+    /**
+     * 增加地理位置的坐标（对应的redis命令示例：geoadd location 116.999 39.999 test1）
+     *
+     * @param key        redis的key：location
+     * @param coordinate 经纬度对象：
+     * @param memberName redis中zset对象的value：test1
+     * @return
+     */
+    public static Long geoAdd(String key, GeoCoordinate coordinate, String memberName) {
+        Jedis jedis = null;
+        try {
+            jedis = connect();
+            return jedis.geoadd(key, coordinate.getLongitude(), coordinate.getLatitude(), memberName);
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    /**
+     * 批量添加地理位置
+     *
+     * @param key                 redis的key：location
+     * @param memberCoordinateMap map的key为zset对象的value：test1 test2... value为经纬度对象
+     * @return
+     */
+    public static Long geoAdd(String key, Map<String, GeoCoordinate> memberCoordinateMap) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.geoadd(key, memberCoordinateMap);
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    /**
+     * 获取指定范围内的地理位置集合（返回匹配位置的经纬度 + 匹配位置与给定地理位置的距离 + 从近到远排序，）
+     * <p>
+     * 对应的redis命令示例：
+     * georadius location 116.999 39.999 20 km withdist
+     * georadius location 116.999 39.999 20 km withdist withhash
+     *
+     * @param key        redis的key：location
+     * @param coordinate 经纬度对象：
+     * @param radius     距离：2，单位可设为km m...
+     * @return List<GeoRadiusResponse>
+     */
+    public static List<GeoRadiusResponse> geoRadius(String key, GeoCoordinate coordinate, double radius) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.georadius(key, coordinate.getLongitude(), coordinate.getLatitude(), radius, GeoUnit.KM, GeoRadiusParam.geoRadiusParam().withDist().withCoord().sortAscending());
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    /**
+     * 获取指定范围内的地理位置集合（返回匹配位置的经纬度 + 匹配位置与给定地理位置的距离 + 从近到远排序）
+     * <p>
+     * 对应的redis命令示例：（和georadius一样都可以找出位于指定范围内的元素，但georadiusbymember的中心点是由给定的位置元素决定的。）
+     * georadiusbymember location test1 20 km withdist
+     * georadiusbymember location test1 20 km withdist withhash
+     *
+     * @param key    redis的key：location
+     * @param member redis中zset对象的value：test1
+     * @param radius 距离：2，单位可设为km m..
+     * @return List<GeoRadiusResponse>
+     */
+    public static List<GeoRadiusResponse> geoRadiusByMember(String key, String member, double radius) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.georadiusByMember(key, member, radius, GeoUnit.KM, GeoRadiusParam.geoRadiusParam().withDist().withCoord().sortAscending());
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    /**
+     * 查询两位置距离（对应的redis命令示例：geodist location test1 test2 km）
+     *
+     * @param key     redis的key：location
+     * @param member1 redis中zset对象的value：test1
+     * @param member2 redis中zset对象的value：test2
+     * @param unit    距离单位：km m...
+     * @return
+     */
+    public static Double geoDist(String key, String member1, String member2, GeoUnit unit) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.geodist(key, member1, member2, unit);
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    /**
+     * 获取某个地理位置的geohash值（对应的redis命令示例：geohash location test1）
+     *
+     * @param key     redis的key：location
+     * @param members redis中zset对象的value：test1，test2...
+     * @return
+     */
+    public static List<String> geoHash(String key, String... members) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.geohash(key, members);
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    /**
+     * 获取地理位置的坐标（对应的redis命令示例：geopos location test1）
+     *
+     * @param key     redis的key：location
+     * @param members redis中zset对象的value：test1，test2...
+     * @return
+     */
+    public static List<GeoCoordinate> geoPos(String key, String... members) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.geopos(key, members);
+        } finally {
+            disConnect(jedis);
         }
     }
 
@@ -75,7 +203,7 @@ public class RedisUtil {
             jedis = connect();
             jedis.hset(CONSUMER_PROGRESS_KEY, groupId + "_" + topic + "_" + partition, Long.toString(offset));
         } finally {
-            disconnect(jedis);
+            disConnect(jedis);
         }
     }
 
@@ -97,7 +225,7 @@ public class RedisUtil {
                 offset = Long.parseLong(offsetStr);
             }
         } finally {
-            disconnect(jedis);
+            disConnect(jedis);
         }
 
         return offset;
@@ -119,7 +247,6 @@ public class RedisUtil {
         try {
             jedis = connect();
             Iterator<String> keyIt = jedis.hkeys(CONSUMER_PROGRESS_KEY).iterator();
-
             while (keyIt.hasNext()) {
                 String key = keyIt.next();
                 if (key.startsWith(keyPrefix)) {
@@ -127,7 +254,7 @@ public class RedisUtil {
                 }
             }
         } finally {
-            disconnect(jedis);
+            disConnect(jedis);
         }
 
         return partitions;
