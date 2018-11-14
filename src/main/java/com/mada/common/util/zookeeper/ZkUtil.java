@@ -5,6 +5,7 @@ import com.mada.common.configuration.ConfigurationUtil;
 import com.mada.common.enumeration.InfrastructureEnum;
 import com.mada.common.enumeration.ServerStateEnum;
 import com.mada.common.enumeration.ServiceEnum;
+import com.mada.common.util.collection.CollectionUtil;
 import com.mada.common.util.zookeeper.callback.IZkConnectionListenerCallback;
 import com.mada.common.util.zookeeper.callback.IZkInfrastructureListenerCallback;
 import com.mada.common.util.zookeeper.callback.IZkServiceConfigListenerCallback;
@@ -58,7 +59,6 @@ public class ZkUtil {
 
     static {
         ZOOKEEPER_HOST = ConfigurationUtil.ZOOKEEPER_HOST;
-
         client = CuratorFrameworkFactory.builder()
                 .connectString(ZOOKEEPER_HOST)
                 .namespace(NAMESPACE)
@@ -72,7 +72,6 @@ public class ZkUtil {
      * @param initData zk初始化数据
      */
     public static void init(ZkInitializationData initData) {
-
         if (!initFlag) {
             initializationData = initData;
             initFlag = true;
@@ -90,13 +89,14 @@ public class ZkUtil {
 
     public static void connect(ServiceEnum curServ, ServiceEnum[] depServs) {
 
-        if (currentService == null) {
-            if (curServ != null) {
+        if (Objects.isNull(currentService)) {
+            if (Objects.nonNull(curServ)) {
                 currentService = curServ;
             }
 
-            if (dependentServices == null && depServs != null && depServs.length != 0)
+            if (Objects.nonNull(dependentServices) && Objects.nonNull(depServs) && depServs.length != 0) {
                 dependentServices = depServs;
+            }
 
             //监听必须在client.start()方法之前启动才生效
             //服务配置监听
@@ -113,13 +113,12 @@ public class ZkUtil {
             LOGGER.info("Connect to zookeeper (host: {}).", ZOOKEEPER_HOST);
 
             while (true) {
-
                 //保证所有监听器已启动
                 if (SERVICE_CONFIG_MAP.size() >= ServiceEnum.values().length &&
                         INFRASTRUCTURE_MAP.size() >= InfrastructureEnum.values().length &&
-                        CONNECTION_MAP.size() >= ServiceEnum.values().length)
+                        CONNECTION_MAP.size() >= ServiceEnum.values().length) {
                     break;
-
+                }
                 try {
                     LOGGER.info("Waiting for all listeners started.");
                     Thread.sleep(500);
@@ -134,7 +133,6 @@ public class ZkUtil {
      * 连接Zookeeper
      */
     public static void connect(ServiceEnum curSer) {
-
         connect(curSer, null);
     }
 
@@ -142,35 +140,27 @@ public class ZkUtil {
      * 断开Zookeeper
      */
     public static void disconnect() {
-
-        if (currentService != null) {
-
+        if (Objects.nonNull(currentService)) {
             currentService = null;
-
             client.close();
-
             LOGGER.info("Disconnect zookeeper (host: {}).", ZOOKEEPER_HOST);
         }
     }
 
     private static void addNode(Map.Entry<String, String> entry) throws Exception {
-
         client.create().withMode(CreateMode.EPHEMERAL).forPath(entry.getKey(), entry.getValue().getBytes("UTF-8"));
     }
 
     protected static void deleteNode(String path) throws Exception {
-
         client.delete().forPath(path);
     }
 
     private static void updateNode(Map.Entry<String, String> entry) throws Exception {
-
         client.setData().forPath(entry.getKey(), entry.getValue().getBytes("UTF-8"));
     }
 
     protected static Map.Entry<String, String> getNode(String path) {
         Map.Entry<String, String> entry;
-
         try {
             byte[] data = client.getData().forPath(path);
             entry = new AbstractMap.SimpleEntry<>(path, new String(data, "UTF-8"));
@@ -199,23 +189,19 @@ public class ZkUtil {
     }
 
     protected static boolean checkNode(String path) throws Exception {
-
-        return client.checkExists().forPath(path) != null;
+        return Objects.nonNull(client.checkExists().forPath(path));
     }
 
     private static void listenChildNode(IZkNodeListener zkNodeListener) {
 
         String childPath = zkNodeListener.getPath();
-
         PathChildrenCache cache = new PathChildrenCache(client, childPath, true);
 
         cache.getListenable().addListener((client, event) -> {
-
             ChildData node = event.getData();
             if (node == null) {
                 //表示与zk断开连接
                 cache.close();
-
                 return;
             }
 
@@ -237,7 +223,6 @@ public class ZkUtil {
 
         try {
             cache.start();
-
             LOGGER.info("Listen successfully (path = {}).", childPath);
         } catch (Throwable t) {
             LOGGER.error("Listen failed (path = \"" + childPath + "\").", t);
@@ -253,13 +238,10 @@ public class ZkUtil {
 
             switch (state) {
                 case RECONNECTED:
-
                     connected(path, zkNodeListenerClass);
-
-                    if (currentService != null) {
+                    if (Objects.nonNull(currentService)) {
                         try {
                             String connectionPath = CONNECTION_PATH + "/" + currentService.getZookeeperNodeName() + "/" + ConfigurationUtil.getServerId();
-
                             if (!checkNode(connectionPath)) {
                                 //重连zk后更新服务状态
                                 addConnection(currentService, ServerStateEnum.Running);
@@ -268,19 +250,14 @@ public class ZkUtil {
                             LOGGER.warn(t.getMessage(), t);
                         }
                     }
-
                     break;
                 case CONNECTED:
-
                     connected(path, zkNodeListenerClass);
-
                     break;
 //                case SUSPENDED:
                 case LOST:
-
                     //回收机制
                     disconnected(path);
-
                     break;
             }
         });
@@ -293,71 +270,58 @@ public class ZkUtil {
 
             switch (path) {
                 case SERVICE_CONFIG_PATH:
-
-                    if (initializationData.getServiceConfigListenerCallback() != null) {
+                    if (Objects.nonNull(initializationData.getServiceConfigListenerCallback())) {
                         //注入应用层面的事件处理机制
                         constructor = zkNodeListenerClass.getDeclaredConstructor(String.class, IZkServiceConfigListenerCallback.class);
                     }
-
                     break;
                 case INFRASTRUCTURE_PATH:
-
-                    if (initializationData.getInfrastructureListenerCallback() != null) {
+                    if (Objects.nonNull(initializationData.getInfrastructureListenerCallback())) {
                         //注入应用层面的事件处理机制
                         constructor = zkNodeListenerClass.getDeclaredConstructor(String.class, IZkInfrastructureListenerCallback.class);
                     }
-
                     break;
                 case CONNECTION_PATH:
-
-                    if (initializationData.getConnectionListenerCallback() != null) {
+                    if (Objects.nonNull(initializationData.getConnectionListenerCallback())) {
                         //注入应用层面的事件处理机制
                         constructor = zkNodeListenerClass.getDeclaredConstructor(String.class, IZkConnectionListenerCallback.class);
                     }
-
                     break;
             }
 
-            if (constructor == null)
+            if (Objects.isNull(constructor)) {
                 constructor = zkNodeListenerClass.getDeclaredConstructor(String.class);
+            }
 
             List<Map.Entry<String, String>> entryList = listNode(path);
-
             for (Map.Entry<String, String> entry : entryList) {
-
                 String childPath = entry.getKey();
-
                 IZkNodeListener zkNodeListener = null;
 
                 switch (path) {
                     case SERVICE_CONFIG_PATH:
-
-                        if (initializationData.getServiceConfigListenerCallback() != null) {
+                        if (Objects.nonNull(initializationData.getServiceConfigListenerCallback())) {
                             //注入应用层面的事件处理机制
                             zkNodeListener = constructor.newInstance(childPath, initializationData.getServiceConfigListenerCallback());
                         }
-
                         break;
                     case INFRASTRUCTURE_PATH:
-
-                        if (initializationData.getInfrastructureListenerCallback() != null) {
+                        if (Objects.nonNull(initializationData.getInfrastructureListenerCallback())) {
                             //注入应用层面的事件处理机制
                             zkNodeListener = constructor.newInstance(childPath, initializationData.getInfrastructureListenerCallback());
                         }
-
                         break;
                     case CONNECTION_PATH:
-
-                        if (initializationData.getConnectionListenerCallback() != null) {
+                        if (Objects.nonNull(initializationData.getConnectionListenerCallback())) {
                             //注入应用层面的事件处理机制
                             zkNodeListener = constructor.newInstance(childPath, initializationData.getConnectionListenerCallback());
                         }
-
                         break;
                 }
 
-                if (zkNodeListener == null)
+                if (Objects.isNull(zkNodeListener)) {
                     zkNodeListener = constructor.newInstance(childPath);
+                }
 
                 listenChildNode(zkNodeListener);
 
@@ -374,13 +338,11 @@ public class ZkUtil {
                 }
             }
         } catch (Throwable t) {
-
             throw new RuntimeException(t);
         }
     }
 
     private static void disconnected(String path) {
-
         switch (path) {
             case SERVICE_CONFIG_PATH:
                 SERVICE_CONFIG_MAP.clear();
@@ -395,20 +357,16 @@ public class ZkUtil {
     }
 
     private static void addConnection(ServiceEnum serviceEnum, ServerStateEnum serverStateEnum) {
-
         String path = CONNECTION_PATH + "/" + serviceEnum.getZookeeperNodeName() + "/" + ConfigurationUtil.getServerId();
-
         while (true) {
             try {
                 if (!checkNode(path)) {
-
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Ip", ConfigurationUtil.getServerIp());
                     jsonObject.put("Port", ConfigurationUtil.SERVER_PORT);
                     jsonObject.put("State", serverStateEnum.value());
 
                     Map.Entry<String, String> entry = new AbstractMap.SimpleEntry<>(path, jsonObject.toJSONString());
-
                     addNode(entry);
 
                     break;
@@ -417,7 +375,6 @@ public class ZkUtil {
                 LOGGER.info("/" + NAMESPACE + path + " service is already exists! Please wait for 5 seconds and retry.");
 
                 Thread.sleep(5000);
-
             } catch (Throwable t) {
                 throw new RuntimeException(t);
             }
@@ -430,38 +387,32 @@ public class ZkUtil {
      * @param serverStateEnum 负载管理状态枚举
      */
     public static void addConnection(ServerStateEnum serverStateEnum) {
-
         addConnection(currentService, serverStateEnum);
     }
 
     private static void deleteConnection(ServiceEnum serviceEnum) {
-
         String path = CONNECTION_PATH + "/" + serviceEnum.getZookeeperNodeName() + "/" + ConfigurationUtil.getServerId();
-
         try {
-            if (checkNode(path))
+            if (checkNode(path)) {
                 deleteNode(path);
-            else {
+            } else {
                 //获取节点，没有时，忽略
+                LOGGER.warn("No such node.node path:{}", path);
             }
         } catch (Throwable t) {
             throw new RuntimeException(t);
         }
-
     }
 
     /**
      * 服务删除
      */
     public static void deleteConnection() {
-
         deleteConnection(currentService);
     }
 
     private static void updateConnection(ServiceEnum serviceEnum, ServerStateEnum serverStateEnum) {
-
         String path = CONNECTION_PATH + "/" + serviceEnum.getZookeeperNodeName();
-
         String childPath = path + "/" + ConfigurationUtil.getServerId();
 
         try {
@@ -490,7 +441,6 @@ public class ZkUtil {
      * @param serverStateEnum 负载管理状态枚举
      */
     public static void updateConnection(ServerStateEnum serverStateEnum) {
-
         updateConnection(currentService, serverStateEnum);
     }
 
@@ -501,12 +451,10 @@ public class ZkUtil {
      * @return 服务连接实体
      */
     public static ZkConnectionNodeEntity getConnection(ServiceEnum serviceEnum) {
-
         String path = CONNECTION_PATH + "/" + serviceEnum.getZookeeperNodeName();
-
         ZkConnectionNodeListener listener = CONNECTION_MAP.get(path);
 
-        return listener == null ? null : listener.getConnection();
+        return Objects.isNull(listener) ? null : listener.getConnection();
     }
 
     /**
@@ -517,12 +465,10 @@ public class ZkUtil {
      * @return 服务连接实体
      */
     public static ZkConnectionNodeEntity getConnection(ServiceEnum serviceEnum, String key) {
-
         String path = CONNECTION_PATH + "/" + serviceEnum.getZookeeperNodeName();
-
         ZkConnectionNodeListener listener = CONNECTION_MAP.get(path);
 
-        return listener == null ? null : listener.getConnection(key);
+        return Objects.isNull(listener) ? null : listener.getConnection(key);
     }
 
     /**
@@ -532,20 +478,16 @@ public class ZkUtil {
      * @return 服务连接实体
      */
     public static ZkConnectionNodeEntity getCustomerConnection(String nodeName) {
-
         String path = CONNECTION_PATH + "/" + ServiceEnum.CustomerService.getZookeeperNodeName();
-
         return getConn(nodeName, path);
     }
 
     //服务发现（CustomerService）基础方法
     private static ZkConnectionNodeEntity getConn(String nodeName, String path) {
-
         String nodeValue = getNode(path + "/" + nodeName).getValue();
-
         ZkConnectionNodeListener listener = CONNECTION_MAP.get(path);
 
-        return listener == null ? null : listener.getConnectionNodeEntity(nodeName, nodeValue);
+        return Objects.isNull(listener) ? null : listener.getConnectionNodeEntity(nodeName, nodeValue);
     }
 
     /**
@@ -555,33 +497,24 @@ public class ZkUtil {
      * @return 所有的服务
      */
     public static List<ZkConnectionNodeEntity> listConnection(ServiceEnum serviceEnum) {
-
         String path = CONNECTION_PATH + "/" + serviceEnum.getZookeeperNodeName();
-
         ZkConnectionNodeListener listener = CONNECTION_MAP.get(path);
 
-        return listener == null ? null : listener.listConnection();
+        return Objects.isNull(listener) ? null : listener.listConnection();
     }
 
     /**
      * 服务依赖
      */
     public static void dependConnection() {
-
-        if (dependentServices != null) {
-
+        if (Objects.nonNull(dependentServices)) {
             for (ServiceEnum dependentService : dependentServices) {
-
                 while (true) {
-
                     boolean dependentFlag = false;
-
                     List<ZkConnectionNodeEntity> connectionNodeEntities = listConnection(dependentService);
 
-                    if (connectionNodeEntities != null) {
-
+                    if (Objects.nonNull(connectionNodeEntities)) {
                         for (ZkConnectionNodeEntity connectionNodeEntity : connectionNodeEntities) {
-
                             if (ServerStateEnum.Running == connectionNodeEntity.getServerStateEnum()) {
                                 dependentFlag = true;
                                 break;
@@ -590,9 +523,7 @@ public class ZkUtil {
                     }
 
                     if (dependentFlag) {
-
                         LOGGER.info("Dependent {} has been deployed.", dependentService.description());
-
                         break;
                     }
 
@@ -614,23 +545,17 @@ public class ZkUtil {
      * @return
      */
     public static boolean isLeaderConnection() {
-
-        if (currentService == null)
+        if (Objects.isNull(currentService)) {
             return false;
+        }
 
         List<ZkConnectionNodeEntity> connectionNodeEntityList = listConnection(currentService);
-
-        if (connectionNodeEntityList == null || connectionNodeEntityList.size() == 0)
+        if (CollectionUtil.isEmpty(connectionNodeEntityList)) {
             return false;
+        }
 
         //排序
-        Collections.sort(connectionNodeEntityList, new Comparator<ZkConnectionNodeEntity>() {
-            @Override
-            public int compare(ZkConnectionNodeEntity e1, ZkConnectionNodeEntity e2) {
-
-                return e1.getId().compareTo(e2.getId());
-            }
-        });
+        connectionNodeEntityList.sort(Comparator.comparing(ZkConnectionNodeEntity::getId));
 
         //暂定：所有zookeeper服务中第一个id为ConfigurationUtil.getServerId()的服务为leader
         return connectionNodeEntityList.get(0).getId().equals(ConfigurationUtil.getServerId());
@@ -644,25 +569,19 @@ public class ZkUtil {
      * @return 服务配置实体
      */
     public static ZkConfigurationNodeEntity getServiceConfig(ServiceEnum serviceEnum, String key) {
-
         String path = SERVICE_CONFIG_PATH + "/" + serviceEnum.getZookeeperNodeName();
-
         ZkConfigurationNodeListener listener = SERVICE_CONFIG_MAP.get(path);
 
-        return listener == null ? null : listener.getConfiguration(key);
+        return Objects.isNull(listener) ? null : listener.getConfiguration(key);
     }
 
     private static void updateServiceConfig(ServiceEnum serviceEnum, ZkConfigurationNodeEntity zkConfigurationNodeEntity) {
-
         String path = SERVICE_CONFIG_PATH + "/" + serviceEnum.getZookeeperNodeName() + "/" + zkConfigurationNodeEntity.getKey();
-
         Map.Entry<String, String> entry = new AbstractMap.SimpleEntry<>(path, zkConfigurationNodeEntity.getValue());
 
         try {
             if (checkNode(path)) {
-
                 updateNode(entry);
-
             } else {
                 //获取节点，没有时，抛异常
                 throw new RuntimeException("There is no zookeeper node named \"" + path + "\".");
@@ -679,7 +598,6 @@ public class ZkUtil {
      * @param configurationNodeEntity 服务配置实体
      */
     public static void updateServiceConfig(ZkConfigurationNodeEntity configurationNodeEntity) {
-
         updateServiceConfig(currentService, configurationNodeEntity);
     }
 
@@ -691,12 +609,10 @@ public class ZkUtil {
      * @return 基础服务配置实体
      */
     public static ZkConfigurationNodeEntity getInfrastructure(InfrastructureEnum infrastructureEnum, String key) {
-
         String path = INFRASTRUCTURE_PATH + "/" + infrastructureEnum.getZookeeperNodeName();
-
         ZkConfigurationNodeListener listener = INFRASTRUCTURE_MAP.get(path);
 
-        return listener == null ? null : listener.getConfiguration(key);
+        return Objects.isNull(listener) ? null : listener.getConfiguration(key);
     }
 
     /**
@@ -706,12 +622,10 @@ public class ZkUtil {
      * @return
      */
     public static List<ZkConfigurationNodeEntity> listServiceConfig(ServiceEnum serviceEnum) {
-
         String path = SERVICE_CONFIG_PATH + "/" + serviceEnum.getZookeeperNodeName();
-
         ZkConfigurationNodeListener listener = SERVICE_CONFIG_MAP.get(path);
 
-        return listener == null ? null : listener.listServiceConfig();
+        return Objects.isNull(listener) ? null : listener.listServiceConfig();
     }
 
     /**
@@ -723,7 +637,6 @@ public class ZkUtil {
      * @param offset
      */
     public static void updateConsumerOffset(final String groupId, final String topic, final int partition, final long offset) {
-
         //zookeeper节点格式：/consumers/{groupId}/offsets/{topic}/{partition}	->		offset值
 
         String namespace = "consumers";
@@ -733,24 +646,22 @@ public class ZkUtil {
         try {
             CuratorFramework consumerClient = client.usingNamespace(namespace);
 
-            if (consumerClient.checkExists().forPath(path) != null) {
+            if (Objects.nonNull(consumerClient.checkExists().forPath(path))) {
                 consumerClient.setData().forPath(path, value.getBytes("UTF-8"));
             } else {
                 String[] strArr = path.split("/");
-
                 StringBuilder sb = new StringBuilder();
 
                 for (String str : strArr) {
-
-                    if (str.length() == 0)
+                    if (str.length() == 0) {
                         continue;
+                    }
 
                     sb.append("/");
                     sb.append(str);
 
                     String p = sb.toString();
-
-                    if (consumerClient.checkExists().forPath(p) == null) {
+                    if (Objects.isNull(consumerClient.checkExists().forPath(p))) {
                         //创建永久节点
                         consumerClient.create().withMode(CreateMode.PERSISTENT).forPath(p, p.equals(path) ? value.getBytes("UTF-8") : null);
                     }
@@ -758,7 +669,6 @@ public class ZkUtil {
             }
         } catch (Throwable t) {
             LOGGER.error(t.getMessage(), t);
-
             throw new RuntimeException(t);
         }
 
@@ -774,7 +684,6 @@ public class ZkUtil {
      * @return
      */
     public static Long getConsumerOffset(final String groupId, final String topic, final int partition) {
-
         //zookeeper节点格式：/consumers/{groupId}/offsets/{topic}/{partition}	->		offset值
         Long offset = null;
 
@@ -783,17 +692,16 @@ public class ZkUtil {
 
         try {
             CuratorFramework consumerClient = client.usingNamespace(namespace);
-
-            if (consumerClient.checkExists().forPath(path) != null) {
+            if (Objects.nonNull(consumerClient.checkExists().forPath(path))) {
                 byte[] data = consumerClient.getData().forPath(path);
                 offset = Long.parseLong(new String(data, "UTF-8"));
             }
         } catch (Throwable t) {
             LOGGER.error(t.getMessage(), t);
-
             throw new RuntimeException(t);
         }
 
         return offset;
     }
+
 }
