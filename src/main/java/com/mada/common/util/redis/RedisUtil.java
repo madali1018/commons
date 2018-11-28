@@ -1,5 +1,8 @@
 package com.mada.common.util.redis;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.*;
 import redis.clients.jedis.params.geo.GeoRadiusParam;
 
@@ -7,13 +10,15 @@ import java.util.*;
 
 /**
  * Redis3.0之后支持地理位置geo功能。geo底层是一个zset（删除可以使用 del location命令删除）
- *参考：https://segmentfault.com/a/1190000009857124
- *
- *
+ * 参考：https://segmentfault.com/a/1190000009857124
+ * <p>
+ * <p>
  * <p>
  * Created by madali on 2017/4/26.
  */
 public class RedisUtil {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisUtil.class);
 
     private static final JedisPool jedisPool;
 
@@ -57,6 +62,46 @@ public class RedisUtil {
     public static void disConnect(Jedis jedis) {
         if (Objects.nonNull(jedis)) {
             jedis.close();
+        }
+    }
+
+    public static Object getObject(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            if (StringUtils.isNotEmpty(key)) {
+                return jedis.get(key);
+            }
+        } catch (Exception e) {
+            LOGGER.error("getObject获取redis键值异常:key=" + key + " cause:" + e.getMessage());
+        } finally {
+            disConnect(jedis);
+        }
+        return null;
+    }
+
+    public static String setObject(String key, Object value) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.set(key, String.valueOf(value));
+        } catch (Exception e) {
+            LOGGER.error("setObject设置redis键值异常:key=" + key + " value=" + value + " cause:" + e.getMessage());
+            return null;
+        } finally {
+            disConnect(jedis);
+        }
+    }
+
+    public static void deleteObject(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            jedis.del(key);
+        } catch (Exception e) {
+            LOGGER.error("deleteObject失败,key:{}", key);
+        } finally {
+            disConnect(jedis);
         }
     }
 
