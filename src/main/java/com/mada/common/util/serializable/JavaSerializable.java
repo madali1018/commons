@@ -5,6 +5,10 @@ import java.util.Objects;
 
 /**
  * Created by madali on 2018/11/28 18:07
+ * 注意：
+ * 同一个实体，在两个项目中都使用lombok注解
+ * 1.使用fastjson进行序列化反序列化都是成功的，即便两个实体的包名不一致。fastjson序列化反序列化是根据@JSONField注解中的name等字段进行处理的。
+ * 2.使用io流进行序列化反序列化，包名一致时成功；包名不一致，不成功的：反序列化时根据完整类名找不到对应的实体类。
  */
 public class JavaSerializable {
 
