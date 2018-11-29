@@ -1,4 +1,4 @@
-package demo.lombok;
+package com.mada.common.entity.lombok;
 
 import lombok.*;
 
@@ -11,12 +11,14 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class LomEntity {
+public class LombokEntity {
 
     private String name;
 
     private boolean flag;
 
     private Boolean needFlag;
+
+    private int num;
 
 }
