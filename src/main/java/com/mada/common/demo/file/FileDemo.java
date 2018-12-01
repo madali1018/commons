@@ -54,7 +54,7 @@ public class FileDemo {
                 e.printStackTrace();
             } finally {
                 try {
-                    out.flush();
+                    Objects.requireNonNull(out).flush();
                     out.close();
                 } catch (IOException e) {
                     e.printStackTrace();
