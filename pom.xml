@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mada</groupId>
-    <artifactId>common</artifactId>
+    <groupId>com.mada.commons</groupId>
+    <artifactId>commons</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
-    <name>common</name>
+    <name>Utils And Demo</name>
     <url>http://maven.apache.org</url>
 
     <properties>

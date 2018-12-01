@@ -6,10 +6,11 @@
 
 ### 目录
 
-* #### com.mada.common目录 ####
+* #### com.mada.commons目录 ####
 	* annotation：注解
 	* configuration：配置
 	* dao：dao层
+	* demo：测试包
 	* designpattern：设计模式demo
 	* entity：实体类
 	* enumeration：枚举

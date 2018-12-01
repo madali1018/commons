@@ -7,7 +7,7 @@
 
     <!--使用自定义的[%myFileAndLineConverter]来代替原有的[%file:%line]，MyFileAndLineConverter类中自定义了file和line的转换器  -->
     <conversionRule conversionWord="myFileAndLineConverter"
-                    converterClass="com.mada.common.util.log.logback.MyFileAndLineConverter"/>
+                    converterClass="com.mada.commons.util.log.logback.MyFileAndLineConverter"/>
 
     <!--appender配置日志打印方式-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
