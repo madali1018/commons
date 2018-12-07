@@ -2,9 +2,7 @@
 
 ## jdk版本：jdk1.8.0_102
 
-## 常用工具类
-
-### 目录
+## 项目结构
 
 * #### com.mada.commons目录 ####
 	* annotation：注解
