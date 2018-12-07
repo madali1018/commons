@@ -43,7 +43,7 @@ public class Demo {
         String url = "http://localhost:8080/index/person/p4";
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("username","name4");
+        jsonObject.put("username", "name4");
 
         String result = HttpClientUtil2.sendPost(url, jsonObject.toJSONString());
         System.out.println(result);
