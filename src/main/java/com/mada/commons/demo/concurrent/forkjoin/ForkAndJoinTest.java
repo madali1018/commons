@@ -12,7 +12,7 @@ import java.util.concurrent.RecursiveTask;
  * @Auther: madali
  * @Date: 2018/8/31 16:34
  */
-public class CountTaskDemo1 extends RecursiveTask<Integer> {
+public class ForkAndJoinTest extends RecursiveTask<Integer> {
 
     // 设立一个最大计算容量
     private static final int DEFAULT_CAPACITY = 100;
@@ -21,7 +21,7 @@ public class CountTaskDemo1 extends RecursiveTask<Integer> {
     private int start;
     private int end;
 
-    public CountTaskDemo1(int start, int end) {
+    public ForkAndJoinTest(int start, int end) {
         this.start = start;
         this.end = end;
     }
@@ -40,8 +40,8 @@ public class CountTaskDemo1 extends RecursiveTask<Integer> {
             // 计算容量中间值：如果超过了最大容量，那么就进行拆分处理
             int middle = (start + end) / 2;
             // 递归
-            CountTaskDemo1 leftTask = new CountTaskDemo1(start, middle);
-            CountTaskDemo1 rightTask = new CountTaskDemo1(middle + 1, end);
+            ForkAndJoinTest leftTask = new ForkAndJoinTest(start, middle);
+            ForkAndJoinTest rightTask = new ForkAndJoinTest(middle + 1, end);
 
             // 执行任务
             leftTask.fork();
@@ -58,7 +58,7 @@ public class CountTaskDemo1 extends RecursiveTask<Integer> {
         // ForkJoinPool线程池：提交任务和调度任务
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         // 任务执行类(ForkJoinTask的子类)：生成一个计算任务，计算1+2+3+...+10000
-        CountTaskDemo1 task = new CountTaskDemo1(1, 10000);
+        ForkAndJoinTest task = new ForkAndJoinTest(1, 10000);
 
         long result = forkJoinPool.invoke(task);
         System.out.println(result);
