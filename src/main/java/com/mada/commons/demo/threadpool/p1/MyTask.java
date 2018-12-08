@@ -14,7 +14,7 @@ public class MyTask implements Runnable {
     public void run() {
         System.out.println("当前线程名称:" + Thread.currentThread().getName() + ",正在执行task:" + taskNum);
         try {
-            Thread.sleep(1 * 1000L);
+            Thread.sleep(2 * 1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
