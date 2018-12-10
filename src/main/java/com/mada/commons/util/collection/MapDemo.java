@@ -12,8 +12,8 @@ public class MapDemo {
     private static Map<Integer, String> map = new HashMap<>();
 
     static {
-//        map.put(1, "a");
-//        map.put(2, "b");
+        map.put(1, "a");
+        map.put(2, "b");
     }
 
     public static void main(String[] args) {
