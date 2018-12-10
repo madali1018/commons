@@ -21,8 +21,8 @@ public class ListDemo {
         }
 
         //获取studentList中name为n_1的所有元素的集合
-        List<Student> stuList = CollectionUtil.list(studentList, Student.class, "name", "n_2");
-        System.out.println(stuList);
+        List<Student> stuList = CollectionUtil.list(studentList, Student.class, "name", "n_1");
+        CollectionUtil.loopCollection(stuList);
     }
 
     @Test
@@ -33,8 +33,7 @@ public class ListDemo {
 
     // list去重
     @Test
-    private void test3() {
-
+    public void test3() {
         List<String> list = new ArrayList<>();
         list.add("111");
         list.add("222");
@@ -42,16 +41,11 @@ public class ListDemo {
         list.add("111");
         list.add("555");
 
-        for (String s : list) {
-            System.out.println(s);
-        }
-
+        CollectionUtil.loopCollection(list);
         System.out.println("去重复后");
-        List<String> newList = new ArrayList<>(new HashSet<>(list));
 
-        for (String s : newList) {
-            System.out.println(s);
-        }
+        List<String> newList = new ArrayList<>(new HashSet<>(list));
+        CollectionUtil.loopCollection(newList);
     }
 
     @Test

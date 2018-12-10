@@ -23,6 +23,29 @@ public class CollectionUtil {
     }
 
     /**
+     * 判断map是否为空
+     *
+     * @param map
+     * @return
+     */
+    public static boolean isEmpty(Map map) {
+        return map == null || map.isEmpty();
+    }
+
+    public static boolean isNotEmpty(Map map) {
+        return !isEmpty(map);
+    }
+
+    /**
+     * 遍历输出集合元素
+     *
+     * @param collection
+     */
+    public static void loopCollection(Collection<?> collection) {
+        collection.stream().forEach(System.out::println);
+    }
+
+    /**
      * 获取集合中具有特定属性值的元素的集合
      *
      * @param list      源集合
@@ -59,9 +82,12 @@ public class CollectionUtil {
      * @return
      */
     public static long countOccurrences(int[] numbers, int value) {
-
         //使用 Arrays.stream().filter().count() 计算等于指定值的值的总数
         return Arrays.stream(numbers)
+                // 此处IntPredicate接口可以实现计算数组中大于 小于 ... 某个值的元素的个数
+//                .filter(number -> number > value)
+//                .filter(number -> number != value)
+//                .filter(number -> number <= value)
                 .filter(number -> number == value)
                 .count();
     }
