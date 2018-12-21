@@ -72,4 +72,25 @@ public class ListDemo {
         }
     }
 
+    @Test
+    public void t() {
+        List<String> list1 = new ArrayList<>();
+        list1.add("111");
+        list1.add("222");
+        list1.add("333");
+        list1.add("555");
+
+        List<String> list2 = new ArrayList<>();
+        list2.add("888");
+        list2.add("666");
+        list2.add("777");
+        list2.add("999");
+
+        List<String> list = new ArrayList<>();
+        list.addAll(list1);
+        list.addAll(list2);
+
+        list.forEach(System.out::println);
+    }
+
 }

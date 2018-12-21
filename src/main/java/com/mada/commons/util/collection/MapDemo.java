@@ -14,9 +14,14 @@ public class MapDemo {
     static {
         map.put(1, "a");
         map.put(2, "b");
+        map.put(1, "c");
     }
 
     public static void main(String[] args) {
+
+        System.out.println(map.get(1));
+
+        System.out.println(Long.MAX_VALUE);
         System.out.println(map.isEmpty());
         System.out.println(map.get(1));
         System.out.println(map.get(10));
