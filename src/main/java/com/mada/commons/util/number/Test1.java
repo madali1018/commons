@@ -1,13 +1,29 @@
 package com.mada.commons.util.number;
 
+import org.junit.Test;
+
 /**
  * @Auther: madali
  * @Date: 2018/7/6 16:08
  */
-public class Demo1 {
+public class Test1 {
 
-    public static void main(String[] args) {
+    @Test
+    public void t1() {
+        System.out.println(Long.MAX_VALUE);
 
+        for (int i = 0; i < 12; i++) {
+            System.out.println(NumberUtil.n32nMultipy(i));
+        }
+
+        System.out.println(NumberUtil.base32To10Number("wx4g0u0p5jhq"));
+        System.out.println(NumberUtil.base32To10Number("wx4g0wp5sgp6"));
+        System.out.println(NumberUtil.base32To10Number("wx4g0wp5krty"));
+        System.out.println(NumberUtil.base32To10Number("wx4g0wp5tw2v"));
+        System.out.println(NumberUtil.base32To10Number("ybkfc7cw43zt"));
+    }
+
+    public void t2() {
         System.out.println(NumberUtil.round(12.541D, 2));
         System.out.println(NumberUtil.round(12.0001D, 2));
         System.out.println(NumberUtil.round(12.00D, 2));
