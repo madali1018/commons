@@ -14,6 +14,9 @@ public class Test {
         LombokEntity lombokEntity = new LombokEntity("name", false, true, 0);
         System.out.println(lombokEntity);
         log.info("slf4j");
+
+        LombokEntity lombokEntity2 = LombokEntity.builder().name("nnnnnn").build();
+        System.out.println(lombokEntity2);
     }
 
     @org.junit.Test
@@ -28,7 +31,6 @@ public class Test {
                 num += 1;
             }
         }
-        lombokEntity.setNum(num);
 
         System.out.println(lombokEntity);
     }

@@ -6,11 +6,11 @@ import lombok.*;
  * @Auther: madali
  * @Date: 2018/11/5 11:18
  */
-@Getter
-@Setter
+@Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder(toBuilder = true)
 public class LombokEntity {
 
     private String name;

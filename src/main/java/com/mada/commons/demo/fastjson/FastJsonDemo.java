@@ -14,6 +14,19 @@ import java.util.*;
  */
 public class FastJsonDemo {
 
+    @Test
+    public void t1() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("a", "1");
+        jsonObject.put("b", "2");
+        System.out.println(jsonObject);
+
+        jsonObject.remove("a");
+        jsonObject.remove("a2222");
+        System.out.println(jsonObject);
+        System.out.println(jsonObject.toString());
+    }
+
     // JSONObject JSONArray的基础使用
     @Test
     public void test1() {
