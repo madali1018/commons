@@ -31,6 +31,7 @@ public class Test {
                 num += 1;
             }
         }
+        lombokEntity.setNum(num);
 
         System.out.println(lombokEntity);
     }
