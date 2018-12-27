@@ -4,7 +4,7 @@ package com.mada.commons.util.http;
  * @Auther: madali
  * @Date: 2018/8/24 16:57
  */
-public class Constants {
+public class HttpConstants {
 
     // http请求超时时间（毫秒）
     public static final int CONNECT_TIME_OUT = 500;

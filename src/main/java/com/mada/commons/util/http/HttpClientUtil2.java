@@ -259,8 +259,8 @@ public class HttpClientUtil2 {
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            connection.setConnectTimeout(Constants.CONNECT_TIME_OUT);
-            connection.setReadTimeout(Constants.READ_TIME_OUT);
+            connection.setConnectTimeout(HttpConstants.CONNECT_TIME_OUT);
+            connection.setReadTimeout(HttpConstants.READ_TIME_OUT);
 
             // 建立实际的连接
             connection.connect();
@@ -314,8 +314,8 @@ public class HttpClientUtil2 {
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            connection.setConnectTimeout(Constants.CONNECT_TIME_OUT);
-            connection.setReadTimeout(Constants.READ_TIME_OUT);
+            connection.setConnectTimeout(HttpConstants.CONNECT_TIME_OUT);
+            connection.setReadTimeout(HttpConstants.READ_TIME_OUT);
 
             // 发送POST请求必须设置如下两行
             connection.setDoOutput(true);

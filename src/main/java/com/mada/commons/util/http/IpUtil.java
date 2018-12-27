@@ -92,12 +92,13 @@ public class IpUtil {
             if (candidateAddress != null) {
                 return candidateAddress;
             }
+
             // 如果没有发现 non-loopback地址.只能用最次选的方案
-            InetAddress jdkSuppliedAddress = InetAddress.getLocalHost();
-            return jdkSuppliedAddress;
+            return InetAddress.getLocalHost();
         } catch (Exception e) {
 
         }
+
         return null;
     }
 

@@ -43,8 +43,8 @@ public class HttpClientUtil {
             httpGet.setHeader("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
             // 设置配置请求参数
             RequestConfig requestConfig = RequestConfig.custom()
-                    .setConnectionRequestTimeout(Constants.CONNECT_TIME_OUT)
-                    .setSocketTimeout(Constants.READ_TIME_OUT)
+                    .setConnectionRequestTimeout(HttpConstants.CONNECT_TIME_OUT)
+                    .setSocketTimeout(HttpConstants.READ_TIME_OUT)
                     .build();
             // 为httpGet实例设置配置
             httpGet.setConfig(requestConfig);
@@ -76,8 +76,8 @@ public class HttpClientUtil {
         HttpPost httpPost = new HttpPost(url);
         // 配置请求参数实例
         RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectionRequestTimeout(Constants.CONNECT_TIME_OUT)
-                .setSocketTimeout(Constants.READ_TIME_OUT)
+                .setConnectionRequestTimeout(HttpConstants.CONNECT_TIME_OUT)
+                .setSocketTimeout(HttpConstants.READ_TIME_OUT)
                 .build();
         // 为httpPost实例设置配置
         httpPost.setConfig(requestConfig);
