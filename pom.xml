@@ -26,11 +26,11 @@
         </dependency>
 
         <!-- netty -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.31.Final</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>io.netty</groupId>-->
+            <!--<artifactId>netty-all</artifactId>-->
+            <!--<version>4.1.31.Final</version>-->
+        <!--</dependency>-->
 
         <!-- commons-lang3 -->
         <dependency>
@@ -215,6 +215,13 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
+        </dependency>
+
+        <!-- elasticsearch -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>2.4.6</version>
         </dependency>
 
         <!-- JAVA解析Excel工具：阿里easyexcel -->
