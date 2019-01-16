@@ -9,6 +9,8 @@ public interface IEsSearchService {
 
     /**
      * 根据id获取文档内容
+     * <p>
+     * http请求方式：curl -XGET "http://127.0.0.1:9200/hirdata/hirdata/35302499264591"
      *
      * @param indexName 索引名称
      * @param id        索引id
