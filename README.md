@@ -9,7 +9,7 @@
 	* es获取索引分片，副本信息
 	* es获取索引所有的字段及类型
 	* es查询：in, not in；多字段sort；query；filter；function_score等
-	* 详情见csdn专栏：[https://blog.csdn.net/mada26/column/info/29898](https://blog.csdn.net/mada26/column/info/29898 "ElasticSearch-Java服务化开发")
+	* 详情见csdn专栏：[ElasticSearch-Java服务化开发](https://blog.csdn.net/mada26/column/info/29898 "ElasticSearch-Java服务化开发")
 	
 
 * #### com.mada.commons目录 ####
