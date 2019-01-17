@@ -1,6 +1,8 @@
 package com.mada.es.search;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by madali on 2019/1/16 18:18
@@ -17,6 +19,53 @@ public interface IEsSearchService {
      * @return 索引中文档的原始数据（String类型的json串）
      */
     String getIndexData(String indexName, String id);
+
+    /**
+     * in 某个字段查询
+     *
+     * @param indexName 索引名称
+     * @param fieldName 字段名称
+     * @param set       属性值set
+     * @return
+     */
+    List<String> getInOneFieldData(String indexName, String fieldName, Set<Object> set);
+
+    /**
+     * in 多个字段查询
+     *
+     * @param indexName 索引名称
+     * @param map       map的key为字段名称，value为字段名称in的集合
+     * @return
+     */
+    List<String> getInMultiFieldData(String indexName, Map<String, Set<Object>> map);
+
+    /**
+     * not in 某个字段查询
+     *
+     * @param indexName 索引名称
+     * @param fieldName 字段名称
+     * @param set       属性值set
+     * @return
+     */
+    List<String> getNotInOneFieldData(String indexName, String fieldName, Set<Object> set);
+
+    /**
+     * not in 多个字段查询
+     *
+     * @param indexName 索引名称
+     * @param map       map的key为字段名称，value为字段名称not in的集合
+     * @return
+     */
+    List<String> getNotInMultiFieldData(String indexName, Map<String, Set<Object>> map);
+
+    /**
+     * 多字段排序
+     *
+     * @param indexName 索引名称
+     * @param fieldMap  字段fieldMap：key为字段名称，value为true时表示升序，false时表示降序，未传值则默认按照该字段降序进行查询
+     * @return
+     */
+    List<String> getOrderData(String indexName, Map<String, Boolean> fieldMap);
 
     /**
      * 获取索引分片，副本数，创建时间等信息

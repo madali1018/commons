@@ -3,7 +3,7 @@ package com.mada.es.test;
 import com.mada.es.impl.EsSearchServiceImpl;
 import org.junit.Test;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by madali on 2019/1/16 19:15
@@ -33,6 +33,84 @@ public class IEsSearchServiceTest extends BaseTest {
         for (Map.Entry<String, Object> entry : mappingsMap.entrySet()) {
             System.out.println("es索引的字段:" + entry.getKey() + ",类型" + entry.getValue());
         }
+    }
+
+    // in not/in 一个字段
+    @Test
+    public void t3() {
+        Set<Object> set = new HashSet<>();
+        set.add("100");
+        set.add("101");
+        set.add("102");
+
+        String fieldName = "price";
+        List<String> result = esSearchService.getInOneFieldData(indexName, fieldName, set);
+        List<String> result2 = esSearchService.getNotInOneFieldData(indexName, fieldName, set);
+        result.forEach(System.out::println);
+        System.out.println("====================");
+        result2.forEach(System.out::println);
+    }
+
+    // in 多个字段
+    @Test
+    public void t4() {
+
+        Map<String, Set<Object>> map = new HashMap<>();
+
+        Set<Object> set = new HashSet<>();
+        set.add("100");
+        set.add("101");
+        set.add("102");
+
+        String fieldName = "price";
+        map.put(fieldName, set);
+
+        Set<Object> set2 = new HashSet<>();
+        set2.add("1000");
+        set2.add("1001");
+
+        String fieldName2 = "time";
+        map.put(fieldName2, set2);
+
+        List<String> result = esSearchService.getInMultiFieldData(indexName, map);
+        result.forEach(System.out::println);
+    }
+
+    // not in 多个字段
+    @Test
+    public void t5() {
+
+        Map<String, Set<Object>> map = new HashMap<>();
+
+        Set<Object> set = new HashSet<>();
+        set.add("100");
+        set.add("101");
+        set.add("102");
+
+        String fieldName = "price";
+        map.put(fieldName, set);
+
+        Set<Object> set2 = new HashSet<>();
+        set2.add("1000");
+        set2.add("1004");
+
+        String fieldName2 = "time";
+        map.put(fieldName2, set2);
+
+        List<String> result = esSearchService.getNotInMultiFieldData(indexName, map);
+        result.forEach(System.out::println);
+    }
+
+    //多字段排序2
+    @Test
+    public void test6() {
+
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("price", false);
+        map.put("age", true);
+
+        List<String> result = esSearchService.getOrderData(indexName, map);
+        result.forEach(System.out::println);
     }
 
 }

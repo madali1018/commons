@@ -1,17 +1,30 @@
 package com.mada.es.impl;
 
 import com.carrotsearch.hppc.cursors.ObjectObjectCursor;
+import com.mada.commons.util.collection.CollectionUtil;
 import com.mada.es.client.EsClient;
 import com.mada.es.search.IEsSearchService;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsRequest;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.cluster.metadata.MappingMetaData;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by madali on 2019/1/16 19:11
@@ -26,6 +39,159 @@ public class EsSearchServiceImpl implements IEsSearchService {
                 .actionGet();
 
         return response.getSourceAsString();
+    }
+
+    @Override
+    public List<String> getInOneFieldData(String indexName, String fieldName, Set<Object> set) {
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        // must相当于and，mustNot相当于Not，should相当于or
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        for (Object obj : set) {
+            boolQuery.should(QueryBuilders.termQuery(fieldName, obj));
+        }
+
+        SearchResponse response = EsClient.getInstance().getEsClient()
+                .prepareSearch(indexName, indexName)
+                // 初始搜索请求在查询中指定scroll参数，告诉es需要保持搜索的上下文环境多长时间（滚动时间）
+                .setScroll(new TimeValue(60000))
+                .setQuery(queryBuilder.must(boolQuery))
+                // 最多查询到的记录数
+                .setSize(10000)
+                .execute().actionGet();
+
+        SearchHit[] hits = response.getHits().getHits();
+        List<String> result = new ArrayList<>();
+        if (hits.length > 0) {
+            for (SearchHit hit : hits) {
+                result.add(hit.getSourceAsString());
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<String> getInMultiFieldData(String indexName, Map<String, Set<Object>> map) {
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        SearchRequestBuilder searchRequestBuilder = EsClient.getInstance().getEsClient()
+                .prepareSearch(indexName, indexName)
+                .setScroll(new TimeValue(60000));
+
+        if (CollectionUtil.isNotEmpty(map)) {
+            for (Map.Entry<String, Set<Object>> entry : map.entrySet()) {
+                BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+                String fieldName = entry.getKey();
+                Set<Object> set = entry.getValue();
+                for (Object obj : set) {
+                    boolQuery.should(QueryBuilders.termQuery(fieldName, obj));
+                    searchRequestBuilder.setQuery(queryBuilder.must(boolQuery));
+                }
+            }
+        }
+
+        SearchResponse response = searchRequestBuilder.setSize(10000).execute().actionGet();
+        SearchHit[] hits = response.getHits().getHits();
+        List<String> result = new ArrayList<>();
+        if (hits.length > 0) {
+            for (SearchHit hit : hits) {
+                result.add(hit.getSourceAsString());
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<String> getNotInOneFieldData(String indexName, String fieldName, Set<Object> set) {
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+        for (Object obj : set) {
+            boolQuery.mustNot(QueryBuilders.termQuery(fieldName, obj));
+        }
+
+        SearchResponse response = EsClient.getInstance().getEsClient()
+                .prepareSearch(indexName, indexName)
+                .setScroll(new TimeValue(60000))
+                .setQuery(queryBuilder.must(boolQuery))
+                .setSize(10000)
+                .execute().actionGet();
+
+        SearchHit[] hits = response.getHits().getHits();
+        List<String> result = new ArrayList<>();
+        if (hits.length > 0) {
+            for (SearchHit hit : hits) {
+                result.add(hit.getSourceAsString());
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<String> getNotInMultiFieldData(String indexName, Map<String, Set<Object>> map) {
+        BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+
+        SearchRequestBuilder searchRequestBuilder = EsClient.getInstance().getEsClient()
+                .prepareSearch(indexName, indexName)
+                .setScroll(new TimeValue(60000));
+
+        if (CollectionUtil.isNotEmpty(map)) {
+            for (Map.Entry<String, Set<Object>> entry : map.entrySet()) {
+                BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
+                String fieldName = entry.getKey();
+                Set<Object> set = entry.getValue();
+                for (Object obj : set) {
+                    boolQuery.mustNot(QueryBuilders.termQuery(fieldName, obj));
+                    searchRequestBuilder.setQuery(queryBuilder.must(boolQuery));
+                }
+            }
+        }
+
+        SearchResponse response = searchRequestBuilder.setSize(10000).execute().actionGet();
+        SearchHit[] hits = response.getHits().getHits();
+        List<String> result = new ArrayList<>();
+        if (hits.length > 0) {
+            for (SearchHit hit : hits) {
+                result.add(hit.getSourceAsString());
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<String> getOrderData(String indexName, Map<String, Boolean> fieldMap) {
+        List<String> result = new ArrayList<>();
+
+        SearchRequestBuilder searchRequestBuilder = EsClient.getInstance().getEsClient()
+                .prepareSearch(indexName)
+                .setSize(10000); // 最多查询到的记录数默认为10，不指定的话则最多只查询出10条记录。
+
+        if (CollectionUtil.isNotEmpty(fieldMap)) {
+            for (Map.Entry<String, Boolean> entry : fieldMap.entrySet()) {
+                FieldSortBuilder sortBuilder = SortBuilders.fieldSort(entry.getKey());
+                if (entry.getValue()) {
+                    sortBuilder.order(SortOrder.ASC);
+                } else {
+                    sortBuilder.order(SortOrder.DESC);
+                }
+
+                searchRequestBuilder.addSort(sortBuilder);
+            }
+        }
+
+        SearchResponse response = searchRequestBuilder.execute().actionGet();
+        SearchHit[] hits = response.getHits().getHits();
+        if (hits.length > 0) {
+            for (SearchHit hit : hits) {
+                result.add(hit.getSourceAsString());
+            }
+        }
+
+        return result;
     }
 
     @Override
