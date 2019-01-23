@@ -11,13 +11,20 @@
 	* es查询：in, not in；多字段sort；query；filter；function_score等
 	* 详情见csdn专栏：[ElasticSearch-Java服务化开发](https://blog.csdn.net/mada26/column/info/29898 "ElasticSearch-Java服务化开发")
 	
+* #### com.mada.designpattern目录 ####
+	* 单例模式
+	* 工厂模式
+	* 代理模式
+	* 适配器模式
+	* 装饰者模式
+	* 
+	
 
 * #### com.mada.commons目录 ####
 	* annotation：注解
 	* configuration：配置
 	* dao：dao层
 	* demo：测试包
-	* designpattern：设计模式demo
 	* entity：实体类
 	* enumeration：枚举
 	* service：service层
