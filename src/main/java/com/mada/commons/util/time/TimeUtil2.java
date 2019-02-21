@@ -1,5 +1,6 @@
 package com.mada.commons.util.time;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,15 +9,32 @@ import java.util.Date;
  */
 public class TimeUtil2 {
 
+    private static final String PATTERN = "YYYY-MM-dd HH:mm:ss";
+
+    /**
+     * 获取当前时间加减几分钟后的时间
+     *
+     * @param minutes
+     * @return
+     */
+    public static String getAdditionTime(int minutes) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.MINUTE, minutes);// 24小时制   
+        return new SimpleDateFormat(PATTERN).format(calendar.getTime());
+    }
+
     /**
      * 判断一个Long型时间戳（秒10位，毫秒13位）与当前时间的差值是否在24小时内
+     * <p>
+     * 1. 暂时认为time是合法的秒或毫秒，不做校验。
      *
      * @param time
      * @return
      */
-    public static Boolean isLegal(Long time) {
+    public static boolean isLegal(Long time) {
 
-        Boolean flag = false;
+        boolean flag = false;
 
         Long currentTime = System.currentTimeMillis();
         //前一天时间（毫秒）
@@ -37,6 +55,8 @@ public class TimeUtil2 {
 
     /**
      * 将Long型时间戳（调用isLegal返回为true的合法时间戳）转换为Date
+     * <p>
+     * 1. 暂时认为time是合法的秒或毫秒，不做校验。
      *
      * @param time
      * @return
@@ -56,6 +76,9 @@ public class TimeUtil2 {
     }
 
     public static void main(String[] args) {
+
+        System.out.println(getAdditionTime(-10));
+        System.out.println(getAdditionTime(10));
 
         System.out.println(isLegal(1514805297L));
         System.out.println(isLegal(1514805300000L));

@@ -143,12 +143,8 @@ public class TimeUtil {
         long between = offsetDateTime1.toEpochSecond() - offsetDateTime2.toEpochSecond();//时间差，单位为秒
         long minutes = between / 60;
 
-        if (minutes >= difference)
-            return true;
-        else
-            return false;
+        return minutes >= difference;
     }
-
 
     public static void main(String[] args) {
 
@@ -165,7 +161,6 @@ public class TimeUtil {
         System.out.println("gmt0OffsetDateTime: " + gmt0OffsetDateTime);
         System.out.println("gmtOffsetDateTime: " + gmtOffsetDateTime);
         System.out.println("--------------------");
-
 
         //String 转 OffsetDateTime
         OffsetDateTime gmt0DatetimeODT = offsetDateTime(gmt0Datetime, 0);
