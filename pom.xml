@@ -217,13 +217,6 @@
             <version>2.9.0</version>
         </dependency>
 
-        <!-- elasticsearch -->
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>2.4.6</version>
-        </dependency>
-
         <!-- JAVA解析Excel工具：阿里easyexcel -->
         <dependency>
             <groupId>com.alibaba</groupId>

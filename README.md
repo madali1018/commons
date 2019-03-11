@@ -1,15 +1,6 @@
 # Description: 工具库[持续更新]
 
-## jdk版本：jdk1.8.0_102
-
 ## 项目结构
-
-* #### com.mada.es目录 ####
-	* es增删改，批量增删
-	* es获取索引分片，副本信息
-	* es获取索引所有的字段及类型
-	* es查询：in, not in；多字段sort；query；filter；function_score等
-	* 详情见csdn专栏：[ElasticSearch-Java服务化开发](https://blog.csdn.net/mada26/column/info/29898 "ElasticSearch-Java服务化开发")
 	
 * #### com.mada.designpattern目录 ####
 	* 单例模式
