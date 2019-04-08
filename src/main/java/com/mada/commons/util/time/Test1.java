@@ -3,10 +3,9 @@ package com.mada.commons.util.time;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.*;
 import java.time.temporal.ChronoField;
+import java.util.Date;
 
 /**
  * @Auther: madali
@@ -15,7 +14,7 @@ import java.time.temporal.ChronoField;
 public class Test1 {
 
     @Test
-    public void test1() {
+    public void t1() {
         System.out.println("当前GMT0时间:" + Instant.now());
         System.out.println("当前机器所在时区的时间:" + OffsetDateTime.now());
 
@@ -31,8 +30,40 @@ public class Test1 {
     }
 
     @Test
-    public void test2() {
+    public void t2() {
         String currentTimeStr = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
         System.out.println(currentTimeStr);
     }
+
+    // Date转LocalDate
+    @Test
+    public void t3() {
+        Date date = new Date();
+        System.out.println("date2LocalDate:" + date2LocalDate(date));
+    }
+
+    // LocalDate转Date
+    @Test
+    public void t4() {
+        LocalDate localDate = LocalDate.now();
+        System.out.println("localDate2Date:" + localDate2Date(localDate));
+    }
+
+    private static LocalDate date2LocalDate(Date date) {
+        if (null == date) {
+            return null;
+        }
+
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    private static Date localDate2Date(LocalDate localDate) {
+        if (null == localDate) {
+            return null;
+        }
+
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        return Date.from(zonedDateTime.toInstant());
+    }
+
 }
