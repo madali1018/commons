@@ -12,8 +12,13 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <!-- 文件拷贝时的编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <java.version>1.8</java.version>
+
+        <org.slf4j.version>1.7.25</org.slf4j.version>
     </properties>
 
     <dependencies>
@@ -24,13 +29,6 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
-
-        <!-- netty -->
-        <!--<dependency>-->
-            <!--<groupId>io.netty</groupId>-->
-            <!--<artifactId>netty-all</artifactId>-->
-            <!--<version>4.1.31.Final</version>-->
-        <!--</dependency>-->
 
         <!-- commons-lang3 -->
         <dependency>
@@ -141,17 +139,6 @@
             </exclusions>
         </dependency>
 
-        <!--logback-->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.3</version>
-        </dependency>
         <!--使用log转换器覆盖诸如Spring，kafka内部的源码中的日志组件-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -162,18 +149,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.7.25</version>
-        </dependency>
-
-        <!-- log4j2 -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.11.1</version>
         </dependency>
 
         <!--zookeeper-->
@@ -241,6 +216,16 @@
 
     <build>
         <plugins>
+            <!-- 跳过单元测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+
             <!--maven编译插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
