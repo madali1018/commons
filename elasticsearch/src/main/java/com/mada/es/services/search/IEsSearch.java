@@ -1,4 +1,4 @@
-package com.mada.es.search;
+package com.mada.es.services.search;
 
 import java.util.List;
 import java.util.Map;

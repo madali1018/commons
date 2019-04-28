@@ -1,4 +1,4 @@
-package com.mada.es.search;
+package com.mada.es.services.search;
 
 import com.mada.es.entity.EsGroupByRequestEntity;
 import com.mada.es.entity.EsGroupByResponseEntity;

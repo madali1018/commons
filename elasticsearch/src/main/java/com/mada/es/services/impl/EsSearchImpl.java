@@ -1,8 +1,8 @@
-package com.mada.es.impl;
+package com.mada.es.services.impl;
 
 import com.carrotsearch.hppc.cursors.ObjectObjectCursor;
 import com.mada.es.client.EsClient;
-import com.mada.es.search.IEsSearch;
+import com.mada.es.services.search.IEsSearch;
 import com.mada.es.util.CollectionUtil;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsRequest;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;

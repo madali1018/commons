@@ -2,8 +2,8 @@ package com.mada.es;
 
 import com.mada.es.entity.EsGroupByRequestEntity;
 import com.mada.es.entity.EsGroupByResponseEntity;
-import com.mada.es.impl.EsGroupBySearchImpl;
-import com.mada.es.search.IEsGroupBySearch;
+import com.mada.es.services.impl.EsGroupBySearchImpl;
+import com.mada.es.services.search.IEsGroupBySearch;
 import org.junit.Test;
 
 /**

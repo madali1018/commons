@@ -1,9 +1,9 @@
-package com.mada.es.impl;
+package com.mada.es.services.impl;
 
 import com.mada.es.client.EsClient;
 import com.mada.es.entity.EsGroupByRequestEntity;
 import com.mada.es.entity.EsGroupByResponseEntity;
-import com.mada.es.search.IEsGroupBySearch;
+import com.mada.es.services.search.IEsGroupBySearch;
 import com.mada.es.util.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

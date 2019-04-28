@@ -1,6 +1,6 @@
 package com.mada.es;
 
-import com.mada.es.impl.EsSearchImpl;
+import com.mada.es.services.impl.EsSearchImpl;
 import org.junit.Test;
 
 import java.util.*;

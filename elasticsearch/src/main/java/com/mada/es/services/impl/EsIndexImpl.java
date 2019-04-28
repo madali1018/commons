@@ -1,7 +1,7 @@
-package com.mada.es.impl;
+package com.mada.es.services.impl;
 
 import com.mada.es.client.EsClient;
-import com.mada.es.index.IEsIndex;
+import com.mada.es.services.index.IEsIndex;
 import com.mada.es.util.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

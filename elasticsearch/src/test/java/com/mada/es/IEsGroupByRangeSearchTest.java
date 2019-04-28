@@ -2,8 +2,8 @@ package com.mada.es;
 
 import com.mada.es.entity.EsGroupByRangeRequestEntity;
 import com.mada.es.entity.EsGroupByRangeResponseEntity;
-import com.mada.es.impl.EsGroupByRangeSearchImpl;
-import com.mada.es.search.IEsGroupByRangeSearch;
+import com.mada.es.services.impl.EsGroupByRangeSearchImpl;
+import com.mada.es.services.search.IEsGroupByRangeSearch;
 import org.junit.Test;
 
 import java.util.Arrays;
