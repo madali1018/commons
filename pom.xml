@@ -12,7 +12,6 @@
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>bak</module>
         <module>utils</module>
         <module>zookeeper</module>
         <module>designpattern</module>
