@@ -17,6 +17,7 @@
         <module>zookeeper</module>
         <module>designpattern</module>
         <module>elasticsearch</module>
+        <module>mq.redis</module>
     </modules>
 
     <properties>
