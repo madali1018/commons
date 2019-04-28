@@ -32,7 +32,7 @@ public class Demo {
 
     @Test
     public void test3() {
-        String url = "http://localhost:8080/index/person/p3";
+        String url = "http://localhost:8080/index/person/p4";
         String param = "username=name3&pwd=1";
         String result = HttpClientUtil2.sendPost(url, param);
         System.out.println(result);
@@ -47,6 +47,19 @@ public class Demo {
 
         String result = HttpClientUtil2.sendPost(url, jsonObject.toJSONString());
         System.out.println(result);
+    }
+
+    @Test
+    public void t2_2() {
+        String id = "4117";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+
+        String url = "http://service.a.anjuke.test/service-city/region-service?method=getRegionById";
+//        String url = "http://service.a.ajkdns.com/service-city/region-service?method=getRegionById";
+
+        String httpResult = HttpClientUtil2.doPostFromUrlWithJson(url, jsonObject);
+        System.out.println(httpResult);
     }
 
 }

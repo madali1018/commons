@@ -20,9 +20,9 @@ public class DbUtil {
 
     private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
     // 可改为走配置文件获取
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/mydb1";
-    private static final String USERNAME = "admin";
-    private static final String PASSWORD = "admin";
+    private static final String URL = "jdbc:mysql://test1255.db.58dns.org:23667/db58_scf_engineer_mdl_test";
+    private static final String USERNAME = "engine_admin";
+    private static final String PASSWORD = "37ff340107f77cdf";
 
     private static BasicDataSource basicDataSource = new BasicDataSource();
 
