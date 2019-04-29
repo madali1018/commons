@@ -1,7 +1,7 @@
-package com.mada.es;
+package com.mada.elasticsearch;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mada.es.services.impl.EsIndexImpl;
+import com.mada.elasticsearch.impl.EsIndexImpl;
 import org.junit.Test;
 
 import java.util.Arrays;

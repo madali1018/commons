@@ -1,4 +1,4 @@
-package com.mada.es;
+package com.mada.elasticsearch;
 
 /**
  * Created by madali on 2019/1/16 16:28

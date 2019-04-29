@@ -1,10 +1,10 @@
-package com.mada.es.services.impl;
+package com.mada.elasticsearch.impl;
 
-import com.mada.es.client.EsClient;
-import com.mada.es.entity.EsGroupByRangeRequestEntity;
-import com.mada.es.entity.EsGroupByRangeResponseEntity;
-import com.mada.es.services.search.IEsGroupByRangeSearch;
-import com.mada.es.util.CollectionUtil;
+import com.mada.elasticsearch.client.EsClient;
+import com.mada.elasticsearch.entity.EsGroupByRequestEntity;
+import com.mada.elasticsearch.entity.EsGroupByResponseEntity;
+import com.mada.elasticsearch.contarct.search.IEsGroupBySearch;
+import com.mada.elasticsearch.util.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -12,55 +12,51 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.bucket.range.InternalRange;
-import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
+import org.elasticsearch.search.aggregations.metrics.sum.SumBuilder;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
- * Created by madali on 2019/3/12 14:42
+ * Created by madali on 2019/3/12 14:33
  */
 @Slf4j
-public class EsGroupByRangeSearchImpl implements IEsGroupByRangeSearch {
+public class EsGroupBySearchImpl implements IEsGroupBySearch {
 
     @Override
-    public EsGroupByRangeResponseEntity groupByRangeFiledValue(EsGroupByRangeRequestEntity request) {
-        EsGroupByRangeResponseEntity result = new EsGroupByRangeResponseEntity();
+    public EsGroupByResponseEntity groupByFiledValue(EsGroupByRequestEntity request) {
+        EsGroupByResponseEntity result = new EsGroupByResponseEntity();
 
         String indexName = request.getIndexName();
         String fieldName = request.getFieldName();
-        List<String> groupList = request.getGroupList();
         /*
-         * 以下情况不查询es，直接返回一个空的EsGroupByRangeResponseEntity
+         * 以下情况不查询es，直接返回一个空的EsGroupByResponseEntity
          *  1.未传索引名
          *  2.未传fieldName
-         *  3.未传groupList
          */
-        if (StringUtils.isEmpty(indexName) || StringUtils.isEmpty(fieldName) || CollectionUtil.isEmpty(groupList)) {
+        if (StringUtils.isEmpty(indexName) || StringUtils.isEmpty(fieldName)) {
             return result;
         }
 
-        int groupByNum = request.getGroupByNum() == 0 ? 100 : request.getGroupByNum();
-        groupByNum = Math.min(groupByNum, 3500);
+        int requiredSize = request.getRequiredSize() == 0 ? 10 : request.getRequiredSize();
+        requiredSize = Math.min(requiredSize, 3500);
 
         SearchRequestBuilder searchRequestBuilder = EsClient.getInstance().getEsClient()
                 .prepareSearch(indexName)
                 .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-                .setFrom(0)
-                .setSize(groupByNum)
                 .addFields(fieldName);
 
         BoolQueryBuilder queryBuilder = buildQuery(request.getQuery());
         queryBuilder = buildFilter(request.getFilter(), queryBuilder);
         searchRequestBuilder.setQuery(queryBuilder);
-        searchRequestBuilder.addAggregation(buildGroupBy(fieldName, request.getGroupList()));
+        searchRequestBuilder.addAggregation(buildGroupBy(fieldName, requiredSize));
 
         SearchResponse searchResponse = searchRequestBuilder.setExplain(false).execute().actionGet();
-        result.setMap(buildResponse(searchResponse));
+        result.setMap(buildResponse(fieldName, searchResponse));
         if (request.isNeedRealEsJson()) {
             result.setRealQueryJson(searchRequestBuilder.toString());
         }
@@ -168,32 +164,32 @@ public class EsGroupByRangeSearchImpl implements IEsGroupByRangeSearch {
         return queryBuilder;
     }
 
-    private AggregationBuilder buildGroupBy(String fieldName, List<String> groupList) {
-        // fieldAgg是自定义的聚合名称，可以用其他任意字符串代替
-        RangeBuilder rangeBuilder = AggregationBuilders.range("fieldAgg").field(fieldName);
+    private TermsBuilder buildGroupBy(String fieldName, int requiredSize) {
+        /**
+         * 1.fieldAgg是自定义的聚合名称，可以用其他任意字符串代替
+         * 2.size指的是返回字段group by的size，如age字段有1000个值，size设为100，则只返回100个age值
+         */
+        TermsBuilder termsBuilder = AggregationBuilders.terms("fieldAgg").field(fieldName).size(requiredSize)
+                .order(Terms.Order.aggregation("sum_" + fieldName, false));
+        SumBuilder fieldSum = AggregationBuilders.sum("sum_" + fieldName).field(fieldName);
+        termsBuilder.subAggregation(fieldSum);//把sum聚合器放入到Term聚合器中，相当于先group by再sum
 
-        for (String rangeStr : groupList) {
-            String[] rangeArr = rangeStr.split("-");
-            if (rangeArr.length == 2) {
-                rangeBuilder.addRange(Double.valueOf(rangeArr[0]), Double.valueOf(rangeArr[1]));
-            }
-        }
-
-        return rangeBuilder;
+        return termsBuilder;
     }
 
-    private Map<String, Long> buildResponse(SearchResponse searchResponse) {
-        Map<String, Long> map = new HashMap<>();
+    private Map<String, Long> buildResponse(String fieldName, SearchResponse searchResponse) {
+        Map<String, Long> map = new TreeMap<>();
 
-        InternalRange internalRange = searchResponse.getAggregations().get("fieldAgg");
-        List<InternalRange.Bucket> list = internalRange.getBuckets();
-        if (CollectionUtil.isEmpty(list)) {
+        Terms terms = searchResponse.getAggregations().get("fieldAgg");
+        List<Terms.Bucket> bucketList = terms.getBuckets();
+        if (CollectionUtil.isEmpty(bucketList)) {
             return map;
         }
 
-        for (InternalRange.Bucket bucket : list) {
-//            System.out.println("group by分组条件:" + bucket.getKey() + ",该分组下文档个数:" + bucket.getDocCount());
-            map.put(bucket.getKey(), bucket.getDocCount());
+        for (Terms.Bucket bucket : terms.getBuckets()) {
+//            InternalSum internalSum = bucket.getAggregations().get("sum_" + fieldName);//注意从bucket而不是searchResponse
+//            System.out.println("group by字段:age 值:" + bucket.getKeyAsString() + " 个数:" + bucket.getDocCount() + " sum:" + internalSum.getValue());
+            map.put(bucket.getKeyAsString(), bucket.getDocCount());
         }
 
         return map;

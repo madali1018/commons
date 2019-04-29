@@ -1,4 +1,4 @@
-package com.mada.es.entity;
+package com.mada.elasticsearch.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

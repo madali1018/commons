@@ -1,4 +1,4 @@
-package com.mada.es.services.search;
+package com.mada.elasticsearch.contarct.search;
 
 import java.util.List;
 import java.util.Map;

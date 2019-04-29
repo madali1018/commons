@@ -1,6 +1,6 @@
-package com.mada.es.client;
+package com.mada.elasticsearch.client;
 
-import com.mada.es.Constants;
+import com.mada.elasticsearch.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;

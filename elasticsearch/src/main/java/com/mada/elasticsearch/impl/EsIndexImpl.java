@@ -1,8 +1,8 @@
-package com.mada.es.services.impl;
+package com.mada.elasticsearch.impl;
 
-import com.mada.es.client.EsClient;
-import com.mada.es.services.index.IEsIndex;
-import com.mada.es.util.CollectionUtil;
+import com.mada.elasticsearch.client.EsClient;
+import com.mada.elasticsearch.contarct.index.IEsIndex;
+import com.mada.elasticsearch.util.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.bulk.BulkItemResponse;

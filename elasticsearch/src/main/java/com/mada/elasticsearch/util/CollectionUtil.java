@@ -1,4 +1,4 @@
-package com.mada.es.util;
+package com.mada.elasticsearch.util;
 
 import java.lang.reflect.Field;
 import java.util.*;

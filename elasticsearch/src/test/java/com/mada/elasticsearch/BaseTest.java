@@ -1,6 +1,6 @@
-package com.mada.es;
+package com.mada.elasticsearch;
 
-import com.mada.es.client.EsClient;
+import com.mada.elasticsearch.client.EsClient;
 import org.junit.Before;
 
 /**

@@ -1,6 +1,6 @@
-package com.mada.es;
+package com.mada.elasticsearch;
 
-import com.mada.es.services.impl.EsSearchImpl;
+import com.mada.elasticsearch.impl.EsSearchImpl;
 import org.junit.Test;
 
 import java.util.*;

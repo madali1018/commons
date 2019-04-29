@@ -1,7 +1,7 @@
-package com.mada.es.services.search;
+package com.mada.elasticsearch.contarct.search;
 
-import com.mada.es.entity.EsGroupByRangeRequestEntity;
-import com.mada.es.entity.EsGroupByRangeResponseEntity;
+import com.mada.elasticsearch.entity.EsGroupByRangeRequestEntity;
+import com.mada.elasticsearch.entity.EsGroupByRangeResponseEntity;
 
 /**
  * Created by madali on 2019/3/12 14:38

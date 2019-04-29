@@ -1,9 +1,9 @@
-package com.mada.es;
+package com.mada.elasticsearch;
 
-import com.mada.es.entity.EsGroupByRequestEntity;
-import com.mada.es.entity.EsGroupByResponseEntity;
-import com.mada.es.services.impl.EsGroupBySearchImpl;
-import com.mada.es.services.search.IEsGroupBySearch;
+import com.mada.elasticsearch.entity.EsGroupByRequestEntity;
+import com.mada.elasticsearch.entity.EsGroupByResponseEntity;
+import com.mada.elasticsearch.impl.EsGroupBySearchImpl;
+import com.mada.elasticsearch.contarct.search.IEsGroupBySearch;
 import org.junit.Test;
 
 /**
