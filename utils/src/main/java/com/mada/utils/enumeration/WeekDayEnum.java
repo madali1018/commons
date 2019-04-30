@@ -1,4 +1,4 @@
-package com.mada.commons.enumeration;
+package com.mada.utils.enumeration;
 
 /**
  * Created by madali on 2017/4/26.
@@ -32,13 +32,10 @@ public enum WeekDayEnum {
 
     public String description() {
         String description;
-        switch (this) {
-            case Sunday:
-                description = "sunday";
-                break;
-            default:
-                description = this.name();
-                break;
+        if (this == WeekDayEnum.Sunday) {
+            description = "sunday";
+        } else {
+            description = this.name();
         }
         return description;
     }

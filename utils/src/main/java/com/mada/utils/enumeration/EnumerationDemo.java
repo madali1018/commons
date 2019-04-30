@@ -1,10 +1,8 @@
 package com.mada.utils.enumeration;
 
-import com.mada.commons.enumeration.WeekDayEnum;
 import org.apache.commons.lang3.EnumUtils;
 import org.junit.Test;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,21 +13,23 @@ import java.util.Set;
 public class EnumerationDemo {
 
     @Test
-    public void test1() {
+    public void t1() {
         //nameOf方法获取枚举类的对象
         WeekDayEnum weekDayEnum = EnumerationUtil.nameOf(WeekDayEnum.class, "sunday");
         System.out.println(weekDayEnum);
 
         //valueOf方法获取枚举类的对象
-        WeekDayEnum weekDayEnum2 = EnumerationUtil.valueOf(WeekDayEnum.class, 3);
+        WeekDayEnum weekDayEnum2 = EnumerationUtil.valueOf(WeekDayEnum.class, 4);
         System.out.println(weekDayEnum2);
-        //获取枚举类的对象属性，属性值，对象的描述
-        System.out.println(weekDayEnum2.name() + "," + weekDayEnum2.value() + "," + weekDayEnum2.description());
+
+        //valueOf方法获取枚举类的对象
+        ThreadLevelEnum threadLevelEnum = EnumerationUtil.valueOf(ThreadLevelEnum.class, "1");
+        System.out.println(threadLevelEnum);
     }
 
     // commons-lang3包下的EnumUtils
     @Test
-    public void test2() {
+    public void t2() {
         WeekDayEnum weekDayEnum = EnumUtils.getEnum(WeekDayEnum.class, "Sunday");
         System.out.println(weekDayEnum);
         WeekDayEnum weekDayEnum2 = EnumUtils.getEnumIgnoreCase(WeekDayEnum.class, "sunday");
@@ -40,16 +40,11 @@ public class EnumerationDemo {
         System.out.println("-------------");
 
         List<WeekDayEnum> list = EnumUtils.getEnumList(WeekDayEnum.class);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
+        list.forEach(System.out::println);
         System.out.println("-------------");
 
         Map<String, WeekDayEnum> map = EnumUtils.getEnumMap(WeekDayEnum.class);
         Set<Map.Entry<String, WeekDayEnum>> set = map.entrySet();
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+        set.forEach(System.out::println);
     }
 }
