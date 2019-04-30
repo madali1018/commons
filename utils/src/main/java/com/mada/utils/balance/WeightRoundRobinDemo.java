@@ -6,7 +6,6 @@ package com.mada.utils.balance;
 public class WeightRoundRobinDemo {
 
     public static void main(String[] args) {
-
         long begin = System.currentTimeMillis();
 
         WeightRoundRobin robin = new WeightRoundRobin();
@@ -15,12 +14,12 @@ public class WeightRoundRobinDemo {
         }
         System.out.println("添加服务节点结束...");
 
-//        robin.setLeader(2);
-        robin.setLeader("server102");
+//        robin.setLeaderByIndex(2);
+        robin.setLeaderByServerName("server102");
         System.out.println("设置leader服务节点成功...");
 
         String serverName;
-        for (int i = 0; i < 41; i++) {
+        for (int i = 0; i < 50; i++) {
             serverName = robin.next();
             System.out.println("获取到的serverName:" + serverName);
         }

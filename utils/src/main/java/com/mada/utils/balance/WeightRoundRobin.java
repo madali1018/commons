@@ -1,5 +1,9 @@
 package com.mada.utils.balance;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,7 +53,6 @@ public class WeightRoundRobin {
      * @param serverName
      */
     public synchronized void addNode(String serverName) {
-
         if (StringUtils.isEmpty(serverName)) {
             log.warn("空的服务节点不能添加.");
             return;
@@ -75,30 +78,27 @@ public class WeightRoundRobin {
      * @param serverName
      */
     public synchronized void removeNode(String serverName) {
-
         if (StringUtils.isEmpty(serverName)) {
             log.warn("空的服务节点不能删除.");
             return;
         }
-
-        Iterator<NodeEntity> iterator = serverList.iterator();
 
         // 集合中已经遍历的元素的个数
         int i = 0;
         // 要删除的元素在服务集合中是否存在
         boolean isExist = false;
 
+        Iterator<NodeEntity> iterator = serverList.iterator();
         while (iterator.hasNext()) {
             NodeEntity entity = iterator.next();
             if (serverName.equals(entity.getName())) {
+                // 1.如果server是leader服务，则删除server之后集合中所有的服务都是非leader服务，此时需将index置为 -1，
+                // 2.如果server是非leader服务，且server的下标小于leader服务的下标，则index向前移动一位即index = index-1
+                // 3.如果server是非leader服务，且server的下标大于leader服务的下标，则index不变
                 if (entity.isLeader()) {
-                    // 如果server是leader服务，则删除server之后集合中所有的服务都是非leader服务，此时需将index置为 -1，
                     index = -1;
                 } else if (i < index) {
-                    // 如果server是非leader服务，且server的下标小于leader服务的下标，则index向前移动一位即index = index-1
                     index--;
-                } else {
-                    // 如果server是非leader服务，且server的下标大于leader服务的下标，则index不变
                 }
 
                 iterator.remove();
@@ -122,7 +122,7 @@ public class WeightRoundRobin {
      *
      * @param newIndex
      */
-    public synchronized void setLeader(int newIndex) {
+    public synchronized void setLeaderByIndex(int newIndex) {
         if (newIndex <= size - 1) {
             // 将newIndex下标对应的server设为leader服务，并将之前的leader服务设为非leader服务
             index = newIndex;
@@ -140,8 +140,7 @@ public class WeightRoundRobin {
      *
      * @param serverName
      */
-    public synchronized void setLeader(String serverName) {
-
+    public synchronized void setLeaderByServerName(String serverName) {
         if (StringUtils.isEmpty(serverName)) {
             log.info("空的服务节点不能被置为leader.");
             return;
@@ -167,7 +166,6 @@ public class WeightRoundRobin {
     }
 
     private void resetList() {
-
         // add remove服务后，服务集合的大小发生了变化，size值也需要同步更新
         size = serverList.size();
 
@@ -186,8 +184,9 @@ public class WeightRoundRobin {
         // 重置serverList
         for (int i = 0; i < size; i++) {
             NodeEntity entity = serverList.get(i);
-            if (i != index)
+            if (i != index) {
                 entity.setLeader(false);
+            }
         }
 
         // 清空原先的统计数据，重新记录数据，分配服务
@@ -202,7 +201,6 @@ public class WeightRoundRobin {
      * @return
      */
     public synchronized String next() {
-
         NodeEntity entity = new NodeEntity();
         boolean isLeader;
         int nSize;
@@ -259,7 +257,6 @@ public class WeightRoundRobin {
                 }
             }
         } else if (index > 0) {
-
             //有leader服务，但leader服务不是第一个服务时
 
             // 第一次请求时，已经处理的总的请求数为0，返回第一个服务，
@@ -276,7 +273,6 @@ public class WeightRoundRobin {
                     log.info("allNum:{},index:{},leaderNum:{},isLeader:{}.", allNum, index, leaderNum, isLeader);
                     allNum++;
                 } else {
-
                     nSize = nServerList.size();
 
                     // 非leader服务已经循环分配了一圈，重置下标nonIndex为0
@@ -303,35 +299,15 @@ public class WeightRoundRobin {
         return entity.getName();
     }
 
-    private class NodeEntity {
-
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    @Builder
+    private static class NodeEntity {
         // server服务名称
         private String name;
         // 该server服务是否是leader服务
         private boolean isLeader;
-
-        public NodeEntity() {
-        }
-
-        public NodeEntity(String name, boolean isLeader) {
-            this.name = name;
-            this.isLeader = isLeader;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public boolean isLeader() {
-            return isLeader;
-        }
-
-        public void setLeader(boolean isLeader) {
-            this.isLeader = isLeader;
-        }
     }
+
 }
