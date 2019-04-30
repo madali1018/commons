@@ -2,7 +2,7 @@ package com.mada.zookeeper.configuration;
 
 import com.mada.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.mada.zookeeper.utils.zk.ZkUtil;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * Created by madali on 2017/4/26.
  */
-@Slf4j
+@Log4j2
 public class ConfigurationUtil {
 
     public static final Integer SERVER_PORT;

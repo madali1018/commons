@@ -1,6 +1,6 @@
 package com.mada.zookeeper.utils.balance;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * 简单的负载均衡算法
  * Created by madali on 2017/4/26.
  */
-@Slf4j
+@Log4j2
 public class RoundRobin {
 
     //上一次调度下标

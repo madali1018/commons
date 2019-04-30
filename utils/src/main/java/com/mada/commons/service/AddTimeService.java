@@ -2,7 +2,7 @@ package com.mada.commons.service;
 
 import com.mada.commons.dao.AddTimeDao;
 import com.mada.commons.entity.hibernate.AddTime;
-import com.mada.commons.utils.time.TimeUtil;
+import com.mada.utils.time.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

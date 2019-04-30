@@ -2,8 +2,8 @@ package com.mada.elasticsearch.impl;
 
 import com.mada.elasticsearch.client.EsClient;
 import com.mada.elasticsearch.contarct.index.IEsIndex;
-import com.mada.elasticsearch.util.CollectionUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.mada.elasticsearch.utils.CollectionUtil;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by madali on 2019/1/16 16:36
  */
-@Slf4j
+@Log4j2
 public class EsIndexImpl implements IEsIndex {
 
     @Override

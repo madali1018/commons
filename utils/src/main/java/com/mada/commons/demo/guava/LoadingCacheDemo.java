@@ -5,7 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import lombok.Builder;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by madali on 2019/3/19 14:12
  */
-@Slf4j
+@Log4j2
 public class LoadingCacheDemo {
 
     //缓存接口这里是LoadingCache，LoadingCache在缓存项不存在时可以自动加载缓存

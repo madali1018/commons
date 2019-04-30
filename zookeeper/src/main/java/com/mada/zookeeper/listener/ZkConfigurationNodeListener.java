@@ -6,7 +6,7 @@ import com.mada.zookeeper.entity.ZkConfigurationNodeEntity;
 import com.mada.zookeeper.enumeration.InfrastructureEnum;
 import com.mada.zookeeper.enumeration.ServiceEnum;
 import com.mada.zookeeper.utils.zk.ZkUtil;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.zookeeper.KeeperException;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by madali on 2017/4/27.
  */
-@Slf4j
+@Log4j2
 public final class ZkConfigurationNodeListener extends ZkNodeListener {
 
     private final Map<String, ZkConfigurationNodeEntity> configurationMap = new ConcurrentHashMap<>();

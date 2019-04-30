@@ -3,7 +3,7 @@ package com.mada.mq.redis;
 import com.mada.mq.services.ICallback;
 import com.mada.mq.services.IConsumerHandler;
 import com.mada.mq.utils.RedisUtil;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import redis.clients.jedis.Jedis;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by madali on 2017/4/27.
  */
-@Slf4j
+@Log4j2
 public class RedisConsumerHandler implements IConsumerHandler {
 
     private static final int BLOCK_TIMEOUT = 30;    //30秒

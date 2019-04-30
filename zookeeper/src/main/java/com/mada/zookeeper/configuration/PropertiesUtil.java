@@ -1,6 +1,6 @@
 package com.mada.zookeeper.configuration;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.util.Properties;
  * @Auther: madali
  * @Date: 2018/8/28 20:25
  */
-@Slf4j
+@Log4j2
 public class PropertiesUtil {
 
     private static final String CONFIG_PATH = "zk.properties";

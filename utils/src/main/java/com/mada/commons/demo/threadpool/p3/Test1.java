@@ -1,6 +1,6 @@
 package com.mada.commons.demo.threadpool.p3;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.LongAdder;
 /**
  * Created by madali on 2019/4/10 17:22
  */
-@Slf4j
+@Log4j2
 public class Test1 {
 
     private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20, 30, TimeUnit.MILLISECONDS,

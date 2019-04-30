@@ -1,7 +1,7 @@
 package com.mada.commons.demo.guava;
 
 import com.google.common.util.concurrent.RateLimiter;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 /**
  * Created by madali on 2019/4/1 11:57
  */
-@Slf4j
+@Log4j2
 public class RateLimiterDemo {
 
     // 限制频率

@@ -5,11 +5,11 @@ import com.mada.zookeeper.callback.IZkConnectionListenerCallback;
 import com.mada.zookeeper.entity.ZkConnectionNodeEntity;
 import com.mada.zookeeper.enumeration.ServerStateEnum;
 import com.mada.zookeeper.enumeration.ServiceEnum;
-import com.mada.zookeeper.utils.enumeration.EnumerationUtil;
-import com.mada.zookeeper.utils.zk.ZkUtil;
 import com.mada.zookeeper.utils.balance.RoundRobin;
+import com.mada.zookeeper.utils.enumeration.EnumerationUtil;
 import com.mada.zookeeper.utils.ketama.ConsistentHashing;
-import lombok.extern.slf4j.Slf4j;
+import com.mada.zookeeper.utils.zk.ZkUtil;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by madali on 2017/4/27.
  */
-@Slf4j
+@Log4j2
 public final class ZkConnectionNodeListener extends ZkNodeListener {
 
     private final Map<String, ZkConnectionNodeEntity> connectionMap = new ConcurrentHashMap<>();

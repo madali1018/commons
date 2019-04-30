@@ -2,13 +2,13 @@ package com.mada.mq.redis;
 
 import com.mada.mq.services.IPublisherHandler;
 import com.mada.mq.utils.RedisUtil;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import redis.clients.jedis.Jedis;
 
 /**
  * Created by madali on 2017/4/27.
  */
-@Slf4j
+@Log4j2
 public class RedisPublisherHandler implements IPublisherHandler {
 
     private final Jedis JEDIS;

@@ -1,29 +1,16 @@
 package com.mada.commons.configuration;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 
 /**
  * Created by madali on 2017/4/26.
  */
 public class ConfigurationUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigurationUtil.class);
 
     public static final Integer SERVER_PORT;
     public static final String ZOOKEEPER_HOST;
-
-    private static String SERVER_ID = null;
-    private static String SERVER_IP = null;
 
     static {
         ZOOKEEPER_HOST = PropertiesUtil.getValue("ZOOKEEPER_HOST");

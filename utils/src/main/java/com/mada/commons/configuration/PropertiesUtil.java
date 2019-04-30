@@ -1,7 +1,6 @@
 package com.mada.commons.configuration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +10,8 @@ import java.util.Properties;
  * @Auther: madali
  * @Date: 2018/8/28 20:25
  */
+@Log4j2
 public class PropertiesUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesUtil.class);
 
     /**
      * 路径说明：
@@ -36,7 +35,7 @@ public class PropertiesUtil {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error("读取配置文件失败, ErrorMsg:{}", e.getMessage());
+            log.error("读取配置文件失败, ErrorMsg:{}", e.getMessage());
         }
     }
 
@@ -47,7 +46,7 @@ public class PropertiesUtil {
 //            properties.load(inputStream);
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//            LOGGER.error("读取配置文件失败, ErrorMsg:{}", e.getMessage());
+//            log.error("读取配置文件失败, ErrorMsg:{}", e.getMessage());
 //        }
 //    }
 

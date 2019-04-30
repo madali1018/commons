@@ -1,11 +1,11 @@
 package com.mada.elasticsearch.impl;
 
 import com.mada.elasticsearch.client.EsClient;
+import com.mada.elasticsearch.contarct.search.IEsGroupBySearch;
 import com.mada.elasticsearch.entity.EsGroupByRequestEntity;
 import com.mada.elasticsearch.entity.EsGroupByResponseEntity;
-import com.mada.elasticsearch.contarct.search.IEsGroupBySearch;
-import com.mada.elasticsearch.util.CollectionUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.mada.elasticsearch.utils.CollectionUtil;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -24,7 +24,7 @@ import java.util.TreeMap;
 /**
  * Created by madali on 2019/3/12 14:33
  */
-@Slf4j
+@Log4j2
 public class EsGroupBySearchImpl implements IEsGroupBySearch {
 
     @Override

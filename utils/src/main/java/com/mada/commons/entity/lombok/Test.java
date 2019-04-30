@@ -1,19 +1,19 @@
 package com.mada.commons.entity.lombok;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * @Auther: madali
  * @Date: 2018/11/5 11:21
  */
-@Slf4j
+@Log4j2
 public class Test {
 
     @org.junit.Test
     public void t1() {
         LombokEntity lombokEntity = new LombokEntity("name", false, true, 0);
         System.out.println(lombokEntity);
-        log.info("slf4j");
+        log.info("log4j2");
 
         LombokEntity lombokEntity2 = LombokEntity.builder().name("nnnnnn").build();
         System.out.println(lombokEntity2);

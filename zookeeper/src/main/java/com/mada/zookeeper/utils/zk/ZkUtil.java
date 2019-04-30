@@ -1,7 +1,6 @@
 package com.mada.zookeeper.utils.zk;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mada.zookeeper.listener.ZkInitializationData;
 import com.mada.zookeeper.callback.IZkConnectionListenerCallback;
 import com.mada.zookeeper.callback.IZkInfrastructureListenerCallback;
 import com.mada.zookeeper.callback.IZkServiceConfigListenerCallback;
@@ -14,7 +13,8 @@ import com.mada.zookeeper.enumeration.ServiceEnum;
 import com.mada.zookeeper.listener.IZkNodeListener;
 import com.mada.zookeeper.listener.ZkConfigurationNodeListener;
 import com.mada.zookeeper.listener.ZkConnectionNodeListener;
-import lombok.extern.slf4j.Slf4j;
+import com.mada.zookeeper.listener.ZkInitializationData;
+import lombok.extern.log4j.Log4j2;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.listen.Listenable;
@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by madali on 2017/4/27.
  */
-@Slf4j
+@Log4j2
 public class ZkUtil {
 
     private static final String NAMESPACE = "dm2";

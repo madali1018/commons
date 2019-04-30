@@ -6,13 +6,13 @@ import com.mada.zookeeper.enumeration.ServerStateEnum;
 import com.mada.zookeeper.enumeration.ServiceEnum;
 import com.mada.zookeeper.exception.EnvironmentVariableNotExistException;
 import com.mada.zookeeper.utils.zk.ZkUtil;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by madali on 2019/4/28 14:48
  */
-@Slf4j
+@Log4j2
 public abstract class Application {
 
     private final ServiceEnum currentService;

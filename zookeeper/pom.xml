@@ -15,17 +15,17 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--使用log转换器覆盖诸如Spring，kafka内部的源码中的日志组件-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${org.slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${org.slf4j.version}</version>
-        </dependency>
+        <!--&lt;!&ndash;使用log转换器覆盖诸如Spring，kafka内部的源码中的日志组件&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>log4j-over-slf4j</artifactId>-->
+            <!--<version>${org.slf4j.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>jcl-over-slf4j</artifactId>-->
+            <!--<version>${org.slf4j.version}</version>-->
+        <!--</dependency>-->
 
         <!--zookeeper-->
         <dependency>

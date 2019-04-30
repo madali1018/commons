@@ -1,7 +1,7 @@
 package com.mada.elasticsearch.client;
 
 import com.mada.elasticsearch.Constants;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * Created by madali on 2019/1/16 16:28
  */
-@Slf4j
+@Log4j2
 public class EsClient {
 
     private TransportClient transportClient;

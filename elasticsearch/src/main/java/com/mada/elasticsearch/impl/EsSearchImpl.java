@@ -3,7 +3,7 @@ package com.mada.elasticsearch.impl;
 import com.carrotsearch.hppc.cursors.ObjectObjectCursor;
 import com.mada.elasticsearch.client.EsClient;
 import com.mada.elasticsearch.contarct.search.IEsSearch;
-import com.mada.elasticsearch.util.CollectionUtil;
+import com.mada.elasticsearch.utils.CollectionUtil;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsRequest;
 import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;
 import org.elasticsearch.action.get.GetResponse;
