@@ -1,7 +1,7 @@
 package com.mada.commons.dao;
 
 import com.mada.commons.entity.hibernate.AddTime;
-import com.mada.commons.util.hibernate.HibernateUtil;
+import com.mada.commons.utils.hibernate.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.slf4j.Logger;

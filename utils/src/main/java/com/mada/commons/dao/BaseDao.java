@@ -1,6 +1,6 @@
 package com.mada.commons.dao;
 
-import com.mada.commons.util.hibernate.HibernateUtil;
+import com.mada.commons.utils.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
