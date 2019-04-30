@@ -1,13 +1,17 @@
 package com.mada.commons.utils.collection;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * 分页工具类
+ * List的分页工具类
+ * <p>
  * Created by madali on 2017/12/5.
  */
+@Data
 public class ListPageUtil<T> {
 
     //原集合
@@ -31,8 +35,9 @@ public class ListPageUtil<T> {
     //总数据条数
     private int totalCount;
 
+    // 分页构造器
     public ListPageUtil(List<T> data, int nowPage, int pageSize) {
-        if (data == null || data.isEmpty()) {
+        if (CollectionUtil.isEmpty(data)) {
             throw new IllegalArgumentException("data must be not empty!");
         }
 
@@ -45,52 +50,17 @@ public class ListPageUtil<T> {
         this.nextPage = nowPage >= totalPage ? totalPage : nowPage + 1;
     }
 
-    /**
-     * 得到分页后的数据
-     *
-     * @return
-     */
+    // 得到分页后的数据
     public List<T> getPagedList() {
         int fromIndex = (nowPage - 1) * pageSize;
-        if (fromIndex >= data.size()) {
+        if (!(fromIndex >= 0 && fromIndex < data.size())) {
             return Collections.emptyList();
         }
-        if (fromIndex < 0) {
-            return Collections.emptyList();
-        }
+
         int toIndex = nowPage * pageSize;
-        if (toIndex >= data.size()) {
-            toIndex = data.size();
-        }
+        toIndex = toIndex >= data.size() ? data.size() : toIndex;
+
         return data.subList(fromIndex, toIndex);
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
-    public int getPreviousPage() {
-        return previousPage;
-    }
-
-    public int getNowPage() {
-        return nowPage;
-    }
-
-    public int getNextPage() {
-        return nextPage;
-    }
-
-    public int getTotalPage() {
-        return totalPage;
-    }
-
-    public int getTotalCount() {
-        return totalCount;
     }
 
     public static void main(String[] args) {
@@ -99,7 +69,7 @@ public class ListPageUtil<T> {
             list.add(i);
         }
 
-        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 2, 5);
+        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 1, 5);
         List<Integer> pagedList = listPageUtil.getPagedList();
         System.out.println(pagedList);
     }
