@@ -1,4 +1,4 @@
-package com.mada.commons.configuration;
+package com.mada.utils.properties;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -24,9 +24,10 @@ public class PropertiesUtil {
      * ClassLoader就是从整个classes文件夹找的，所以前面无需再加/。
      */
     private static final String CONFIG_PATH = "zk.properties";
-    private static final String CONFIG_PATH2 = "/config/zk/zk.properties";
+    private static final String CONFIG_PATH2 = "/zk/zk.properties";
 
     private static Properties properties = new Properties();
+    private static Properties properties2 = new Properties();
 
     static {
         try {
@@ -34,38 +35,20 @@ public class PropertiesUtil {
             InputStream inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream(CONFIG_PATH);
             properties.load(inputStream);
         } catch (IOException e) {
-            e.printStackTrace();
-            log.error("读取配置文件失败, ErrorMsg:{}", e.getMessage());
+            log.error("加载:{}配置文件失败", CONFIG_PATH, e);
         }
-    }
 
-//    static {
-//        try {
-//            // 读取resources/config路径下的文件
-//            InputStream inputStream = PropertiesUtil.class.getResourceAsStream(CONFIG_PATH2);
-//            properties.load(inputStream);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            log.error("读取配置文件失败, ErrorMsg:{}", e.getMessage());
-//        }
-//    }
-
-    public static Properties getProperties() {
-        return properties;
+        try {
+            // 读取resources/zk路径下的文件
+            InputStream inputStream2 = PropertiesUtil.class.getResourceAsStream(CONFIG_PATH2);
+            properties2.load(inputStream2);
+        } catch (IOException e) {
+            log.error("加载:{}配置文件失败", CONFIG_PATH2, e);
+        }
     }
 
     public static String getValue(String propertiesKey) {
         return properties.getProperty(propertiesKey);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(PropertiesUtil.getProperties());
-
-        String ZOOKEEPER_HOST = PropertiesUtil.getValue("ZOOKEEPER_HOST");
-        System.out.println(ZOOKEEPER_HOST);
-
-        Integer SERVER_PORT = Integer.parseInt(PropertiesUtil.getValue("SERVER_PORT"));
-        System.out.println(SERVER_PORT);
     }
 
 }
