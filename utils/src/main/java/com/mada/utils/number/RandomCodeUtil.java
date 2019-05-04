@@ -11,8 +11,8 @@ public class RandomCodeUtil {
 
     private static final List<String> COLD_LIST;
     private static final Integer CODE_LENGTH = 16;
-    private static final String COLD = "abcdefghigklmnopqrstuvwxyz,ABCDEFGHIGKLMNOPQRSTUVWXYZ,0123456789";
-//    private static final String COLD = "abcdefghigklmnopqrstuvwxyz,ABCDEFGHIGKLMNOPQRSTUVWXYZ,0123456789,!@#$%^&*()_";
+    //    private static final String COLD = "abcdefghigklmnopqrstuvwxyz,ABCDEFGHIGKLMNOPQRSTUVWXYZ,0123456789";
+    private static final String COLD = "abcdefghigklmnopqrstuvwxyz,ABCDEFGHIGKLMNOPQRSTUVWXYZ,0123456789,!@#$%^&*()_";
 
     static {
         COLD_LIST = Arrays.asList(COLD.split(","));
@@ -24,11 +24,9 @@ public class RandomCodeUtil {
      * @return
      */
     public static String getRandomCode() {
-
         Random random = new Random();
 
         StringBuffer sb = new StringBuffer();
-
         while (sb.length() < CODE_LENGTH) {
             String cold = COLD_LIST.get(random.nextInt(COLD_LIST.size()));
             sb.append(cold.charAt(random.nextInt(cold.length())));
@@ -37,11 +35,4 @@ public class RandomCodeUtil {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-
-        for (int i = 0; i < 10; i++) {
-            System.out.println(getRandomCode());
-        }
-
-    }
 }
