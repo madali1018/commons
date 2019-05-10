@@ -1,4 +1,4 @@
-package com.mada.utils.gzip;
+package com.mada.commons.demo.io.gzip;
 
 import lombok.extern.log4j.Log4j2;
 
