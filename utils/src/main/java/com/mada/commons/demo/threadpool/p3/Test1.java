@@ -26,7 +26,7 @@ public class Test1 {
 
         threadPoolExecutor.shutdown();
 
-        // 线程池中线程都执行完毕后再 记录 统计数据
+        // 等待线程池中线程都执行完毕后再向下执行
         while (true) {
             try {
                 // 每10ms执行一次判断操作：线程池中线程是否已完全执行完
