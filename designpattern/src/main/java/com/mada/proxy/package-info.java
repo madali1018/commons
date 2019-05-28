@@ -16,6 +16,7 @@ package com.mada.proxy;
 
 
 
-//参考common项目中的日志和对象转换工具：
-// https://github.com/madayiban/common/tree/master/src/main/java/com/common/util/log
-// https://github.com/madayiban/common/tree/master/src/main/java/com/common/util/obj
+//参考对象转换工具：
+// https://github.com/madali1018/commons/tree/b3e3d1f63b088c5586894fe6ee41d6ab39e8290b/utils/src/main/java/com/mada/utils/obj
+//参考日志工具：
+// https://github.com/madali1018/logdemo/tree/31752f0eb48483a902858ef67c5c092a433a6a51/logback.demo/src/main/java/util
