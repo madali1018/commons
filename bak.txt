@@ -1,0 +1,18 @@
+es
+public static final String ES_HOSTS = "10.48.194.19:9300,10.49.12.11:9300";
+public static final String ES_CLUSTER_NAME = "hir_test";
+
+
+mysql
+// 可改为走配置文件获取
+private static final String URL = "jdbc:mysql://test1255.db.58dns.org:23667/db58_scf_engineer_mdl_test";
+private static final String USERNAME = "engine_admin";
+private static final String PASSWORD = "37ff340107f77cdf";
+
+
+58：测试redis配置
+// private static String IP = "test1266.rdb.58dns.org";
+// private static int PORT = 8013;
+//private static String PASSWORD = "74bc3cc617e70446";
+
+
