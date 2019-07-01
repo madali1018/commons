@@ -1,4 +1,4 @@
-package com.mada.commons.demo.io;
+package com.mada.commons.demo.io.file;
 
 import org.junit.Test;
 
@@ -67,7 +67,6 @@ public class FileDemo {
                 e.printStackTrace();
             }
         }
-
     }
 
     private void readFile(String filePath) {
