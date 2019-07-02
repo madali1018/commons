@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @Auther: madali
  * @Date: 2018/8/31 16:34
  */
-public class ForkAndJoinTest extends RecursiveTask<Integer> {
+public class ForkJoinTest extends RecursiveTask<Integer> {
 
     // 设立一个最大计算容量
     private static final int MAX = 100;
@@ -24,7 +24,7 @@ public class ForkAndJoinTest extends RecursiveTask<Integer> {
     private int start;
     private int end;
 
-    public ForkAndJoinTest(int start, int end) {
+    public ForkJoinTest(int start, int end) {
         this.start = start;
         this.end = end;
     }
@@ -44,8 +44,8 @@ public class ForkAndJoinTest extends RecursiveTask<Integer> {
             // 计算容量中间值：如果超过了最大容量，那么就进行拆分处理
             int middle = (start + end) / 2;
             // 递归
-            ForkAndJoinTest leftTask = new ForkAndJoinTest(start, middle);
-            ForkAndJoinTest rightTask = new ForkAndJoinTest(middle + 1, end);
+            ForkJoinTest leftTask = new ForkJoinTest(start, middle);
+            ForkJoinTest rightTask = new ForkJoinTest(middle + 1, end);
 
             // 执行任务
             leftTask.fork();
@@ -62,13 +62,13 @@ public class ForkAndJoinTest extends RecursiveTask<Integer> {
         // ForkJoinPool线程池：提交任务和调度任务
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         // 任务执行类(ForkJoinTask的子类)：生成一个计算任务，计算1+2+3+...+10000
-        ForkAndJoinTest task = new ForkAndJoinTest(1, 10000);
+        ForkJoinTest task = new ForkJoinTest(1, 10000);
 
         //阻塞当前线程直到 ForkJoinPool 中所有的任务都执行结束
         forkJoinPool.awaitTermination(2, TimeUnit.SECONDS);
 
         // 关闭线程池
-        forkJoinPool.shutdown();
+//        forkJoinPool.shutdown();
 
         long result = forkJoinPool.invoke(task);
         System.out.println(result);

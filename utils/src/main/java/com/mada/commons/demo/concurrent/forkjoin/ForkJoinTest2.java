@@ -9,14 +9,14 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Created by madali on 2019/4/17 16:31
  */
-public class ForkAndJoinTest2 extends RecursiveAction {
+public class ForkJoinTest2 extends RecursiveAction {
 
     private static final int MAX = 20;
 
     private int start;
     private int end;
 
-    public ForkAndJoinTest2(int start, int end) {
+    public ForkJoinTest2(int start, int end) {
         this.start = start;
         this.end = end;
     }
@@ -32,8 +32,8 @@ public class ForkAndJoinTest2 extends RecursiveAction {
             System.out.println("thread:" + Thread.currentThread().getName() + ", range:[" + start + ", " + end + "]");
             // 将大任务分解成两个小任务
             int middle = (start + end) / 2;
-            ForkAndJoinTest2 left = new ForkAndJoinTest2(start, middle);
-            ForkAndJoinTest2 right = new ForkAndJoinTest2(middle, end);
+            ForkJoinTest2 left = new ForkJoinTest2(start, middle);
+            ForkJoinTest2 right = new ForkJoinTest2(middle, end);
             left.fork();
             right.fork();
         }
@@ -44,7 +44,7 @@ public class ForkAndJoinTest2 extends RecursiveAction {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
 
         // 提交可分解的PrintTask任务
-        forkJoinPool.submit(new ForkAndJoinTest2(0, 1000));
+        forkJoinPool.submit(new ForkJoinTest2(0, 1000));
 
         //阻塞当前线程直到 ForkJoinPool 中所有的任务都执行结束
         forkJoinPool.awaitTermination(2, TimeUnit.SECONDS);
