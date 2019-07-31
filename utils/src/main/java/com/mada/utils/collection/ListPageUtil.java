@@ -2,9 +2,10 @@ package com.mada.utils.collection;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * List的分页工具类
@@ -64,12 +65,9 @@ public class ListPageUtil<T> {
     }
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            list.add(i);
-        }
+        List<Integer> list = IntStream.range(0, 15).boxed().collect(Collectors.toList());
 
-        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 1, 5);
+        ListPageUtil<Integer> listPageUtil = new ListPageUtil<>(list, 2, 5);
         List<Integer> pagedList = listPageUtil.getPagedList();
         System.out.println(pagedList);
     }
