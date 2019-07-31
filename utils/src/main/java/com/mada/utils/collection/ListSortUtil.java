@@ -1,6 +1,7 @@
 package com.mada.utils.collection;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by madali on 2019/4/30 14:42
@@ -48,12 +49,13 @@ public class ListSortUtil {
 
     public static void main(String[] args) {
         Long[] arr = {10L, 5L, 4L, 6L, 2L, 8L, 7L, 3L, 1L, 10L, 5L, 8L};
-        Arrays.stream(arr).forEach(System.out::println);
+        List<Long> list = Arrays.asList(arr);
+        System.out.println("排序前:" + list);
 
         arr = getSortedArr(arr, 5);
 
-        System.out.println("排序后");
-        Arrays.stream(arr).forEach(System.out::println);
+        List<Long> list2 = Arrays.asList(arr);
+        System.out.println("排序后:" + list2);
     }
 
 }
