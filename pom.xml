@@ -17,6 +17,7 @@
         <module>designpattern</module>
         <module>elasticsearch</module>
         <module>mq.redis</module>
+        <module>springdemo</module>
     </modules>
 
     <properties>

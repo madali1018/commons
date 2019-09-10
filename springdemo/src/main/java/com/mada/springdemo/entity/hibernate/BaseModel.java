@@ -1,4 +1,4 @@
-package com.mada.commons.entity.hibernate;
+package com.mada.springdemo.entity.hibernate;
 
 import com.alibaba.fastjson.JSON;
 
@@ -18,7 +18,7 @@ public abstract class BaseModel implements Serializable {
      * @return
      */
     public static <E> E convertTo(Object obj, Class<E> cls) {
-
         return JSON.parseObject(JSON.toJSONString(obj), cls);
     }
+
 }

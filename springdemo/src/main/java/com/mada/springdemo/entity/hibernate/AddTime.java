@@ -1,4 +1,9 @@
-package com.mada.commons.entity.hibernate;
+package com.mada.springdemo.entity.hibernate;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -10,6 +15,10 @@ import javax.persistence.Id;
  */
 //@Entity
 //@Table(name = "add_time")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AddTime extends BaseModel {
 
     @Id
@@ -27,26 +36,4 @@ public class AddTime extends BaseModel {
     @Column(name = "add_minute")
     private Integer addMinute;
 
-    public Integer getAddDay() {
-        return addDay;
-    }
-
-    public Integer getAddHour() {
-        return addHour;
-    }
-
-    public Integer getAddMinute() {
-        return addMinute;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("AddTime{");
-        sb.append("id=").append(id);
-        sb.append(", addDay=").append(addDay);
-        sb.append(", addHour=").append(addHour);
-        sb.append(", addMinute=").append(addMinute);
-        sb.append('}');
-        return sb.toString().replace("'null'", "null");
-    }
 }

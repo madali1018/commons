@@ -1,4 +1,4 @@
-package com.mada.utils.hibernate;
+package com.mada.springdemo.utils;
 
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 /**
- * Created by madali on 2017/4/27.
+ * Created by madali on 2019/9/10 16:27
  */
 public class HibernateUtil {
 
@@ -17,7 +17,7 @@ public class HibernateUtil {
     static {
         Configuration configuration = new Configuration().configure();
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        SESSION_FACTORY =  configuration.buildSessionFactory(serviceRegistry);
+        SESSION_FACTORY = configuration.buildSessionFactory(serviceRegistry);
     }
 
     public static Session getSession() {

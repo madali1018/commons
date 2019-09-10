@@ -1,7 +1,7 @@
-package com.mada.commons.dao;
+package com.mada.springdemo.dao;
 
-import com.mada.commons.entity.hibernate.AddTime;
-import com.mada.utils.hibernate.HibernateUtil;
+import com.mada.springdemo.entity.hibernate.AddTime;
+import com.mada.springdemo.utils.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Query;
 import org.hibernate.Session;
