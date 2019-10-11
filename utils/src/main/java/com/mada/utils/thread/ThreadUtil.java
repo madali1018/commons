@@ -13,7 +13,6 @@ public class ThreadUtil {
      *
      * @param thread
      */
-
     public static void suspend(Thread thread) {
         log.info("Suspend thread (id: {}; name: {}).", thread.getId(), thread.getName());
         synchronized (thread) {
@@ -21,7 +20,6 @@ public class ThreadUtil {
                 thread.wait();
             } catch (InterruptedException ie) {
                 log.error(ie.getMessage(), ie);
-
                 throw new RuntimeException(ie);
             }
         }
@@ -38,26 +36,4 @@ public class ThreadUtil {
         }
         log.info("Resume thread (id: {}; name: {}).", thread.getId(), thread.getName());
     }
-
-//    /**
-//     * 获取指定名字的线程（获取满足条件的第一个）
-//     * @param name
-//     * @return
-//     */
-//    public static Thread getByName(String name) {
-//
-//        Thread thread = null;
-//
-//        Set<Thread> ts =  Thread.getAllStackTraces().keySet();
-//
-//        for(Thread t : ts) {
-//            if(name.equals(t.getName())) {
-//                thread = t;
-//
-//                break;
-//            }
-//        }
-//
-//        return thread;
-//    }
 }
