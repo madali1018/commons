@@ -105,6 +105,13 @@
             <version>1.0.3</version>
         </dependency>
 
+        <!-- Apache Commons项目中用来处理常用的编码方法的工具类包，例如DES、SHA1、MD5、Base64，URL，Soundx等等 -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.12</version>
+        </dependency>
+
     </dependencies>
 
 </project>
