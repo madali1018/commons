@@ -2,7 +2,7 @@
 2. 
 
 ## common说明 ##
-1. common是一个多model的maven工程
+1. 一个多model的maven工程
 2. 项目约定
 	1. 统一使用log4j2，jdk8，lombok
 	2. 包命名
