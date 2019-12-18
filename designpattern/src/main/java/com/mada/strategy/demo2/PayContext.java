@@ -1,4 +1,4 @@
-package com.mada.strategy;
+package com.mada.strategy.demo2;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

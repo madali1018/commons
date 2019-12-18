@@ -1,4 +1,4 @@
-package com.mada.strategy;
+package com.mada.strategy.demo2;
 
 /**
  * 策略模式示例 参考：https://www.cnblogs.com/lewis0077/p/5133812.html

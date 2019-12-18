@@ -1,4 +1,4 @@
-package com.mada.strategy;
+package com.mada.strategy.demo2;
 
 /**
  * Created by madali on 2019/5/28 13:54
@@ -9,7 +9,6 @@ public class DollarPay implements IPayStrategy {
     @Override
     public void pay(PayContext payContext) {
         System.out.println("现在给：" + payContext.getUsername() + " 美金支付 " + payContext.getMoney() + "dollar !");
-
     }
 
 }

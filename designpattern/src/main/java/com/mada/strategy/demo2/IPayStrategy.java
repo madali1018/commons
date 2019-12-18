@@ -1,4 +1,4 @@
-package com.mada.strategy;
+package com.mada.strategy.demo2;
 
 /**
  * 支付策略接口

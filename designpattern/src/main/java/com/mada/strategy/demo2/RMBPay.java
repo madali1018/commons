@@ -1,4 +1,4 @@
-package com.mada.strategy;
+package com.mada.strategy.demo2;
 
 /**
  * Created by madali on 2019/5/28 11:58
