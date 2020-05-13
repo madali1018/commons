@@ -1,7 +1,7 @@
 package com.mada.mq.demo;
 
-import com.mada.mq.services.IProducerHandler;
-import com.mada.mq.services.IPublisherHandler;
+import com.mada.mq.services.p2p.IProducerHandler;
+import com.mada.mq.services.pubsub.IPublisherHandler;
 import com.mada.mq.utils.MqUtil;
 
 import java.io.BufferedReader;

@@ -1,6 +1,6 @@
-package com.mada.mq.redis;
+package com.mada.mq.redis.pubsub;
 
-import com.mada.mq.services.IPublisherHandler;
+import com.mada.mq.services.pubsub.IPublisherHandler;
 import com.mada.mq.utils.RedisUtil;
 import lombok.extern.log4j.Log4j2;
 import redis.clients.jedis.Jedis;

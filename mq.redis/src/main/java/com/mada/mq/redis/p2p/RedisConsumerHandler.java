@@ -1,7 +1,8 @@
-package com.mada.mq.redis;
+package com.mada.mq.redis.p2p;
 
+import com.mada.mq.redis.IRedisCallback;
 import com.mada.mq.services.ICallback;
-import com.mada.mq.services.IConsumerHandler;
+import com.mada.mq.services.p2p.IConsumerHandler;
 import com.mada.mq.utils.RedisUtil;
 import lombok.extern.log4j.Log4j2;
 import redis.clients.jedis.Jedis;

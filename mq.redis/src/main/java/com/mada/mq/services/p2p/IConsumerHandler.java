@@ -1,4 +1,6 @@
-package com.mada.mq.services;
+package com.mada.mq.services.p2p;
+
+import com.mada.mq.services.ICallback;
 
 /**
  * Created by madali on 2017/4/27.

@@ -1,13 +1,13 @@
 package com.mada.mq.utils;
 
-import com.mada.mq.redis.RedisConsumerHandler;
-import com.mada.mq.redis.RedisProducerHandler;
-import com.mada.mq.redis.RedisPublisherHandler;
-import com.mada.mq.redis.RedisSubscriberHandler;
-import com.mada.mq.services.IConsumerHandler;
-import com.mada.mq.services.IProducerHandler;
-import com.mada.mq.services.IPublisherHandler;
-import com.mada.mq.services.ISubscriberHandler;
+import com.mada.mq.redis.p2p.RedisConsumerHandler;
+import com.mada.mq.redis.p2p.RedisProducerHandler;
+import com.mada.mq.redis.pubsub.RedisPublisherHandler;
+import com.mada.mq.redis.pubsub.RedisSubscriberHandler;
+import com.mada.mq.services.p2p.IConsumerHandler;
+import com.mada.mq.services.p2p.IProducerHandler;
+import com.mada.mq.services.pubsub.IPublisherHandler;
+import com.mada.mq.services.pubsub.ISubscriberHandler;
 
 import java.util.Collections;
 import java.util.LinkedList;

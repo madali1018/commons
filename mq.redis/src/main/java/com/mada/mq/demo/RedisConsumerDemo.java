@@ -1,7 +1,7 @@
 package com.mada.mq.demo;
 
-import com.mada.mq.services.IConsumerHandler;
-import com.mada.mq.services.ISubscriberHandler;
+import com.mada.mq.services.p2p.IConsumerHandler;
+import com.mada.mq.services.pubsub.ISubscriberHandler;
 import com.mada.mq.utils.MqUtil;
 import com.mada.mq.redis.IRedisCallback;
 

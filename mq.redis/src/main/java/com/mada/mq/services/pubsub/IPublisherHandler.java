@@ -1,4 +1,4 @@
-package com.mada.mq.services;
+package com.mada.mq.services.pubsub;
 
 /**
  * Created by madali on 2017/4/27.
