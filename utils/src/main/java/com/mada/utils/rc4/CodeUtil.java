@@ -79,7 +79,7 @@ public class CodeUtil {
 
     public static void main(String[] args) throws Exception {
         String s = "axa2123fa";
-        String s2 = "073b33ac14ef5d53c198312c71bbc20b3505a5bc0369";
+        String s2 = "073b3dac15ea5d57cc983d2c7fbbc20b3505a5bc0369";
         String key = "dsfmdls";
         System.out.println(encode(s, key));
         System.out.println(decode(s2, key));

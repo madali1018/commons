@@ -2,6 +2,7 @@ package com.mada.utils.rc4;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -23,7 +24,7 @@ public class Rc4Util {
             return null;
         }
 
-        return rc4Base(data.getBytes("UTF-8"), key);
+        return rc4Base(data.getBytes(StandardCharsets.UTF_8), key);
     }
 
     public static String encryToStr(String data, String key) throws Exception {
@@ -40,7 +41,7 @@ public class Rc4Util {
     }
 
     private static String asString(byte[] buf) {
-        StringBuffer result = new StringBuffer(buf.length);
+        StringBuilder result = new StringBuilder(buf.length);
 
         for (byte b : buf) {
             result.append((char) b);
@@ -72,7 +73,7 @@ public class Rc4Util {
     }
 
     private static String toHexStr(String s) {
-        String str = "";
+        StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < s.length(); i++) {
             int ch = (int) s.charAt(i);
@@ -80,10 +81,10 @@ public class Rc4Util {
             if (s1.length() == 1) {
                 s1 = '0' + s1;
             }
-            str = str + s1;
+            str.append(s1);
         }
 
-        return str;
+        return str.toString();
     }
 
     private static byte[] hexStrToBytes(String str) {
