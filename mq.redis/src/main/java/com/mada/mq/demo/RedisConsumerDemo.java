@@ -26,14 +26,14 @@ public class RedisConsumerDemo {
     private static void testConsumer() {
         IConsumerHandler consumerHandler = MqUtil.Redis.createConsumerHandler(topic);
         consumerHandler.consume((IRedisCallback) message -> {
-            System.out.println("Message:\t" + message);
+            System.out.println("consume message:\t" + message);
         });
     }
 
     private static void testSubscriber() {
         ISubscriberHandler subscriberHandler = MqUtil.Redis.createSubscriberHandler(topic);
         subscriberHandler.subscribe((IRedisCallback) message -> {
-            System.out.println("Message:\t" + message);
+            System.out.println("subscribe message:\t" + message);
         });
     }
 }

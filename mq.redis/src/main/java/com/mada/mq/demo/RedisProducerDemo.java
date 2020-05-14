@@ -29,7 +29,7 @@ public class RedisProducerDemo {
         IProducerHandler producerHandler = MqUtil.Redis.createProducerHandler(topic);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
-            System.out.println("Input message:");
+            System.out.println("produce message:");
             producerHandler.produce(br.readLine());
         }
     }
@@ -38,7 +38,7 @@ public class RedisProducerDemo {
         IPublisherHandler publisherHandler = MqUtil.Redis.createPublisherHandler(topic);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
-            System.out.println("Input message:");
+            System.out.println("publish message:");
             publisherHandler.publish(br.readLine());
         }
     }
