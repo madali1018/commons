@@ -22,6 +22,13 @@
             <version>27.1-jre</version>
         </dependency>
 
+        <!-- Caffeine是基于JDK8的高性能本地缓存库，提供了几乎完美的命中率，它有点类似JDK中的ConcurrentMap，它的API设计大量借鉴了GuavaCache -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+
         <!-- cglib动态代理 -->
         <dependency>
             <groupId>cglib</groupId>

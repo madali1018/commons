@@ -1,4 +1,4 @@
-package com.mada.commons.demo.guava;
+package com.mada.commons.demo.cache.guava;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

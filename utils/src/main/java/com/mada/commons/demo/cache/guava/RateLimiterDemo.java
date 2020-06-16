@@ -1,4 +1,4 @@
-package com.mada.commons.demo.guava;
+package com.mada.commons.demo.cache.guava;
 
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.log4j.Log4j2;
