@@ -1,6 +1,5 @@
 package com.mada.utils.dslock;
 
-import com.alibaba.fastjson.JSONObject;
 import com.mada.utils.dslock.contract.DsLock;
 import com.mada.utils.dslock.service.DsLockFactory;
 import com.mada.utils.dslock.service.RedisLock;
